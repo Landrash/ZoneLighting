@@ -143,8 +143,6 @@
     <Compile Include="VisualClock.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="tevirtualMIDI.dll" />
-    <Content Include="teVirtualMIDI32.dll" />
     <None Include="app.config" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
