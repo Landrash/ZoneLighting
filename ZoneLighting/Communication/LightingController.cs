@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ZoneLighting.Communication
 {
-	public abstract class LightingController : ILightingController, IDisposable
+	public abstract class LightingController : ILightingController, IDisposable 
 	{
 		#region ILightingController
 
@@ -33,5 +33,7 @@ namespace ZoneLighting.Communication
 		}
 
 		#endregion
+
+	    public string Name { get; }
 	}
 }

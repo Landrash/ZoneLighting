@@ -230,14 +230,25 @@ namespace ZoneLighting
 			return zones;
 		}
 
-		#endregion
+        #endregion
 
-		#region CORE
+        #region CORE
 
-		/// <summary>
-		/// All zones that can be managed by this class.
-		/// </summary>
-		[ImportMany(typeof(Zone), AllowRecomposition = true)]
+        /// <summary>
+	    /// All lighting controllers available for use.
+        /// </summary>
+        [ImportMany(typeof(LightingController), AllowRecomposition = true)]
+	    public BetterList<ILightingController> LightingControllers { get; private set; } = new BetterList<ILightingController>();
+        
+	    /// <summary>
+	    /// Container for the external lighting controller modules.
+	    /// </summary>
+	    private CompositionContainer ExternalLightingControllerContainer { get; set; }
+        
+        /// <summary>
+        /// All zones that can be managed by this class.
+        /// </summary>
+        [ImportMany(typeof(Zone), AllowRecomposition = true)]
 		public BetterList<Zone> Zones { get; private set; } = new BetterList<Zone>();
 
 		/// <summary>
@@ -380,26 +391,53 @@ namespace ZoneLighting
 		/// </summary>
 		private void ComposeWithExternalModules()
 		{
-			List<ComposablePartCatalog> fileCatalogs = new List<ComposablePartCatalog>();
-			foreach (var file in Directory.GetFiles(ConfigurationManager.AppSettings["ZoneDLLFolder"], "*.dll").ToList())
-			{
-				var assembly = Assembly.LoadFrom(file);
-
-				if (assembly.GetCustomAttributesData()
-					.Any(ass => ass.AttributeType == typeof(ZoneAssemblyAttribute)))
-				{
-					fileCatalogs.Add(new AssemblyCatalog(assembly));
-					//this may be required to be uncommented in the future
-					File.Copy(file, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetFileName(file)), true);
-				}
-			}
-
-			var aggregateCatalog = new AggregateCatalog(fileCatalogs);
-			ExternalZoneContainer = new CompositionContainer(aggregateCatalog);
-			ExternalZoneContainer.ComposeParts(this);
+		    ComposeZones();
+		    ComposeLightingControllers();
 		}
 
-		//TODO: This is not working because MEF has to be "hacked" to have the 
+	    private void ComposeZones()
+	    {
+	        List<ComposablePartCatalog> zoneFileCatalogs = new List<ComposablePartCatalog>();
+	        foreach (var file in Directory.GetFiles(ConfigurationManager.AppSettings["ZoneDLLFolder"], "*.dll").ToList())
+	        {
+	            var assembly = Assembly.LoadFrom(file);
+
+	            if (assembly.GetCustomAttributesData()
+	                .Any(ass => ass.AttributeType == typeof(ZoneAssemblyAttribute)))
+	            {
+	                zoneFileCatalogs.Add(new AssemblyCatalog(assembly));
+	                //this may be required to be uncommented in the future
+	                File.Copy(file, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetFileName(file)), true);
+	            }
+	        }
+
+	        var zoneAggregateCatalog = new AggregateCatalog(zoneFileCatalogs);
+	        ExternalZoneContainer = new CompositionContainer(zoneAggregateCatalog);
+	        ExternalZoneContainer.ComposeParts(this);
+	    }
+
+	    private void ComposeLightingControllers()
+	    {
+	        List<ComposablePartCatalog> lightingControllerFileCatalogs = new List<ComposablePartCatalog>();
+	        foreach (var file in Directory.GetFiles(ConfigurationManager.AppSettings["LightingControllerDLLFolder"], "*.dll").ToList())
+	        {
+	            var assembly = Assembly.LoadFrom(file);
+
+	            if (assembly.GetCustomAttributesData()
+	                .Any(ass => ass.AttributeType == typeof(LightingControllerAssemblyAttribute)))
+	            {
+	                lightingControllerFileCatalogs.Add(new AssemblyCatalog(assembly));
+	                //this may be required to be uncommented in the future
+	                File.Copy(file, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetFileName(file)), true);
+	            }
+	        }
+
+	        var lightingControllerAggregateCatalog = new AggregateCatalog(lightingControllerFileCatalogs);
+	        ExternalLightingControllerContainer = new CompositionContainer(lightingControllerAggregateCatalog);
+	        ExternalLightingControllerContainer.ComposeParts(this);
+	    }
+
+	    //TODO: This is not working because MEF has to be "hacked" to have the 
 		//TODO: assemblies load in a different appdomain with ShadowCopyFiles set to true as in the following example:
 		//TODO: http://www.codeproject.com/Articles/633140/MEF-and-AppDomain-Remove-Assemblies-On-The-Fly
 		//public void RefreshExternalPrograms()

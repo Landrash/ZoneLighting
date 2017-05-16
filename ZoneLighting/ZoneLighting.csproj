@@ -201,7 +201,8 @@
     <Compile Include="StockPrograms\Raindrops.cs" />
     <Compile Include="ZoneProgramNS\ReactiveZoneProgram.cs" />
     <Compile Include="ZoneProgramNS\UnderlyingTypeConverter.cs" />
-    <Compile Include="ZoneProgramNS\ZoneLightingProgramAssemblyAttribute.cs" />
+    <Compile Include="ZoneProgramNS\ZoneLightingProgramAssemblyAttribute - Copy.cs" />
+    <Compile Include="ZoneProgramNS\LightingControllerAssemblyAttribute.cs" />
     <Compile Include="ZoneProgramNS\ZoneProgramInput.cs" />
     <Compile Include="ZoneProgramNS\ZoneProgramInputCollection.cs" />
     <Compile Include="ZoneProgramNS\ZoneProgramJsonConverter.cs" />

@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using ZoneLighting.Usables;
 
 namespace ZoneLighting.Communication
 {
-	public interface ILightingController
+	public interface ILightingController : IBetterListType
 	{
 		void SendPixelFrame(IPixelFrame opcPixelFrame);
 		void SendLEDs(IList<ILightingControllerPixel> leds);
