@@ -1,7 +1,7 @@
 ﻿using System;
 using ZoneLighting.Communication;
 
-namespace ZoneLighting
+namespace OPCWebSocketController
 {
     public abstract class OPCController : LightingController
     {

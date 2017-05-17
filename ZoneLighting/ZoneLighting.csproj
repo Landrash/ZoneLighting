@@ -141,8 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communication\IPixelFrame.cs" />
-    <Compile Include="Communication\NodeMCUController.cs" />
-    <Compile Include="Communication\OPCWebSocketController.cs" />
     <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\Drawing\ClockedTrailShape.cs" />
     <Compile Include="Helpers.cs" />
@@ -151,7 +149,6 @@
     <Compile Include="Int32DictionaryConverter.cs" />
     <Compile Include="ISVConverter.cs" />
     <Compile Include="IZLM.cs" />
-    <Compile Include="OPCController.cs" />
     <Compile Include="StockPrograms\LivingRoomMidiPlay.cs" />
     <Compile Include="StockPrograms\MicroClockBlink.cs" />
     <Compile Include="StockPrograms\MidiTwoDimensionalFade.cs" />
@@ -179,17 +176,11 @@
     <Compile Include="ZLEventSource.cs" />
     <Compile Include="Usables\IBetterListType.cs" />
     <Compile Include="ZoneNS\SyncContext.cs" />
-    <Compile Include="Communication\FadeCandyController.cs" />
-    <Compile Include="Communication\OPCPixel.cs" />
     <Compile Include="Communication\ILightingController.cs" />
     <Compile Include="Communication\ILightingControllerPixel.cs" />
     <Compile Include="Communication\LightingController.cs" />
-    <Compile Include="Communication\OPCPacket.cs" />
-    <Compile Include="Communication\OPCPixelFrame.cs" />
     <Compile Include="Communication\PhysicalRGBLight.cs" />
-    <Compile Include="Communication\WebSocketOPCPacket.cs" />
     <Compile Include="ConfigNS\Config.cs" />
-    <Compile Include="Communication\IOPCPixelContainer.cs" />
     <Compile Include="DebugTools.cs" />
     <Compile Include="TriggerDependencyNS\Dependency.cs" />
     <Compile Include="TriggerDependencyNS\Interfaces.cs" />
@@ -237,8 +228,6 @@
     <Compile Include="ZoneProgramNS\ZoneProgram.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="tevirtualMIDI.dll" />
-    <Content Include="teVirtualMIDI32.dll" />
     <Content Include="Typelite\TypeLite.Net4.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TypeLite.Net4.d.ts</LastGenOutput>
@@ -287,9 +276,6 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

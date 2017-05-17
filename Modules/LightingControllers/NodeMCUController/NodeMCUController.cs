@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.Composition;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ZoneLighting.Communication;
 
-namespace ZoneLighting.Communication
+namespace NodeMCULightingController
 {
-    public class NodeMCUController : OPCWebSocketController
+	[Export(typeof(LightingController))]
+	[ExportMetadata("Name", "NodeMCUController")]
+	public class NodeMCUController : OPCWebSocketController.OPCWebSocketController
     {
 
         #region Singleton

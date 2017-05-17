@@ -1,6 +1,7 @@
 using System.Runtime.Serialization;
+using ZoneLighting.Communication;
 
-namespace ZoneLighting.Communication
+namespace OPCWebSocketController
 {
     /// <summary>
     /// Represents a pixel that can be controlled by the Open Pixel Control protocol.
@@ -22,11 +23,8 @@ namespace ZoneLighting.Communication
 
         [DataMember]
 		public byte Channel { get; set; }
-        //[DataMember]
         public abstract int RedIndex { get; }
-        //[DataMember]
         public abstract int GreenIndex { get; }
-        //[DataMember]
         public abstract int BlueIndex { get; }
 	}
 

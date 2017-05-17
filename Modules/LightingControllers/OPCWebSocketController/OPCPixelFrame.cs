@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using ZoneLighting.Communication;
 
-namespace ZoneLighting.Communication
+namespace OPCWebSocketController
 {
 	/// <summary>
 	/// Represents a single frame of pixels that will be reflected on the channel on which it's sent.
@@ -30,11 +31,11 @@ namespace ZoneLighting.Communication
 		/// </summary>
 		/// <param name="channel">Channel this frame will be sent to.</param>
 		/// <param name="opcPixels">List of LEDs to map.</param>
-		public static OPCPixelFrame CreateFromOPCPixels(byte channel, IList<IOPCPixelContainer> opcPixels)
+		public static OPCPixelFrame CreateFromOPCPixels(byte channel, IList<ZoneLighting.Communication.IOPCPixelContainer> opcPixels)
 		{
 			var data = new byte[opcPixels.Count * 3];
 
-			foreach (IOPCPixelContainer led in opcPixels)
+			foreach (ZoneLighting.Communication.IOPCPixelContainer led in opcPixels)
 			{
 				data[led.OPCPixel.RedIndex] = led.Color.R;
 				data[led.OPCPixel.GreenIndex] = led.Color.G;
@@ -51,7 +52,7 @@ namespace ZoneLighting.Communication
 		/// </summary>
 		/// <param name="opcPixels"></param>
 		/// <returns></returns>
-		public static IList<OPCPixelFrame> CreateChannelBurstFromOPCPixels(IList<IOPCPixelContainer> opcPixels)
+		public static IList<OPCPixelFrame> CreateChannelBurstFromOPCPixels(IList<ZoneLighting.Communication.IOPCPixelContainer> opcPixels)
 		{
 			var returnValue = new List<OPCPixelFrame>();
 

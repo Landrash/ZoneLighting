@@ -153,7 +153,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ZoneLighting\ZoneLighting.csproj">
+    <ProjectReference Include="..\..\..\ZoneLighting\ZoneLighting.csproj">
       <Project>{FE00DB62-6C3C-4D04-9F03-23DA814298B6}</Project>
       <Name>ZoneLighting</Name>
     </ProjectReference>

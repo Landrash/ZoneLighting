@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Anshul.Utilities;
 using Refigure;
 using WebSocketSharp;
-using Timer = System.Timers.Timer;
+using ZoneLighting.Communication;
+using WebSocket = WebSocketSharp.WebSocket;
 
-namespace ZoneLighting.Communication
+namespace OPCWebSocketController
 {
     public class OPCWebSocketController : OPCController
     {
