@@ -12,12 +12,13 @@ namespace OPCWebSocketController
         {
         }
 
+		//asdfsfszdf
         public override void Initialize(dynamic parameters)
         {
             //base.Initialize((string) parameters.Name, (string) parameters.ServerURL,
             //    (IPixelToOPCPixelMapper) parameters.PixelMapper, (OPCPixelType) parameters.OPCPixelType,
             //    (byte) parameters.Channel);
-            base.Initialize("NodeMCUController1", "ws://192.168.29.113:81/", new DefaultPixelMapper(), OPCPixelType.OPCRGBPixel, 1);
+            base.Initialize("NodeMCUController1", "ws://192.168.29.113:81/", new JsonConfigPixelMapper(), OPCPixelType.OPCRGBPixel, 1);
             Initialized = true;
         }
 
