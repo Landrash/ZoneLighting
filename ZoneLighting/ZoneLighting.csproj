@@ -213,6 +213,7 @@
     <Compile Include="ZoneProgramNS\ProgramSet.cs" />
     <Compile Include="StockPrograms\Raindrops.cs" />
     <Compile Include="ZoneProgramNS\ReactiveZoneProgram.cs" />
+    <Compile Include="ZoneProgramNS\CamelCaseToPascalCaseExpandoObjectConverter.cs" />
     <Compile Include="ZoneProgramNS\UnderlyingTypeConverter.cs" />
     <Compile Include="MEF\ZoneProgramAssemblyAttribute.cs" />
     <Compile Include="ZoneProgramNS\ZoneProgramInput.cs" />

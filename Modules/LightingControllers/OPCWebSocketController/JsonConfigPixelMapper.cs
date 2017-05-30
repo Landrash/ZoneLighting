@@ -4,29 +4,28 @@ using ZoneLighting.MEF;
 
 namespace OPCWebSocketController
 {
-	public class JsonConfigPixelMapper : IPixelToOPCPixelMapper
+    public class StaticPixelMapper : IPixelToOPCPixelMapper
     {
-		public PixelMap PixelMap { get; }
+        public PixelMap PixelMap { get; }
 
-		public int GetOPCPixelIndex(int pixelIndex)
-		{
-			if (PixelMap.LogicalIndices.Contains(pixelIndex))
-				return PixelMap.PhysicalIndices[PixelMap.LogicalIndices.First(x => x == pixelIndex)];
-			else
-			{
-				throw new ArgumentException("Passed in pixel index is not contained in the logical indices.");
-			}
-		}
-
-        public byte GetOPCPixelChannel(IPixel pixel)
+        public int GetOPCPixelIndex(int pixelIndex)
         {
-            return 
+	        if (PixelMap.LogicalIndices.Contains(pixelIndex))
+                return PixelMap.PhysicalIndices[PixelMap.LogicalIndices.First(x => x == pixelIndex)];
+	        throw new ArgumentException("Passed in pixel index is not contained in the logical indices.");
         }
 
-	    public JsonConfigPixelMapper(string configFilePath)
-	    {
-		    
-	    }
-        
+        public byte GetOPCPixelChannel(int pixelIndex)
+        {
+	        if (PixelMap.LogicalIndices.Contains(pixelIndex))
+		        return PixelMap.Channels[PixelMap.LogicalIndices.First(x => x == pixelIndex)];
+	        throw new ArgumentException("Passed in pixel index is not contained in the logical indices.");
+        }
+
+        public StaticPixelMapper(PixelMap pixelMap)
+        {
+	        PixelMap = pixelMap;
+        }
+
     }
 }

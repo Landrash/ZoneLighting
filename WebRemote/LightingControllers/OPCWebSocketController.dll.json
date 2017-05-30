@@ -1,0 +1,38 @@
+{
+	"Name": "NodeMCUController1",
+	"ServerURL": "ws://192.168.29.113:81/",
+	"PixelType": 1,
+	"Channel": 1,
+	"PixelMap": [
+		{
+			"LogicalIndex": 0,
+			"PhysicalIndex": 0,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 1,
+			"PhysicalIndex": 1,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 2,
+			"PhysicalIndex": 2,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 3,
+			"PhysicalIndex": 3,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 4,
+			"PhysicalIndex": 4,
+			"Channel": 1
+		},		
+		{
+			"LogicalIndex": 5,
+			"PhysicalIndex": 5,
+			"Channel": 1
+		}
+	]
+}

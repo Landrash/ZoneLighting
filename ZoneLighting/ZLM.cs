@@ -270,10 +270,10 @@ namespace ZoneLighting
 		/// <param name="loadZonesFromConfig">if set to <c>true</c>, loads external zones from the saved configuration file provided in the application configuration (app/web.config) appSetting with key "ZoneConfigurationSaveFile".</param>
 		/// <param name="loadProgramSetsFromConfig">if set to <c>true</c>, loads program sets from the saved configuration file provided in the application configuration appSetting (app/web.config) with key "ProgramSetConfigurationSaveFile".</param>
 		/// <param name="initAction">If provided, this action will be executed after this instance is initialized.</param>
-		public ZLM(ILightingControllerConfig config = null /* <---this should not be null*/, bool loadZoneModules = false, bool loadZonesFromConfig = true, bool loadProgramSetsFromConfig = true, Action<ZLM> initAction = null)
+		public ZLM(bool loadZoneModules = false, bool loadZonesFromConfig = true, bool loadProgramSetsFromConfig = true, Action<ZLM> initAction = null)
 		{
 			InitZoneScaffolder();
-		    InitLightingControllers(config);
+		    InitLightingControllers();
             if (loadZoneModules && ExternalZoneContainer != null)
 				ComposeWithExternalModules();
 			if (loadZonesFromConfig)
@@ -287,9 +287,9 @@ namespace ZoneLighting
 	    /// Add code here to initialize any other lighting controllers.
 	    /// </summary>
 	    /// <param name="config"></param>
-	    private void InitLightingControllers(ILightingControllerConfig config)
+	    private void InitLightingControllers()
 		{
-            ZoneScaffolder.Instance.InitLightingControllers(config);
+            ZoneScaffolder.Instance.InitLightingControllers();
 		}
 
 		/// <summary>

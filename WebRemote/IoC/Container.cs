@@ -43,7 +43,7 @@ namespace WebRemote.IoC
 
 		    //var lightingControllerConfig = GetLightingControllerConfig();
             
-		    ZLM = new ZLM(null, loadZonesFromConfig: !firstRun,
+		    ZLM = new ZLM(loadZonesFromConfig: !firstRun,
 				loadProgramSetsFromConfig: !firstRun,
 				loadZoneModules: loadZoneModules, initAction: initAction);
 		}

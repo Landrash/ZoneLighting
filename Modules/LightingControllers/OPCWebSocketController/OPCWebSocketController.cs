@@ -87,7 +87,7 @@ namespace OPCWebSocketController
             Connect();
         }
 
-        public abstract void Initialize(dynamic parameters);
+        public abstract void Initialize(string lcConfig);
 
         public virtual void Uninitialize()
         {
@@ -162,9 +162,7 @@ namespace OPCWebSocketController
             var opcLights = ConvertToOPCPixels(lights);
             OPCPixelFrame.CreateChannelBurstFromOPCPixels(opcLights).ToList().ForEach(SendPixelFrame);
         }
-
-        
-
+		
         private IList<OPCPixel> ConvertToOPCPixels(IList<IPixel> lights)
         {
             var opcPixels = lights.ToList()
