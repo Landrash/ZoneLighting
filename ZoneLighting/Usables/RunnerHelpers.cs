@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using Refigure;
 using ZoneLighting.Graphics.Drawing;
-using ZoneLighting.StockPrograms;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
 using ZoneLighting.ZoneProgramNS.Factories;
@@ -12,16 +10,6 @@ namespace ZoneLighting.Usables
 {
 	public static class RunnerHelpers
 	{
-		public static Dictionary<int, int> LivingRoomLogicalPhysicalMapping = new Dictionary<int, int>
-		{
-			{0, 5},
-			{1, 3},
-			{2, 0},
-			{3, 2},
-			{4, 4},
-			{5, 1}
-		};
-
 		//public static Action AddBasementZonesAndProgramsWithSyncAction(ZLM zlm)
 		//{
 		//	return () =>

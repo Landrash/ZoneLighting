@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using Anshul.Utilities;
+using LightingControllerBase;
 using MIDIator.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -134,7 +135,8 @@ namespace ZoneLighting.ZoneProgramNS.Factories
 
         private void LoadLightingControllerModules(string lightingControllerModuleDirectory, List<ComposablePartCatalog> fileCatalogs)
         {
-            LoadModulesCore(lightingControllerModuleDirectory, fileCatalogs, typeof(LightingControllerAssemblyAttribute), true);
+	        LoadModulesCore(lightingControllerModuleDirectory, fileCatalogs, typeof(LightingControllerAssemblyAttribute),
+		        loadLightingControllerModules: true);
         }
 
         private void LoadProgramModules(string programModuleDirectory, List<ComposablePartCatalog> fileCatalogs)
@@ -155,6 +157,10 @@ namespace ZoneLighting.ZoneProgramNS.Factories
                     
                     foreach (var referencedFile in Directory.GetFiles(Path.GetDirectoryName(file), "*.dll").ToList())
                     {
+						//TODO: this try-catch needs to be replaced with a function that actually checks to see the file before copying
+						//TODO: can this whole process be removed completely? this seesm hacky because
+						//TODO: we are doing file copy to load dynamic modules, but ideally we should point
+						//TODO: to the location of the file instead of file copy? seems like a better way
                         try
                         {
                             File.Copy(referencedFile,
@@ -169,10 +175,13 @@ namespace ZoneLighting.ZoneProgramNS.Factories
 
                     if (loadLightingControllerModules)
                     {
+						//if loading lc modules, load the config file with it, if exists
                         var configFileName = $"{file}.json";
-						var config = File.ReadAllText(configFileName);
-						//JObject.Parse();
-                        LightingControllerConfigs.Add(config);
+	                    if (File.Exists(configFileName))
+	                    {
+		                    var config = File.ReadAllText(configFileName);
+		                    LightingControllerConfigs.Add(config);
+						}
                     }
                 }
             }

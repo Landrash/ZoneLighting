@@ -1,4 +1,4 @@
-﻿namespace ZoneLighting.MEF
+﻿namespace LightingControllerBase
 {
 	public interface ILightingControllerMetadata
 	{

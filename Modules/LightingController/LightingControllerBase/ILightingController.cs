@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using Anshul.Utilities;
+using Graphics;
 
-namespace ZoneLighting.MEF
+namespace LightingControllerBase
 {
 	public interface ILightingController : IBetterListType
 	{

@@ -1,5 +1,3 @@
-using ZoneLighting.MEF;
-
 namespace OPCWebSocketController
 {
     public interface IPixelToOPCPixelMapper

@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
 using System.Runtime.Serialization;
+using Graphics;
+using LightingControllerBase;
 using ZoneLighting.MEF;
 
 namespace ZoneLighting

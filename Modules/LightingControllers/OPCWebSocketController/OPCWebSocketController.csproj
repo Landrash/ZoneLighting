@@ -78,14 +78,18 @@
     <Compile Include="WebSocketOPCPacket.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ZoneLighting\ZoneLighting.csproj">
-      <Project>{fe00db62-6c3c-4d04-9f03-23da814298b6}</Project>
-      <Name>ZoneLighting</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Graphics\Graphics.csproj">
+      <Project>{60287c11-06cc-4f24-9473-20a58d4a6ef8}</Project>
+      <Name>Graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LightingController\LightingControllerBase\LightingControllerBase.csproj">
+      <Project>{cab28797-ddc5-4151-bd67-cb0de2b134dd}</Project>
+      <Name>LightingControllerBase</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -1,19 +1,18 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using LightingControllerBase;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OPCWebSocketController")]
+[assembly: AssemblyTitle("LightingControllerBase")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("OPCWebSocketController")]
+[assembly: AssemblyProduct("LightingControllerBase")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: LightingControllerAssembly()]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -21,7 +20,7 @@ using LightingControllerBase;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("041513f8-7c33-4e98-9656-f5af9840ea6f")]
+[assembly: Guid("cab28797-ddc5-4151-bd67-cb0de2b134dd")]
 
 // Version information for an assembly consists of the following four values:
 //

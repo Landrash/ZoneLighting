@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using LightingControllerBase;
 using Newtonsoft.Json;
-using ZoneLighting.MEF;
 
 namespace OPCWebSocketController
 {
@@ -21,8 +21,7 @@ namespace OPCWebSocketController
 			{
 				Pixels = nodeMcuConfig.Pixels
 			};
-
-
+			
 			if (nodeMcuConfig.PixelMapperType == null || nodeMcuConfig.PixelMapperType == PixelMapperType.Static)
 			{
 				Initialize(nodeMcuConfig.Name, nodeMcuConfig.ServerURL,
@@ -31,6 +30,7 @@ namespace OPCWebSocketController
 			}
 			else
 			{
+				//TODO: still needs to be tested
 				//instantiating a new instance of any of the resolvers might 
 				//require passing in parameters, which is not happening here
 				//todo: create an init method into which params are passed in

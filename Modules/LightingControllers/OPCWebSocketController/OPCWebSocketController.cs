@@ -4,13 +4,14 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
 using Anshul.Utilities;
+using Graphics;
+using LightingControllerBase;
 using Refigure;
 using WebSocketSharp;
-using ZoneLighting.MEF;
 
 namespace OPCWebSocketController
 {
-    public  abstract class OPCWebSocketController : ILightingController, IDisposable
+    public abstract class OPCWebSocketController : ILightingController, IDisposable
     {
         protected virtual int NodeMCUWifiThreadSleepTime { get; set; } = Config.GetAsInt("NodeMCUWIFIThreadSleepTime");
 
@@ -33,6 +34,7 @@ namespace OPCWebSocketController
         public bool Initialized { get; protected set; }
 
         public virtual OPCPixelType OPCPixelType { get; private set; }
+
         public byte Channel { get; set; }
 
         #endregion

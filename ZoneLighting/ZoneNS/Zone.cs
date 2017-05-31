@@ -5,8 +5,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks.Dataflow;
 using Anshul.Utilities;
-using ZoneLighting.MEF;
-using ZoneLighting.Usables;
+using Graphics;
+using LightingControllerBase;
 using ZoneLighting.ZoneProgramNS;
 
 namespace ZoneLighting.ZoneNS

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ZoneLighting.MEF
+namespace LightingControllerBase
 {
 	[AttributeUsage(AttributeTargets.Assembly)]
 	public class LightingControllerAssemblyAttribute : Attribute

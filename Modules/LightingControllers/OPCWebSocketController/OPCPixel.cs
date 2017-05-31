@@ -68,7 +68,6 @@ namespace OPCWebSocketController
     
     public enum OPCPixelType
 	{
-		None,
 		OPCRGBPixel,
 		OPCRBGPixel,
 	}
