@@ -59,10 +59,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NodeMCUControllerConfig.cs" />
     <Compile Include="OneToOnePixelMapper.cs" />
     <Compile Include="FadeCandyController.cs" />
     <Compile Include="IPixelToOPCPixelMapper.cs" />
-    <Compile Include="JsonConfigPixelMapper.cs" />
+    <Compile Include="PixelMapperTypeResolver.cs" />
+    <Compile Include="StaticPixelMapper.cs" />
     <Compile Include="NodeMCUController.cs" />
     <Compile Include="NodeMCULightingControllerConfig.cs" />
     <Compile Include="OPCPacket.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="OPCPixelFrame.cs" />
     <Compile Include="OPCWebSocketController.cs" />
     <Compile Include="OPCZone.cs" />
+    <Compile Include="Pixel.cs" />
     <Compile Include="PixelMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebSocketOPCPacket.cs" />

@@ -6,13 +6,6 @@ namespace OPCWebSocketController
 {
 	public class PixelMap
 	{
-	    public class Pixel
-	    {
-            public int LogicalIndex { get; set; }
-            public int PhysicalIndex { get; set; }
-            public byte Channel { get; set; }
-	    }
-
         public List<Pixel> Pixels { get; set; }
 
 	    public int[] LogicalIndices

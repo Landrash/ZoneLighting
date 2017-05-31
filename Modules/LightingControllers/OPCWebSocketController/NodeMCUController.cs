@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using System.Dynamic;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using ZoneLighting.MEF;
 
 namespace OPCWebSocketController
@@ -18,45 +16,37 @@ namespace OPCWebSocketController
 
 		public override void Initialize(string lcConfig)
 		{
-			//dynamic nodeMcuConfig = JsonConvert.DeserializeObject(lcConfig.Replace("\n", string.Empty)
-			//	.Replace("\r", string.Empty)
-			//	.Replace("\t", string.Empty));
-
-			dynamic nodeMcuConfig =
-				JsonConvert.DeserializeObject(
-					"{ 'Name': 'Jon Smith' }");
-
-			try
+			var nodeMcuConfig = JsonConvert.DeserializeObject<NodeMCUControllerConfig>(lcConfig);
+			var pixelMap = new PixelMap()
 			{
-				Console.WriteLine(nodeMcuConfig.Name);
-				Console.WriteLine(nodeMcuConfig.ServerURL);
+				Pixels = nodeMcuConfig.Pixels
+			};
 
-			}
-			catch (Exception ex)
+
+			if (nodeMcuConfig.PixelMapperType == null || nodeMcuConfig.PixelMapperType == PixelMapperType.Static)
 			{
-				Console.WriteLine(ex.ToString());
+				Initialize(nodeMcuConfig.Name, nodeMcuConfig.ServerURL,
+					new StaticPixelMapper(pixelMap), nodeMcuConfig.OPCPixelType,
+					nodeMcuConfig.Channel);
 			}
+			else
+			{
+				//instantiating a new instance of any of the resolvers might 
+				//require passing in parameters, which is not happening here
+				//todo: create an init method into which params are passed in
+				//these params can be taken from the config also
+				Initialize(nodeMcuConfig.Name, nodeMcuConfig.ServerURL,
+					(IPixelToOPCPixelMapper) Activator.CreateInstance(
+						new PixelMapperTypeResolver().Resolve((PixelMapperType) nodeMcuConfig.PixelMapperType)),
+					nodeMcuConfig.OPCPixelType,
+					nodeMcuConfig.Channel);
+			}
+			Initialized = true;
 
+			//sample: base.Initialize("NodeMCUController1", "ws://192.168.29.113:81/", new JsonConfigPixelMapper(), OPCPixelType.OPCRGBPixel, 1);
+		}
 
-			//if (nodeMcuConfig.PixelMap != null)
-	  //      {
-			//	Initialize((string) nodeMcuConfig.Name, (string) nodeMcuConfig.ServerURL,
-			//        new StaticPixelMapper((PixelMap) nodeMcuConfig.PixelMap), (OPCPixelType) nodeMcuConfig.OPCPixelType,
-			//        (byte) nodeMcuConfig.Channel);
-	  //      }
-	  //      else
-	  //      {
-			//	//this will not work because pixelmapper cannot be read from a config file
-			//	//need to convert it into a factory lookup type thing
-			//	Initialize((string) nodeMcuConfig.Name, (string) nodeMcuConfig.ServerURL,
-			//        (IPixelToOPCPixelMapper) nodeMcuConfig.PixelMapper, (OPCPixelType) nodeMcuConfig.OPCPixelType,
-			//        (byte) nodeMcuConfig.Channel);
-	  //      }
-	        //base.Initialize("NodeMCUController1", "ws://192.168.29.113:81/", new JsonConfigPixelMapper(), OPCPixelType.OPCRGBPixel, 1);
-            Initialized = true;
-        }
-
-        public new void Uninitialize()
+		public new void Uninitialize()
         {
             if (Initialized)
             {

@@ -3,7 +3,7 @@
 	"ServerURL": "ws://192.168.29.113:81/",
 	"PixelType": 1,
 	"Channel": 1,
-	"PixelMap": [
+	"Pixels": [
 		{
 			"LogicalIndex": 0,
 			"PhysicalIndex": 0,
