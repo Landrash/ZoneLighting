@@ -86,7 +86,7 @@
       <Project>{60287c11-06cc-4f24-9473-20a58d4a6ef8}</Project>
       <Name>Graphics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\LightingController\LightingControllerBase\LightingControllerBase.csproj">
+    <ProjectReference Include="..\..\LightingControllerBase\LightingControllerBase.csproj">
       <Project>{cab28797-ddc5-4151-bd67-cb0de2b134dd}</Project>
       <Name>LightingControllerBase</Name>
     </ProjectReference>

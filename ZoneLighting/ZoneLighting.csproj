@@ -294,7 +294,7 @@
       <Project>{60287C11-06CC-4F24-9473-20A58D4A6EF8}</Project>
       <Name>Graphics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Modules\LightingController\LightingControllerBase\LightingControllerBase.csproj">
+    <ProjectReference Include="..\Modules\LightingControllerBase\LightingControllerBase.csproj">
       <Project>{cab28797-ddc5-4151-bd67-cb0de2b134dd}</Project>
       <Name>LightingControllerBase</Name>
     </ProjectReference>
