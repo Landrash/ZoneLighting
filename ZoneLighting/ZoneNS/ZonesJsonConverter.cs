@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ZoneLighting.ZoneProgramNS.Factories;
 
 namespace ZoneLighting.ZoneNS
 {
@@ -44,14 +45,6 @@ namespace ZoneLighting.ZoneNS
 		{
 			var jZones = JArray.Load(reader);
 			IEnumerable<Zone> zones = new List<Zone>();
-
-			
-			jZones.ToList().ForEach(jZone =>
-			{
-				//jZone
-			});
-
-
 			return zones;
 		}
 

@@ -7,6 +7,8 @@ using System.Threading.Tasks.Dataflow;
 using Anshul.Utilities;
 using Graphics;
 using LightingControllerBase;
+using Newtonsoft.Json;
+using ZoneLighting.ConfigNS;
 using ZoneLighting.ZoneProgramNS;
 
 namespace ZoneLighting.ZoneNS
@@ -23,6 +25,7 @@ namespace ZoneLighting.ZoneNS
 		public void SetLightingController(ILightingController lightingController)
 		{
 			LightingController = lightingController;
+			LightingControllerName = lightingController.Name;
 		}
 
 		#region Transport Controls
@@ -191,6 +194,9 @@ namespace ZoneLighting.ZoneNS
 		/// </summary>
 		public ILightingController LightingController { get; private set; }
 
+		[DataMember]
+		public string LightingControllerName { get; private set; }
+
 		/// <summary>
 		/// The program that is active on this zone.
 		/// </summary>
@@ -222,12 +228,14 @@ namespace ZoneLighting.ZoneNS
 		/// <param name="lightingController"></param>
 		/// <param name="name"></param>
 		/// <param name="brightness">Brightness for this zone.</param>
-		public Zone(ILightingController lightingController, string name = "", double? brightness = 1.0)
+		[JsonConstructor]
+		public Zone(ILightingController lightingController, string name = "", double? brightness = 1.0, string lightingControllerName = null, List<LED> lights = null)
 		{
-			Construct();
+			Construct(lights);
 			LightingController = lightingController;
 			Name = name;
 			Brightness = brightness ?? 1.0;
+			LightingControllerName = lightingControllerName ?? LightingController.Name;
 		}
 
 		public Zone(string name)
@@ -236,9 +244,9 @@ namespace ZoneLighting.ZoneNS
 			Name = name;
 		}
 
-		private void Construct()
+		private void Construct(IEnumerable<IPixel> lights= null)
 		{
-			Lights = new List<IPixel>();
+			Lights = lights?.ToList() ?? new List<IPixel>();
 		}
 
 		#region Interrupt Processing

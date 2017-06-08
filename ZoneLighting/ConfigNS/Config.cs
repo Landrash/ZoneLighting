@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using ZoneLighting.Usables;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
+using ZoneLighting.ZoneProgramNS.Factories;
 
 namespace ZoneLighting.ConfigNS
 {
@@ -69,7 +70,8 @@ namespace ZoneLighting.ConfigNS
 
 		public static BetterList<Zone> DeserializeZones(string config)
 		{
-			var zones = ((IEnumerable<Zone>)JsonConvert.DeserializeObject(config, LoadZonesSerializerSettings)).ToBetterList();
+			var des = JsonConvert.DeserializeObject<IEnumerable<Zone>>(config, LoadZonesSerializerSettings);
+			var zones = des.ToBetterList();
 			zones.ForEach(AssignLightingController);
 			return zones.ToBetterList();
 		}
@@ -125,12 +127,9 @@ namespace ZoneLighting.ConfigNS
 
         private static void AssignLightingController(Zone zone)
 		{
-            //TODO: This is where during the reloading of the zone, its previous lighting controller need to be attached back to it.
-            
-			//if (zone.GetType() == typeof(OPCZone))
-			//{
-			//	zone.SetLightingController(FadeCandyController.Instance);
-			//}
+
+
+			zone.SetLightingController(ZoneScaffolder.Instance.LightingControllers[zone.LightingControllerName]);
 		}
 
 		public static IEnumerable<Zone> LoadZones(string filename = "", string zoneConfiguration = "")

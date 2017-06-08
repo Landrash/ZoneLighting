@@ -16,17 +16,6 @@ namespace ZoneLighting
 		}
 
 
-		//TODO: Remove this and use the Listify in Anshul.Utilities after updating it to the latest version
-		/// <summary>
-		/// Takes an object and turns it into a list of its type. Basically puts the incoming object
-		/// into a list.
-		/// </summary>
-		public static List<T> Listify<T>(this T input)
-		{
-			var list = new List<T> {input};
-			return list;
-		}
-
 		/// <summary>
 		/// This runs the given actions for each item in the given list on separate threads simultaneously (TaskCreationOptions.LongRunning).
 		/// </summary>

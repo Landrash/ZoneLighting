@@ -3,19 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
-using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 using Anshul.Utilities;
 using LightingControllerBase;
-using MIDIator.Json;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 using ZoneLighting.MEF;
-using ZoneLighting.Usables;
 using ZoneLighting.ZoneNS;
 
 namespace ZoneLighting.ZoneProgramNS.Factories
@@ -43,57 +36,57 @@ namespace ZoneLighting.ZoneProgramNS.Factories
 
         #region MEF
 
-		[ImportMany(typeof(ZoneProgram), AllowRecomposition = true)]
+        [ImportMany(typeof(ZoneProgram), AllowRecomposition = true)]
         public IList<ExportFactory<ZoneProgram, IZoneProgramMetadata>> ZoneProgramFactories { get; set; }
 
-		[ImportMany(typeof(ILightingController), AllowRecomposition = true)]
-	    public IList<ExportFactory<ILightingController, ILightingControllerMetadata>> LightingControllerFactories { get; set; }
+        [ImportMany(typeof(ILightingController), AllowRecomposition = true)]
+        public IList<ExportFactory<ILightingController, ILightingControllerMetadata>> LightingControllerFactories { get; set; }
 
         private List<string> LightingControllerConfigs { get; set; } = new List<string>();
 
-		/// <summary>
-		/// Container for the external modules.
-		/// </summary>
-		private CompositionContainer ModuleContainer { get; set; }
+        /// <summary>
+        /// Container for the external modules.
+        /// </summary>
+        private CompositionContainer ModuleContainer { get; set; }
 
-		#endregion
+        #endregion
 
-		#region C+I
+        #region C+I
 
-		public bool Initialized { get; private set; }
+        public bool Initialized { get; private set; }
 
         public void Initialize(string programModuleDirectory, string lightingControllerModuleDirectory)
         {
             if (!Initialized)
             {
                 LightingControllerFactories = new List<ExportFactory<ILightingController, ILightingControllerMetadata>>();
-	            ZoneProgramFactories = new List<ExportFactory<ZoneProgram, IZoneProgramMetadata>>();
-				LoadModules(programModuleDirectory, lightingControllerModuleDirectory);
+                ZoneProgramFactories = new List<ExportFactory<ZoneProgram, IZoneProgramMetadata>>();
+                LoadModules(programModuleDirectory, lightingControllerModuleDirectory);
                 Initialized = true;
             }
         }
 
         public void InitLightingControllers()
         {
-            
 
-			//for now - initialize a lighting controller for each of the lighting controller types imported
-			//later - this needs to be driven by the user somehow - maybe during setup of ZL
-			//or manually when they wanna add new controllers
-			LightingControllerFactories.ToList().ForEach(factory =>
-			{
-				var lightingController = factory.CreateExport().Value;
 
-				//var pixelMap = LightingControllerConfigs.First().PixelMap;
-				//var name = LightingControllerConfigs.First().Name;
-				//Console.WriteLine(name);
-				//Console.WriteLine(pixelMap[0].LogicalIndex);
+            //for now - initialize a lighting controller for each of the lighting controller types imported
+            //later - this needs to be driven by the user somehow - maybe during setup of ZL
+            //or manually when they wanna add new controllers
+            LightingControllerFactories.ToList().ForEach(factory =>
+            {
+                var lightingController = factory.CreateExport().Value;
 
-				lightingController.Initialize(LightingControllerConfigs.First());
+                //var pixelMap = LightingControllerConfigs.First().PixelMap;
+                //var name = LightingControllerConfigs.First().Name;
+                //Console.WriteLine(name);
+                //Console.WriteLine(pixelMap[0].LogicalIndex);
 
-				LightingControllers.Add(lightingController);
-			});
-		}
+                lightingController.Initialize(LightingControllerConfigs.First());
+
+                LightingControllers.Add(lightingController);
+            });
+        }
 
 
 
@@ -117,26 +110,28 @@ namespace ZoneLighting.ZoneProgramNS.Factories
         /// <summary>
         /// Loads external ZoneProgram modules.
         /// </summary>
-        private void LoadModules(string programModuleDirectory, string lightingControllerModuleDirectory)
+        private void LoadModules(string programModuleDirectory = null, string lightingControllerModuleDirectory = null)
         {
             var fileCatalogs = new List<ComposablePartCatalog>();
 
-            //need to set this because otherwise for WebController, the file is loaded from c:\windows\system32\inetsrv probably
+            //need to set this because otherwise for web projects, the file is loaded from c:\windows\system32\inetsrv probably
             //because that's where w3wp.exe is or something.. who knows.
             Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            
-            LoadProgramModules(programModuleDirectory, fileCatalogs);
-            LoadLightingControllerModules(lightingControllerModuleDirectory, fileCatalogs);
 
-			var aggregateCatalog = new AggregateCatalog(fileCatalogs);
+            if (!string.IsNullOrEmpty(programModuleDirectory))
+                LoadProgramModules(programModuleDirectory, fileCatalogs);
+            if (!string.IsNullOrEmpty(lightingControllerModuleDirectory))
+                LoadLightingControllerModules(lightingControllerModuleDirectory, fileCatalogs);
+
+            var aggregateCatalog = new AggregateCatalog(fileCatalogs);
             ModuleContainer = new CompositionContainer(aggregateCatalog);
             ModuleContainer.ComposeParts(this);
         }
 
         private void LoadLightingControllerModules(string lightingControllerModuleDirectory, List<ComposablePartCatalog> fileCatalogs)
         {
-	        LoadModulesCore(lightingControllerModuleDirectory, fileCatalogs, typeof(LightingControllerAssemblyAttribute),
-		        loadLightingControllerModules: true);
+            LoadModulesCore(lightingControllerModuleDirectory, fileCatalogs, typeof(LightingControllerBase.LightingControllerAssemblyAttribute),
+                loadLightingControllerModules: true);
         }
 
         private void LoadProgramModules(string programModuleDirectory, List<ComposablePartCatalog> fileCatalogs)
@@ -154,13 +149,13 @@ namespace ZoneLighting.ZoneProgramNS.Factories
                     .Any(ass => ass.AttributeType == assemblyAttribute))
                 {
                     fileCatalogs.Add(new AssemblyCatalog(assembly));
-                    
+
                     foreach (var referencedFile in Directory.GetFiles(Path.GetDirectoryName(file), "*.dll").ToList())
                     {
-						//TODO: this try-catch needs to be replaced with a function that actually checks to see the file before copying
-						//TODO: can this whole process be removed completely? this seesm hacky because
-						//TODO: we are doing file copy to load dynamic modules, but ideally we should point
-						//TODO: to the location of the file instead of file copy? seems like a better way
+                        //TODO: this try-catch needs to be replaced with a function that actually checks to see the file before copying
+                        //TODO: can this whole process be removed completely? this seesm hacky because
+                        //TODO: we are doing file copy to load dynamic modules, but ideally we should point
+                        //TODO: to the location of the file instead of file copy? seems like a better way
                         try
                         {
                             File.Copy(referencedFile,
@@ -175,13 +170,13 @@ namespace ZoneLighting.ZoneProgramNS.Factories
 
                     if (loadLightingControllerModules)
                     {
-						//if loading lc modules, load the config file with it, if exists
+                        //if loading lc modules, load the config file with it, if exists
                         var configFileName = $"{file}.json";
-	                    if (File.Exists(configFileName))
-	                    {
-		                    var config = File.ReadAllText(configFileName);
-		                    LightingControllerConfigs.Add(config);
-						}
+                        if (File.Exists(configFileName))
+                        {
+                            var config = File.ReadAllText(configFileName);
+                            LightingControllerConfigs.Add(config);
+                        }
                     }
                 }
             }

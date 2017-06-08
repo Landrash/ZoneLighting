@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Anshul.Utilities, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Anshul.Utilities.1.0.24.0\lib\net45\Anshul.Utilities.dll</HintPath>
+      <HintPath>..\packages\Anshul.Utilities.1.0.27.0\lib\net45\Anshul.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="AustinHarris.JsonRpc, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AustinHarris.JsonRpc.1.0.4.46\lib\net40\AustinHarris.JsonRpc.dll</HintPath>
@@ -133,12 +133,14 @@
     <Reference Include="TypeLite.Net4, Version=1.8.1.0, Culture=neutral, PublicKeyToken=8cd4b9c9ac23d744, processorArchitecture=MSIL">
       <HintPath>..\packages\MIDIator.CoreLib.1.0.287\lib\net461\TypeLite.Net4.dll</HintPath>
     </Reference>
-    <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebSocketSharp.1.0.3-rc11\lib\websocket-sharp.dll</HintPath>
+    <Reference Include="websocket-sharp, Version=1.0.2.36589, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebSocketSharp.1.0.3-rc9\lib\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigNS\GetOnlyJsonPropertyAttribute.cs" />
+    <Compile Include="ConfigNS\GetOnlyContractResolver.cs" />
     <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\Drawing\ClockedTrailShape.cs" />
     <Compile Include="Helpers.cs" />
@@ -158,6 +160,7 @@
     <Compile Include="Graphics\Drawing\Trail.cs" />
     <Compile Include="StockPrograms\Shimmer.cs" />
     <Compile Include="StockPrograms\VisualClock.cs" />
+    <Compile Include="TestApparatus\TestLightingController.cs" />
     <Compile Include="Usables\RunnerHelpers.cs" />
     <Compile Include="StockPrograms\BlinkColorLoop.cs" />
     <Compile Include="StockPrograms\BlinkColorReactive.cs" />

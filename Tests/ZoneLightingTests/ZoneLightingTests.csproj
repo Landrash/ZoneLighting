@@ -33,16 +33,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Anshul.Utilities">
+      <HintPath>..\..\Modules\LightingControllerBase\bin\Debug\Anshul.Utilities.dll</HintPath>
+    </Reference>
     <Reference Include="FakeItEasy, Version=1.25.1.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FakeItEasy.1.25.1\lib\net40\FakeItEasy.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Moq, Version=4.2.1409.1722, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="nunit.core, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
@@ -54,6 +56,7 @@
     </Reference>
     <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="nunit.util, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnitTestAdapter.2.0.0\lib\nunit.util.dll</HintPath>
@@ -64,7 +67,8 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Refigure, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Refigure.1.0.13.0\lib\net45\Refigure.dll</HintPath>
+      <HintPath>..\..\packages\Refigure.1.0.15.0\lib\net45\Refigure.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Sanford.Multimedia">
       <HintPath>..\..\packages\Sanford.Win10.1.0.0\lib\net45\Sanford.Multimedia.dll</HintPath>
@@ -85,58 +89,33 @@
     <Reference Include="System.Xml" />
     <Reference Include="Telerik.JustMock, Version=2014.3.1204.3, Culture=neutral, PublicKeyToken=721b6c5bc0326b3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\JustMock.2014.3.1204.3\lib\Net35\Telerik.JustMock.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="websocket-sharp, Version=1.0.2.36589, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\WebSocketSharp.1.0.3-rc9\lib\websocket-sharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="xunit, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="xunit.extensions, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\xunit.extensions.1.9.2\lib\net20\xunit.extensions.dll</HintPath>
-      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigTests.cs" />
-    <Compile Include="FadeCandyControllerTests.cs" />
-    <Compile Include="InputStartingValuesTests.cs" />
-    <Compile Include="LEDTests.cs" />
-    <Compile Include="ProgramTests\VisualClockTests.cs" />
-    <Compile Include="ZoneProgramNS\Clock\MilliTimerTests.cs" />
-    <Compile Include="ZoneProgramNS\Clock\MicroTimerTests.cs" />
-    <Compile Include="ZoneProgramNS\Clock\StopwatchClockTests.cs" />
-    <Compile Include="ZoneProgramNS\Clock\TimerClockTests.cs" />
-    <Compile Include="ZoneProgramNS\Clock\MilliClockTests.cs" />
-    <Compile Include="ProgramCommonTests.cs" />
-    <Compile Include="InterruptingInputTests.cs" />
-    <Compile Include="ExtensionsTests.cs" />
-    <Compile Include="MainProgramRunner.cs" />
-    <Compile Include="ProgramTests\MicroClockBlinkTests.cs" />
-    <Compile Include="ProgramTests\MidiTwoDimensionalFadeTests.cs" />
-    <Compile Include="ProgramTests\MidiPlayTests.cs" />
-    <Compile Include="ProgramTests\RaindropTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Programs\Rainbow.cs" />
     <Compile Include="Resources\Programs\ScrollDot.cs" />
     <Compile Include="Resources\Programs\StaticColor.cs" />
     <Compile Include="Resources\Programs\Stepper.cs" />
     <Compile Include="Resources\Programs\StepperInternalLoop.cs" />
-    <Compile Include="ProgramTests\ScrollTrailTests.cs" />
+    <Compile Include="ZoneProgramNS\Clock\MilliTimerTests.cs" />
+    <Compile Include="ZoneProgramNS\Clock\MicroTimerTests.cs" />
+    <Compile Include="ZoneProgramNS\Clock\StopwatchClockTests.cs" />
+    <Compile Include="ZoneProgramNS\Clock\TimerClockTests.cs" />
+    <Compile Include="ZoneProgramNS\Clock\MilliClockTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelpers.cs" />
-    <Compile Include="UnderlyingTypeConverterTests.cs" />
-    <Compile Include="ZLMStateTests.cs" />
-    <Compile Include="ZLMTests.cs" />
-    <Compile Include="ProgramTests\ShimmerTests.cs" />
-    <Compile Include="ZoneScaffolderTests.cs" />
-    <Compile Include="ZoneProgramInputTests.cs" />
-    <Compile Include="SyncContextTests.cs" />
-    <Compile Include="ZoneProgramTests.cs" />
-    <Compile Include="ProgramSetTests.cs" />
-    <Compile Include="ZoneTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config.template">
@@ -160,6 +139,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Modules\Graphics\Graphics.csproj">
+      <Project>{60287C11-06CC-4F24-9473-20A58D4A6EF8}</Project>
+      <Name>Graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Modules\LightingControllerBase\LightingControllerBase.csproj">
+      <Project>{CAB28797-DDC5-4151-BD67-CB0DE2B134DD}</Project>
+      <Name>LightingControllerBase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ZoneLighting\ZoneLighting.csproj">
       <Project>{FE00DB62-6C3C-4D04-9F03-23DA814298B6}</Project>
       <Name>ZoneLighting</Name>
@@ -170,8 +157,65 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logs\Deadlock4Steppers.txt" />
+    <Content Include="Resources\LightingControllers\Anshul.Utilities.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\EventSourceProxy.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\Graphics.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\LightingControllerBase.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\MIDIator.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\MIDIator.UIGenerator.Consumables.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\NLog.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\nunit.framework.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\OPCWebSocketController.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\Refigure.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\System.Reactive.Core.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\System.Reactive.Interfaces.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\System.Reactive.Linq.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\System.Threading.Tasks.Dataflow.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\TypeLite.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\websocket-sharp.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightingControllers\ZoneLighting.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Programs\ExternalPrograms.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Programs\OPCWebSocketController.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Zones\ExternalZones.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
