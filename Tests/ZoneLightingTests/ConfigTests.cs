@@ -119,49 +119,46 @@ namespace ZoneLightingTests
 
 			//assert
 			Assert.AreEqual(serializedProgramSets,
-				"{\r\n  \"$type\": \"Anshul.Utilities.BetterList`1[[ZoneLighting.ZoneProgramNS.ProgramSet, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Anshul.Utilities, Version=1.0.20.0, Culture=neutral, PublicKeyToken=null\",\r\n  \"$values\": [\r\n    {\r\n      \"$type\": \"ZoneLighting.ZoneProgramNS.ProgramSet, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n      \"Name\": \"StepperSet1\",\r\n      \"Zones\": {\r\n        \"$type\": \"System.Collections.Generic.List`1[[ZoneLighting.ZoneNS.Zone, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\",\r\n        \"$values\": [\r\n          {\r\n            \"$type\": \"ZoneLighting.ZoneNS.Zone, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Name\": \"TestZone1\",\r\n            \"Lights\": {\r\n              \"$type\": \"System.Collections.Generic.List`1[[Graphics.IPixel, Graphics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\",\r\n              \"$values\": [\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 0\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 1\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 2\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 3\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 4\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 5\r\n                }\r\n              ]\r\n            },\r\n            \"LightingControllerName\": \"tlc1\",\r\n            \"Brightness\": 1.0,\r\n            \"ZoneProgramInputs\": {\r\n              \"$type\": \"System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[ZoneLighting.ZoneProgramNS.ZoneProgramInputCollection, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\"\r\n            }\r\n          }\r\n        ]\r\n      },\r\n      \"ProgramName\": \"Stepper\",\r\n      \"Sync\": true,\r\n      \"StartingParameters\": null\r\n    },\r\n    {\r\n      \"$type\": \"ZoneLighting.ZoneProgramNS.ProgramSet, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n      \"Name\": \"StepperSet2\",\r\n      \"Zones\": {\r\n        \"$type\": \"System.Collections.Generic.List`1[[ZoneLighting.ZoneNS.Zone, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\",\r\n        \"$values\": [\r\n          {\r\n            \"$type\": \"ZoneLighting.ZoneNS.Zone, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Name\": \"TestZone2\",\r\n            \"Lights\": {\r\n              \"$type\": \"System.Collections.Generic.List`1[[Graphics.IPixel, Graphics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\",\r\n              \"$values\": [\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 0\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 1\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 2\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 3\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 4\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 5\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 6\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 7\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 8\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 9\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 10\r\n                },\r\n                {\r\n                  \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n                  \"Index\": 11\r\n                }\r\n              ]\r\n            },\r\n            \"LightingControllerName\": \"tlc1\",\r\n            \"Brightness\": 1.0,\r\n            \"ZoneProgramInputs\": {\r\n              \"$type\": \"System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[ZoneLighting.ZoneProgramNS.ZoneProgramInputCollection, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\"\r\n            }\r\n          }\r\n        ]\r\n      },\r\n      \"ProgramName\": \"Stepper\",\r\n      \"Sync\": true,\r\n      \"StartingParameters\": null\r\n    }\r\n  ]\r\n}");
+				"[\r\n  {\r\n    \"Name\": \"StepperSet1\",\r\n    \"Zones\": [\r\n      {\r\n        \"Name\": \"TestZone1\",\r\n        \"Lights\": [\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 0\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 1\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 2\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 3\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 4\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 5\r\n          }\r\n        ],\r\n        \"LightingControllerName\": \"tlc1\",\r\n        \"Brightness\": 1.0,\r\n        \"ZoneProgramInputs\": {}\r\n      }\r\n    ],\r\n    \"ProgramName\": \"Stepper\",\r\n    \"Sync\": true,\r\n    \"StartingParameters\": null\r\n  },\r\n  {\r\n    \"Name\": \"StepperSet2\",\r\n    \"Zones\": [\r\n      {\r\n        \"Name\": \"TestZone2\",\r\n        \"Lights\": [\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 0\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 1\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 2\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 3\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 4\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 5\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 6\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 7\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 8\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 9\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 10\r\n          },\r\n          {\r\n            \"$type\": \"ZoneLighting.LED, ZoneLighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\",\r\n            \"Index\": 11\r\n          }\r\n        ],\r\n        \"LightingControllerName\": \"tlc1\",\r\n        \"Brightness\": 1.0,\r\n        \"ZoneProgramInputs\": {}\r\n      }\r\n    ],\r\n    \"ProgramName\": \"Stepper\",\r\n    \"Sync\": true,\r\n    \"StartingParameters\": null\r\n  }\r\n]");
 
 			zones.ForEach(zone => zone.Dispose(true));
 		}
 
-		//[Test]
-		//[Timeout(30000)]
-		//public void DeserializeProgramSets_DeserializesProgramSetsAndBringsThemToInitialConditions()
-		//{
-		//	//arrange
-		//	TestHelpers.InitializeZoneScaffolder();
+		[Test]
+		[Timeout(30000)]
+		public void DeserializeProgramSets_DeserializesProgramSetsAndBringsThemToInitialConditions()
+		{
+			//arrange
+			TestHelpers.InitializeZoneScaffolder();
+			var testController = new TestLightingController("tlc1", list => { });
+			var zones = new BetterList<Zone>();
 
-		//	byte fcChannel = 1;
-		//	var zones = new BetterList<Zone>();
-		//	FadeCandyController.Instance.Initialize();
-		//	((OPCZone)zones.Add(new OPCZone(FadeCandyController.Instance, "TestZone1"))).AddOPCLights(6);
-		//	((OPCZone)zones.Add(new OPCZone(FadeCandyController.Instance, "TestZone2"))).AddOPCLights(12);
-		//	((OPCZone)zones.Add(new OPCZone(FadeCandyController.Instance, "TestZone3"))).AddOPCLights(12);
-		//	((OPCZone)zones.Add(new OPCZone(FadeCandyController.Instance, "TestZone4"))).AddOPCLights(12);
+			zones.Add(new Zone(testController, "TestZone1")).AddLights(6);
+			zones.Add(new Zone(testController, "TestZone2")).AddLights(12);
 
-		//	var programSets = new BetterList<ProgramSet>
-		//	{
-		//		new ProgramSet("Stepper", zones["TestZone1"].Listify().Union(zones["TestZone3"].Listify()), true, null, "StepperSet1"),
-		//		new ProgramSet("Stepper", zones["TestZone2"].Listify().Union(zones["TestZone4"].Listify()), true, null, "StepperSet2")
-		//	};
+			var programSets = new BetterList<ProgramSet>
+			{
+				new ProgramSet("Stepper", zones["TestZone1"].Listify(), true, null, "StepperSet1"),
+				new ProgramSet("Stepper", zones["TestZone2"].Listify(), true, null, "StepperSet2")
+			};
 
-		//	var serializedProgramSets = Config.SerializeProgramSets(programSets);
+			var serializedProgramSets = Config.SerializeProgramSets(programSets);
 
-		//	//act
-		//	var deserializedProgramSets = Config.DeserializeProgramSets(serializedProgramSets, zones);
+			//act
+			var deserializedProgramSets = Config.DeserializeProgramSets(serializedProgramSets, zones);
 
-		//	//assert
-		//	Assert.AreEqual(programSets.Count, deserializedProgramSets.Count());
-		//	deserializedProgramSets.ForEach(deserializedProgramSet =>
-		//	{
-		//		Assert.AreEqual(deserializedProgramSet.ProgramName, programSets[deserializedProgramSet.Name].ProgramName);
-		//		Assert.AreEqual(deserializedProgramSet.Sync, programSets[deserializedProgramSet.Name].Sync);
-		//		Assert.AreEqual(deserializedProgramSet.Zones, programSets[deserializedProgramSet.Name].Zones);
-		//	});
+			//assert
+			Assert.AreEqual(programSets.Count, deserializedProgramSets.Count());
+			deserializedProgramSets.ForEach(deserializedProgramSet =>
+			{
+				Assert.AreEqual(deserializedProgramSet.ProgramName, programSets[deserializedProgramSet.Name].ProgramName);
+				Assert.AreEqual(deserializedProgramSet.Sync, programSets[deserializedProgramSet.Name].Sync);
+				Assert.AreEqual(deserializedProgramSet.Zones, programSets[deserializedProgramSet.Name].Zones);
+			});
 
-		//	TestHelpers.ValidateSteppersRunning(zones.Select(z => z.ZoneProgram).Cast<IStepper>(), 100);
+			TestHelpers.ValidateSteppersRunning(zones.Select(z => z.ZoneProgram).Cast<IStepper>(), 100);
 
-		//	zones.ForEach(zone => zone.Dispose(true));
-		//}
+			zones.ForEach(zone => zone.Dispose(true));
+		}
 	}
 }

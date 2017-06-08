@@ -109,6 +109,7 @@
     <Compile Include="Resources\Programs\StaticColor.cs" />
     <Compile Include="Resources\Programs\Stepper.cs" />
     <Compile Include="Resources\Programs\StepperInternalLoop.cs" />
+    <Compile Include="SyncContextTests.cs" />
     <Compile Include="ZoneProgramNS\Clock\MilliTimerTests.cs" />
     <Compile Include="ZoneProgramNS\Clock\MicroTimerTests.cs" />
     <Compile Include="ZoneProgramNS\Clock\StopwatchClockTests.cs" />

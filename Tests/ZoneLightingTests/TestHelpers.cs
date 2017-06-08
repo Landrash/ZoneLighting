@@ -18,21 +18,21 @@ namespace ZoneLightingTests
 			ZoneScaffolder.Instance.Initialize(Config.Get("TestProgramModuleDirectory"), Config.Get("TestLightingControllerModuleDirectory"));
 		}
 
-		//public static void ValidateSteppersInSync(IEnumerable<IStepper> steppers, int numberOfChecks, int msToWaitBeforeStart = 10, int msToWaitBetweenChecks = 1, bool print = false)
-		//{
-		//	int[,] stepperSteps;
-		//	var stepperArray = steppers as IStepper[] ?? steppers.ToArray();
-		//	var invalidStepIndex = SyncContextTests.ValidateStepperSyncPhase(stepperArray.ToArray(), out stepperSteps, numberOfChecks);
-		//	if (print) SyncContextTests.PrintStepperSteps(stepperArray.ToArray(), stepperSteps);
-		//	Assert.True(invalidStepIndex.Length == 0 && stepperSteps.Length != 0);
-		//}
+		public static void ValidateSteppersInSync(IEnumerable<IStepper> steppers, int numberOfChecks, int msToWaitBeforeStart = 10, int msToWaitBetweenChecks = 1, bool print = false)
+		{
+			int[,] stepperSteps;
+			var stepperArray = steppers as IStepper[] ?? steppers.ToArray();
+			var invalidStepIndex = SyncContextTests.ValidateStepperSyncPhase(stepperArray.ToArray(), out stepperSteps, numberOfChecks);
+			if (print) SyncContextTests.PrintStepperSteps(stepperArray.ToArray(), stepperSteps);
+			Assert.True(invalidStepIndex.Length == 0 && stepperSteps.Length != 0);
+		}
 
-		//public static void ValidateSteppersRunning(IEnumerable<IStepper> steppers, int numberOfChecks, int msToWaitBeforeStart = 10, int msToWaitBetweenChecks = 1)
-		//{
-		//		int[,] stepperSteps;
-		//	SyncContextTests.ValidateStepperSyncPhase(steppers.ToArray(), out stepperSteps, numberOfChecks);
-		//	Assert.True(stepperSteps.Length != 0);
-		//}
+		public static void ValidateSteppersRunning(IEnumerable<IStepper> steppers, int numberOfChecks, int msToWaitBeforeStart = 10, int msToWaitBetweenChecks = 1)
+		{
+			int[,] stepperSteps;
+			SyncContextTests.ValidateStepperSyncPhase(steppers.ToArray(), out stepperSteps, numberOfChecks);
+			Assert.True(stepperSteps.Length != 0);
+		}
 
 		//public static void ValidateSteppersNotRunning(IEnumerable<IStepper> steppers, int numberOfChecks, int msToWaitBeforeStart = 10, int msToWaitBetweenChecks = 1)
 		//{
