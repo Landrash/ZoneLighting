@@ -214,9 +214,6 @@
     <Content Include="Resources\Programs\ExternalPrograms.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Programs\OPCWebSocketController.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Zones\ExternalZones.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

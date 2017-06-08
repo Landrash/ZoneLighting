@@ -130,7 +130,7 @@ namespace ZoneLighting.ZoneProgramNS.Factories
 
         private void LoadLightingControllerModules(string lightingControllerModuleDirectory, List<ComposablePartCatalog> fileCatalogs)
         {
-            LoadModulesCore(lightingControllerModuleDirectory, fileCatalogs, typeof(LightingControllerBase.LightingControllerAssemblyAttribute),
+            LoadModulesCore(lightingControllerModuleDirectory, fileCatalogs, typeof(LightingControllerAssemblyAttribute),
                 loadLightingControllerModules: true);
         }
 
