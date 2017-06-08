@@ -76,7 +76,8 @@ namespace ZoneLighting.ConfigNS
 			//PreserveReferencesHandling = PreserveReferencesHandling.All,
 			TypeNameHandling = TypeNameHandling,
 			TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Full,
-			Formatting = Formatting.Indented
+			Formatting = Formatting.Indented,
+			Binder = SerializationBinder
 		};
 
 		public static JsonSerializerSettings LoadZonesSerializerSettings => new JsonSerializerSettings()
@@ -85,7 +86,8 @@ namespace ZoneLighting.ConfigNS
 			TypeNameHandling = TypeNameHandling,
 			TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Full,
 			Formatting = Formatting.Indented,
-			Converters = new JsonConverter[] { new UnderlyingTypeConverter() }
+			Converters = new JsonConverter[] { new UnderlyingTypeConverter() },
+			Binder = SerializationBinder
 		};
 
 		public static JsonSerializerSettings LoadProgramSetsSerializerSettings => new JsonSerializerSettings()
