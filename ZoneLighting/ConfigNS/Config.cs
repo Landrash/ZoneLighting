@@ -19,7 +19,7 @@ namespace ZoneLighting.ConfigNS
 		public static JsonSerializerSettings SaveZonesSerializerSettings => new JsonSerializerSettings()
 		{
 			//PreserveReferencesHandling = PreserveReferencesHandling.All,
-			TypeNameHandling = TypeNameHandling.All,
+			TypeNameHandling = TypeNameHandling.Auto,
 			TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Full,
 			Formatting = Formatting.Indented
 		};
@@ -27,7 +27,7 @@ namespace ZoneLighting.ConfigNS
 		public static JsonSerializerSettings LoadZonesSerializerSettings => new JsonSerializerSettings()
 		{
 			//PreserveReferencesHandling = PreserveReferencesHandling.All,
-			TypeNameHandling = TypeNameHandling.All,
+			TypeNameHandling = TypeNameHandling.Auto,
 			TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Full,
 			Formatting = Formatting.Indented,
 			Converters = new JsonConverter[] { new UnderlyingTypeConverter() }
