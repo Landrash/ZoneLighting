@@ -111,7 +111,6 @@
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="IoC\Container.cs" />
     <Compile Include="IZLMRPC.cs" />
-    <Compile Include="JSONRPCMiddleware.cs" />
     <Compile Include="Models\ProgramSetVM.cs" />
     <Compile Include="Models\ZLMJsonModel.cs" />
     <Compile Include="Program.cs" />
