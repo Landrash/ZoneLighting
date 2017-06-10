@@ -44,7 +44,6 @@ namespace ZoneLightingTests
 			Assert.DoesNotThrow(() => zone.Run(program, null, true, syncContext));
 			Assert.True(zone.Running);
 			Assert.True(program.State == ProgramState.Started);
-			zone.Dispose();
 		}
 
 		[Test]

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading;
 using Graphics;
 using LightingControllerBase;
-using ZoneLighting.MEF;
 using ZoneLighting.ZoneNS;
 
 namespace ZoneLighting.ZoneProgramNS
