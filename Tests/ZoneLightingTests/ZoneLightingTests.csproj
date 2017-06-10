@@ -117,6 +117,8 @@
     <Compile Include="ZoneProgramNS\Clock\MilliClockTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelpers.cs" />
+    <Compile Include="ZoneScaffolderTests.cs" />
+    <Compile Include="ZoneTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config.template">
