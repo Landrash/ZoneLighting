@@ -12,7 +12,7 @@ namespace ZoneLightingTests
 		[Test]
 		public void SetAllLightsColor_Works()
 		{
-			var zone = new Zone(new TestLightingController("tlc1", null), "TestZone");
+			var zone = new Zone(new TestLightingController("tlc1"), "TestZone");
 			zone.AddLights(6);
 			var color = Color.Red;
 			zone.SetAllLightsColor(color);
@@ -26,7 +26,7 @@ namespace ZoneLightingTests
 		[Test]
 		public void Run_Works()
 		{
-			var zone = new Zone(new TestLightingController("tlc1", null), "TestZone");
+			var zone = new Zone(new TestLightingController("tlc1"), "TestZone");
 			var program = new Rainbow();
 			zone.AddLights(6);
 			Assert.DoesNotThrow(() => zone.Run(program));
@@ -37,7 +37,7 @@ namespace ZoneLightingTests
 		[Test]
 		public void Run_WithSync_Works()
 		{
-			var zone = new Zone(new TestLightingController("tlc1", null), "TestZone");
+			var zone = new Zone(new TestLightingController("tlc1"), "TestZone");
 			var program = new Rainbow();
 			var syncContext = new SyncContext();
 			zone.AddLights(6);
@@ -49,7 +49,7 @@ namespace ZoneLightingTests
 		[Test]
 		public void Stop_Works()
 		{
-			var lightingController = new TestLightingController("tlc1", null);
+			var lightingController = new TestLightingController("tlc1");
 			var zone = new Zone(lightingController, "TestZone");
 			var program = new Rainbow();
 			zone.AddLights(6);
