@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Anshul.Utilities;
+using LightingControllerBase;
 using ZoneLighting.MEF;
 using ZoneLighting.Usables;
 using ZoneLighting.ZoneNS;
@@ -27,10 +28,10 @@ namespace ZoneLighting
 
 		#region Admin
 
-		//public Zone AddFadeCandyZone(string name, int numberOfLights)
-		//{
-		//	return ZoneScaffolder.Instance.AddFadeCandyZone(Zones, name, numberOfLights);
-		//}
+		public Zone AddZone(string name, ILightingController lightingController, int numberOfLights)
+		{
+			return ZoneScaffolder.Instance.AddZone(Zones, name, lightingController, numberOfLights);
+		}
 
 		public void Save()
 		{

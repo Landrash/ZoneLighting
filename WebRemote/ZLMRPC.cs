@@ -5,6 +5,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using Anshul.Utilities;
+using LightingControllerBase;
 using WebRemote.Extensions;
 using WebRemote.IoC;
 using WebRemote.Models;
@@ -61,17 +62,17 @@ namespace WebRemote
 		///// <param name="numberOfLights">The number of lights.</param>
 		///// <param name="channel">The channel.</param>
 		///// <returns>The instance of the zone that was added.</returns>
-		
-		//public ZoneJsonModel AddFadeCandyZone(string name, int numberOfLights)
-		//{
-		//	return ZLM.AddFadeCandyZone(name, numberOfLights).ToJsonModel<Zone, ZoneJsonModel>();
-		//}
+
+		public ZoneJsonModel AddZone(string name, ILightingController lightingController, int numberOfLights)
+		{
+			return ZLM.AddZone(name, lightingController, numberOfLights).ToJsonModel<Zone, ZoneJsonModel>();
+		}
 
 		/// <summary>
 		/// Creates a ZoneLightingManager. This method is intended to be used on re-creations rather than the initial create.
 		/// For initial creation of ZLM, use Container.CreateZLM().
 		/// </summary>
-		
+
 		public void CreateZLM()
 		{
 			Container.CreateZLM();

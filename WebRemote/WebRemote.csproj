@@ -136,6 +136,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Modules\LightingControllerBase\LightingControllerBase.csproj">
+      <Project>{CAB28797-DDC5-4151-BD67-CB0DE2B134DD}</Project>
+      <Name>LightingControllerBase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ZoneLighting\ZoneLighting.csproj">
       <Project>{fe00db62-6c3c-4d04-9f03-23da814298b6}</Project>
       <Name>ZoneLighting</Name>

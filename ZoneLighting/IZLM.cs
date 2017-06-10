@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Anshul.Utilities;
+using LightingControllerBase;
 using ZoneLighting.Usables;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
@@ -73,5 +74,6 @@ namespace ZoneLighting
 		void SetLightColor(string zoneName, string color, int index, float brightness = 1);
 
 		void SetAllZonesColor(string color, float brightness = 1);
+		Zone AddZone(string name, ILightingController lightingController, int numberOfLights);
 	}
 }

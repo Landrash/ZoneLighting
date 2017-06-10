@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Anshul.Utilities, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Anshul.Utilities.1.0.27.0\lib\net45\Anshul.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.5.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.core, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
       <Private>False</Private>
@@ -50,6 +56,9 @@
       <HintPath>..\..\packages\NUnitTestAdapter.2.0.0\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Refigure, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Refigure.1.0.13.0\lib\net45\Refigure.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -65,6 +74,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Modules\Graphics\Graphics.csproj">
+      <Project>{60287C11-06CC-4F24-9473-20A58D4A6EF8}</Project>
+      <Name>Graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Modules\LightingControllerBase\LightingControllerBase.csproj">
+      <Project>{CAB28797-DDC5-4151-BD67-CB0DE2B134DD}</Project>
+      <Name>LightingControllerBase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WebRemote\WebRemote.csproj">
       <Project>{f1527c4e-3ae9-4ea2-803c-b121053df8e2}</Project>
       <Name>WebRemote</Name>

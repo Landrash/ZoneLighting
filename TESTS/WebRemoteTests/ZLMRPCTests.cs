@@ -1,62 +1,65 @@
 ﻿using System.Linq;
+using Anshul.Utilities;
 using NUnit.Framework;
 using WebRemote;
 using WebRemote.IoC;
 using ZoneLighting;
+using ZoneLighting.TestApparatus;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
 
 namespace WebControllerTests
 {
 	[Category("Integration")]
-    public class ZLMRPCTests
-    {
+	public class ZLMRPCTests
+	{
 		[TearDown]
 		public void TearDown()
 		{
-			
+
 		}
 
-		//[TestCase("FadeCandyZone", OPCPixelType.OPCRGBPixel, 8, (byte)1)]
-	 //   public void AddFadeCandyZone_Works(string name, OPCPixelType pixelType, int numberOfLights, byte channel)
-		//{
-		//	var zlm = new ZLM(false, false, false);
-		//	var zlmrpc = new ZLMRPC(zlm);
+		[TestCase("FadeCandyZone", 8)]
+		public void AddZone_Works(string name, int numberOfLights)
+		{
+			var zlm = new ZLM(false, false, false);
+			var zlmrpc = new ZLMRPC(zlm);
+			var testLC = new TestLightingController("tlc1");
 
-		//	//act
-		//	var zone = zlmrpc.AddFadeCandyZone(name, pixelType, numberOfLights, channel);
-			
-		//	//assert
-		//	Assert.That(zone.Name, Is.EqualTo(name));
-		//	Assert.That(zone.LightCount, Is.EqualTo(numberOfLights));
-		//	Assert.That(((OPCZone)zlm.Zones.First()).Channel, Is.EqualTo(channel));
-		//	Assert.That(zone.Running, Is.EqualTo(false));
-		//	Assert.That(zone.ZoneProgramName, Is.EqualTo(null));
+			//act
+			var zone = zlmrpc.AddZone(name, testLC, numberOfLights);
 
-		//	zlmrpc.Dispose();
-		//}
+			//assert
+			Assert.That(zone.Name, Is.EqualTo(name));
+			Assert.That(zone.LightCount, Is.EqualTo(numberOfLights));
+			Assert.That(zone.Running, Is.EqualTo(false));
+			Assert.That(zone.ZoneProgramName, Is.EqualTo(null));
+
+			zlmrpc.Dispose();
+		}
 
 		[Test]
 		[Category("Integration")]
 		[TestCase("StepperSet", "Stepper", true)]
-	    public void CreateProgramSet_Works(string programSetName, string programName, bool sync = true)
+		public void CreateProgramSet_Works(string programSetName, string programName, bool sync = true)
 		{
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			zlm.AddFadeCandyZone("FadeCandyZone", 8);
+			var testLC = new TestLightingController("tlc1");
+			zlm.AddZone("FadeCandyZone", testLC, 8);
 
 			var zones = zlm.Zones.Select(z => z.Name).ToList();
 
 			//act
 			var programSet = zlmrpc.CreateProgramSet(programSetName, programName, zones, sync);
-			
+
 			//assert
 			Assert.That(programSet.Name, Is.EqualTo(programSetName));
 			Assert.That(programSet.ProgramName, Is.EqualTo(programName));
 			Assert.That(programSet.Sync, Is.EqualTo(true));
 			Assert.That(programSet.Zones.Select(zone => zone.Name).ToList(), Is.EqualTo(zones));
 			Assert.That(programSet.State, Is.EqualTo(ProgramState.Started));
-			
+
 			zlmrpc.Dispose();
 		}
 
@@ -67,7 +70,8 @@ namespace WebControllerTests
 		{
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			zlm.AddFadeCandyZone("FadeCandyZone", 8);
+			var testLC = new TestLightingController("tlc1");
+			zlm.AddZone("FadeCandyZone", testLC, 8);
 			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), sync);
 
 			//act
@@ -78,13 +82,14 @@ namespace WebControllerTests
 
 			zlmrpc.Dispose();
 		}
-		
+
 		[TestCase("StepperSet", "Stepper", true)]
 		public void DisposeProgramSet_Works(string programSetName, string programName, bool sync = true)
-	    {
+		{
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			zlm.AddFadeCandyZone("FadeCandyZone", 8);
+			var testLC = new TestLightingController("tlc1");
+			zlm.AddZone("FadeCandyZone", testLC, 8);
 			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), sync);
 			zlm.Zones.ForEach(zone =>
 			{
@@ -102,9 +107,9 @@ namespace WebControllerTests
 		}
 
 		[Test]
-	    public void CreateZLM_Works()
-	    {
-		    var zlm = new ZLM(false, false, false);
+		public void CreateZLM_Works()
+		{
+			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
 			Assert.That(Container.ZLM, Is.Null);
 			zlmrpc.DisposeZLM();
@@ -114,14 +119,14 @@ namespace WebControllerTests
 
 			//assert
 			Assert.That(Container.ZLM, Is.Not.Null);
-			
+
 			zlmrpc.Dispose();
-	    }
+		}
 
 		[Test]
-	    public void DisposeZLM_Works()
-	    {
-		    var zlm = new ZLM(false, false, false);
+		public void DisposeZLM_Works()
+		{
+			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
 
 			//act
@@ -132,14 +137,15 @@ namespace WebControllerTests
 			Assert.That(zlm.ProgramSets, Is.Null);
 
 			zlmrpc.Dispose();
-	    }
+		}
 
 		[TestCase("StepperSet", "Stepper", true)]
 		public void DisposeProgramSets_Works(string programSetName, string programName, bool sync = true)
-	    {
+		{
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			zlm.AddFadeCandyZone("FadeCandyZone", 8);
+			var testLC = new TestLightingController("tlc1");
+			zlm.AddZone("FadeCandyZone", testLC, 8);
 			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), sync);
 			zlm.Zones.ForEach(zone =>
 			{
@@ -167,7 +173,8 @@ namespace WebControllerTests
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			zlm.AddFadeCandyZone("FadeCandyZone", 8);
+			var testLC = new TestLightingController("tlc1");
+			zlm.AddZone("FadeCandyZone", testLC, 8);
 			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, isv);
 			zlm.Zones.ForEach(zone =>
 			{
@@ -186,7 +193,7 @@ namespace WebControllerTests
 			{
 				Assert.That(zone.ZoneProgram.GetInput("Speed").Value, Is.EqualTo(90));
 			});
-			
+
 			zlmrpc.Dispose();
 		}
 
@@ -197,7 +204,8 @@ namespace WebControllerTests
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			zlm.AddFadeCandyZone("FadeCandyZone", 8);
+			var testLC = new TestLightingController("tlc1");
+			zlm.AddZone("FadeCandyZone", testLC, 8);
 			zlm.CreateProgramSet(programSetName, "Stepper", zlm.Zones.Select(z => z.Name));
 			zlm.Zones.ForEach(zone =>
 			{
@@ -224,7 +232,8 @@ namespace WebControllerTests
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			zlm.AddFadeCandyZone("FadeCandyZone", 8);
+			var testLC = new TestLightingController("tlc1");
+			zlm.AddZone("FadeCandyZone", testLC, 8);
 			zlm.CreateProgramSet(programSetName, "Stepper", zlm.Zones.Select(z => z.Name));
 			zlm.Zones.ForEach(zone =>
 			{
@@ -261,7 +270,8 @@ namespace WebControllerTests
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			zlm.AddFadeCandyZone(zoneName, 8);
+			var testLC = new TestLightingController("tlc1");
+			zlm.AddZone(zoneName, testLC, 8);
 			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, isv);
 			zlm.Zones.ForEach(zone =>
 			{
@@ -280,7 +290,7 @@ namespace WebControllerTests
 			{
 				Assert.That(zone.ZoneProgram.GetInput("Speed").Value, Is.EqualTo(90));
 			});
-			
+
 			zlmrpc.Dispose();
 		}
 
@@ -295,20 +305,22 @@ namespace WebControllerTests
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			var fadeCandyZone1 = zlm.AddFadeCandyZone("FadeCandyZone1", 8);
-			var fadeCandyZone2 = zlm.AddFadeCandyZone("FadeCandyZone2", 8);
+
+			var testLC = new TestLightingController("tlc1");
+			var fadeCandyZone1 = zlm.AddZone("FadeCandyZone1", testLC, 8);
+			var fadeCandyZone2 = zlm.AddZone("FadeCandyZone2", testLC, 8);
 			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, isv);
-			
+
 			Assert.That(zlm.ProgramSets[programSetName].Zones, Contains.Item(fadeCandyZone1));
 			Assert.That(zlm.ProgramSets[programSetName].Zones, Contains.Item(fadeCandyZone2));
-			
+
 			//act
 			zlmrpc.RecreateProgramSetWithoutZone(programSetName, fadeCandyZone2.Name);
-			
+
 			//assert
 			Assert.That(zlm.ProgramSets[programSetName].Zones, Contains.Item(fadeCandyZone1));
 			Assert.That(zlm.ProgramSets[programSetName].Zones, Is.Not.Contains(fadeCandyZone2));
-			
+
 			Assert.That(zlm.AvailableZones, Contains.Item(fadeCandyZone2));
 
 			zlmrpc.Dispose();
@@ -322,7 +334,8 @@ namespace WebControllerTests
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
 			var zoneName = "FadeCandyZone";
-			zlm.AddFadeCandyZone(zoneName, 8);
+			var testLC = new TestLightingController("tlc1");
+			zlm.AddZone(zoneName, testLC, 8);
 			zlm.CreateProgramSet(programSetName, "Stepper", zlm.Zones.Select(z => z.Name));
 			Assert.That(zlm.Zones[zoneName].Running, Is.True);
 
@@ -330,7 +343,7 @@ namespace WebControllerTests
 			zlmrpc.StopZone(zoneName, false);
 
 			//assert
-			Assert.That(zlm.Zones[zoneName].Running, Is. False);
+			Assert.That(zlm.Zones[zoneName].Running, Is.False);
 
 			zlmrpc.Dispose();
 		}
@@ -344,7 +357,8 @@ namespace WebControllerTests
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
 			var zoneName = "FadeCandyZone";
-			zlm.AddFadeCandyZone(zoneName, 8);
+			var testLC = new TestLightingController("tlc1");
+			zlm.AddZone(zoneName, testLC, 8);
 			zlm.CreateProgramSet(programSetName, "Stepper", zlm.Zones.Select(z => z.Name));
 
 			var zoneSummary = zlmrpc.GetZoneSummary();
@@ -363,8 +377,9 @@ namespace WebControllerTests
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
 			var zoneName = "FadeCandyZone";
-			zlm.AddFadeCandyZone(zoneName, 8);
-			
+			var testLC = new TestLightingController("tlc1");
+			zlm.AddZone(zoneName, testLC, 8);
+
 			var zoneSummary = zlmrpc.GetZoneSummary();
 
 			Assert.That(zoneSummary, Is.EqualTo(expected));
@@ -384,8 +399,9 @@ namespace WebControllerTests
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			var fadeCandyZone1 = zlm.AddFadeCandyZone("FadeCandyZone1", 8);
-			var fadeCandyZone2 = zlm.AddFadeCandyZone("FadeCandyZone2", 8);
+			var testLC = new TestLightingController("tlc1");
+			var fadeCandyZone1 = zlm.AddZone("FadeCandyZone1", testLC, 8);
+			var fadeCandyZone2 = zlm.AddZone("FadeCandyZone2", testLC, 8);
 			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, isv);
 
 			var zoneSummary = zlmrpc.GetZoneSummary();
@@ -407,9 +423,10 @@ namespace WebControllerTests
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			var fadeCandyZone1 = zlm.AddFadeCandyZone("FadeCandyZone1", 8);
-			var fadeCandyZone2 = zlm.AddFadeCandyZone("FadeCandyZone2", 8);
-			
+			var testLC = new TestLightingController("tlc1");
+			var fadeCandyZone1 = zlm.AddZone("FadeCandyZone1", testLC, 8);
+			var fadeCandyZone2 = zlm.AddZone("FadeCandyZone2", testLC, 8);
+
 			var zoneSummary = zlmrpc.GetZoneSummary();
 
 			Assert.That(zoneSummary, Is.EqualTo(expected));
@@ -423,7 +440,9 @@ namespace WebControllerTests
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
 
-			var zone1 = zlm.AddFadeCandyZone("Zone1", 8);
+			var zoneName = "Zone1";
+			var testLC = new TestLightingController("tlc1");
+			zlm.AddZone(zoneName, testLC, 8);
 
 			zlmrpc.SetZoneColor("Zone1", "Blue", (float)0.5);
 
@@ -444,7 +463,9 @@ namespace WebControllerTests
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
 
-			var zone1 = zlm.AddFadeCandyZone("Zone1", 8);
+			var zoneName = "Zone1";
+			var testLC = new TestLightingController("tlc1");
+			zlm.AddZone(zoneName, testLC, 8);
 
 			zlmrpc.SetLightColor("Zone1", "Blue", 0, (float)0.5);
 
@@ -464,11 +485,12 @@ namespace WebControllerTests
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
 
-			var zone1 = zlm.AddFadeCandyZone("Zone1", 8);
-			var zone2 = zlm.AddFadeCandyZone("Zone2", 8);
+			var testLC = new TestLightingController("tlc1");
+			var zone1 = zlm.AddZone("Zone1", testLC, 8);
+			var zone2 = zlm.AddZone("Zone2", testLC, 8);
 
 			zlmrpc.SetAllZonesColor("Blue", (float)0.5);
-			
+
 			zlm.Zones.ToList().ForEach(zone =>
 				zone.SortedLights.ToList().ForEach(light =>
 				{
@@ -491,10 +513,12 @@ namespace WebControllerTests
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			var zone1 = zlm.AddFadeCandyZone("Zone1", 8);
-			var zone2 = zlm.AddFadeCandyZone("Zone2", 8);
+			var testLC = new TestLightingController("tlc1");
+			var zone1 = zlm.AddZone("Zone1", testLC, 8);
+			var zone2 = zlm.AddZone("Zone2", testLC, 8);
+
 			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, isv);
-			
+
 			isv.Speed = 90;
 
 			//act
@@ -503,7 +527,7 @@ namespace WebControllerTests
 			//assert
 			Assert.That(zone1.ZoneProgram.GetInput("Speed").Value, Is.EqualTo(90));
 			Assert.That(zone2.ZoneProgram.GetInput("Speed").Value, Is.EqualTo(50));
-			
+
 			zlmrpc.Dispose();
 		}
 
@@ -517,10 +541,12 @@ namespace WebControllerTests
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			var zone1 = zlm.AddFadeCandyZone("Zone1", 8);
-			var zone2 = zlm.AddFadeCandyZone("Zone2", 8);
+			var testLC = new TestLightingController("tlc1");
+			var zone1 = zlm.AddZone("Zone1", testLC, 8);
+			var zone2 = zlm.AddZone("Zone2", testLC, 8);
+
 			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, isv);
-			
+
 			//act
 			var zones = zlmrpc.GetZones();
 
@@ -548,9 +574,11 @@ namespace WebControllerTests
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			var zone1 = zlm.AddFadeCandyZone("Zone1", 8);
-			var zone2 = zlm.AddFadeCandyZone("Zone2", 8);
-			
+			var testLC = new TestLightingController("tlc1");
+			var zone1 = zlm.AddZone("Zone1", testLC, 8);
+			var zone2 = zlm.AddZone("Zone2", testLC, 8);
+
+
 			//act
 			var zones = zlmrpc.GetZones();
 
@@ -578,11 +606,12 @@ namespace WebControllerTests
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
-			var zone1 = zlm.AddFadeCandyZone("Zone1", 8);
-			var zone2 = zlm.AddFadeCandyZone("Zone2", 8);
+			var testLC = new TestLightingController("tlc1");
+			var zone1 = zlm.AddZone("Zone1", testLC, 8);
+			var zone2 = zlm.AddZone("Zone2", testLC, 8);
 
 			zlm.CreateProgramSet(programSetName, programName, "Zone2".Listify(), true, isv);
-			
+
 			//act
 			var zones = zlmrpc.GetZones();
 

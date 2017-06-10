@@ -8,10 +8,10 @@ namespace ZoneLighting.TestApparatus
 {
     public class TestLightingController : ILightingController
     {
-        public TestLightingController(string name, Action<IList<IPixel>> sendLightsAction)
+        public TestLightingController(string name, Action<IList<IPixel>> sendLightsAction = null)
         {
             Name = name;
-            SendLightsAction = sendLightsAction;
+            SendLightsAction = sendLightsAction ?? (list => { });
         }
 
 
