@@ -11,7 +11,7 @@ namespace ZoneLighting
 		public static BetterList<T> ToBetterList<T>(this IEnumerable<T> list) where T : IBetterListType
 		{
 			var betterList = new BetterList<T>();
-			betterList.AddRange(list);
+			betterList.AddRange(list); //this is buggy - if list has objects with duplicate names, they can still be added. that should not be allowed.
 			return betterList;
 		}
 

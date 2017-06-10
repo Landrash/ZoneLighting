@@ -14,6 +14,7 @@ namespace WebRemote
 		void CreateZLM();
 		void DisposeProgramSets();
 		List<ZoneJsonModel> GetZones();
+		
 		//void RestartProgramSet(string programSetName, string programName, List<string> zoneNames, ISV isv);
 		void StopProgramSet(string programSetName);
 		void SetZoneInputs(string zoneName, ISV isv);
@@ -26,6 +27,7 @@ namespace WebRemote
 
 		//List<Zone> GetZones();
 		//List<Zone> GetAvailableZones();
+
 		void DisposeProgramSet(string programSetName);
 		string GetStatus();
 		void RecreateProgramSetWithoutZone(string programSetName, string zoneName, bool force = false);
@@ -41,7 +43,5 @@ namespace WebRemote
 
 		void SetAllZonesColor(string color, float brightness = 1);
 		void SetInputs(string programSetOrZoneName, ISV isv);
-		//ZoneJsonModel AddFadeCandyZone(string name, int numberOfLights);
-
 	}
 }
