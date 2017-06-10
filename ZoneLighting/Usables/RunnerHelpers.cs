@@ -240,7 +240,7 @@ namespace ZoneLighting.Usables
 	    public static Zone CreateNodeMCUZone(ZLM zlm)
 	    {
             var zone  = ZoneScaffolder.Instance.AddNodeMCUZone(zlm.Zones, "NodeMCUZone",
-                6, 1);
+                64, 1);
 
             return zone;
         }

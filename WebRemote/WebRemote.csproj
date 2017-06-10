@@ -127,10 +127,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="LightingControllers\OPCWebSocketController_NeoMatrix.dll.json">
+    <None Include="LightingControllers\OPCWebSocketController.dll.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="LightingControllers\OPCWebSocketController.dll.json">
+    <None Include="LightingControllers\OPCWebSocketController_LR.dll.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
