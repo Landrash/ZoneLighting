@@ -32,7 +32,6 @@ namespace ZoneLightingTests
 			Assert.DoesNotThrow(() => zone.Run(program));
 			Assert.True(zone.Running);
 			Assert.True(program.State == ProgramState.Started);
-			zone.Dispose();
 		}
 
 		[Test]
@@ -59,7 +58,6 @@ namespace ZoneLightingTests
 			Assert.DoesNotThrow(() => zone.Stop(true));
 			Assert.False(zone.Running);
 			Assert.True(program.State == ProgramState.Stopped);
-			zone.Dispose();
 		}
 	}
 }

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Anshul.Utilities;
 using NUnit.Framework;
 using ZoneLighting.StockPrograms;
-using ZoneLighting.Usables;
+using ZoneLighting.TestApparatus;
 using ZoneLighting.Usables.TestInterfaces;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
@@ -21,9 +22,9 @@ namespace ZoneLightingTests
 
 			//create zones
 			var zones = new BetterList<Zone>();
-			FadeCandyController.Instance.Initialize();
-			var leftWing = ZoneScaffolder.Instance.AddFadeCandyZone(zones, "LeftWing", 6);
-			var rightWing = ZoneScaffolder.Instance.AddFadeCandyZone(zones, "RightWing", 21);
+			var testLC = new TestLightingController("tlc1", null);
+			var leftWing = ZoneScaffolder.Instance.AddZone(zones, "LeftWing", testLC, 6);
+			var rightWing = ZoneScaffolder.Instance.AddZone(zones, "RightWing", testLC, 21);
 
 			//act
 			var programSet = new ProgramSet("Stepper", zones.ToList(), true, null, "StepperSet");
@@ -48,9 +49,9 @@ namespace ZoneLightingTests
 			TestHelpers.InitializeZoneScaffolder();
 
 			var zones = new BetterList<Zone>();
-			FadeCandyController.Instance.Initialize();
-			var leftWing = ZoneScaffolder.Instance.AddFadeCandyZone(zones, "LeftWing",  6);
-			var rightWing = ZoneScaffolder.Instance.AddFadeCandyZone(zones, "RightWing", 21);
+			var testLC = new TestLightingController("tlc1", null);
+			var leftWing = ZoneScaffolder.Instance.AddZone(zones, "LeftWing", testLC, 6);
+			var rightWing = ZoneScaffolder.Instance.AddZone(zones, "RightWing", testLC, 21);
 
 			//act
 			var programSet = new ProgramSet("Stepper", zones.ToList(), false, null, "StepperSet");
@@ -76,9 +77,9 @@ namespace ZoneLightingTests
 			TestHelpers.InitializeZoneScaffolder();
 
 			var zones = new BetterList<Zone>();
-			FadeCandyController.Instance.Initialize();
-			var leftWing = ZoneScaffolder.Instance.AddFadeCandyZone(zones, "LeftWing", 6);
-			var rightWing = ZoneScaffolder.Instance.AddFadeCandyZone(zones, "RightWing", 21);
+			var testLC = new TestLightingController("tlc1", null);
+			var leftWing = ZoneScaffolder.Instance.AddZone(zones, "LeftWing", testLC, 6);
+			var rightWing = ZoneScaffolder.Instance.AddZone(zones, "RightWing", testLC, 21);
 
 			var programSet = new ProgramSet("Stepper", zones.ToList(), false, null, "StepperSet");
 
@@ -112,11 +113,11 @@ namespace ZoneLightingTests
 
 			//create zones
 			var zones = new BetterList<Zone>();
-			FadeCandyController.Instance.Initialize();
-			var leftWing = ZoneScaffolder.Instance.AddFadeCandyZone(zones, "LeftWing", 6);
-			var rightWing = ZoneScaffolder.Instance.AddFadeCandyZone(zones, "RightWing", 21);
-			var center = ZoneScaffolder.Instance.AddFadeCandyZone(zones, "Center", 21);
-			var baiClock = ZoneScaffolder.Instance.AddFadeCandyZone(zones, "BaiClock",  24);
+			var testLC = new TestLightingController("tlc1", null);
+			var leftWing = ZoneScaffolder.Instance.AddZone(zones, "LeftWing", testLC, 6);
+			var rightWing = ZoneScaffolder.Instance.AddZone(zones, "RightWing", testLC, 21);
+			var center = ZoneScaffolder.Instance.AddZone(zones, "Center", testLC, 21);
+			var baiClock = ZoneScaffolder.Instance.AddZone(zones, "BaiClock", testLC, 24);
 
 			//act
 			var stepperSet1 = new ProgramSet("Stepper", new List<Zone>() { leftWing, rightWing }, true, null, "StepperSet1");

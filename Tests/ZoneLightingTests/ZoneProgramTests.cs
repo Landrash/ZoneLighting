@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Threading;
 using NUnit.Framework;
 using ZoneLighting;
+using ZoneLighting.TestApparatus;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
 using ZoneLighting.ZoneProgramNS.Factories;
@@ -16,17 +17,12 @@ namespace ZoneLightingTests
 		public void ForceStop_Works()
 		{
 			//arrange
-			var zoneScaffolder = new ZoneScaffolder();
-			zoneScaffolder.Initialize(ConfigurationManager.AppSettings["TestProgramModuleDirectory"]);
-
-			var leftWing = new OPCZone(FadeCandyController.Instance, "LeftWing");
-			leftWing.AddOPCLights(6);
+			var leftWing = new Zone(new TestLightingController("tlc1", null), "LeftWing");
+			leftWing.AddLights(6);
 
 			dynamic scrollDotDictionary = new ISV();
 			scrollDotDictionary.DelayTime = 30;
 			scrollDotDictionary.DotColor = (Color?)Color.Red;
-
-			FadeCandyController.Instance.Initialize();	//needs to be faked somehow
 
 			leftWing.Run(new ScrollDot(), scrollDotDictionary);
 
@@ -38,7 +34,6 @@ namespace ZoneLightingTests
 
 			//cleanup
 			leftWing.Dispose();
-			FadeCandyController.Instance.Dispose();
 
 			Assert.True(result);
 		}
@@ -50,17 +45,12 @@ namespace ZoneLightingTests
 			DebugTools.AddEvent("Test.CooperativeStop_Works", "START CooperativeStop_Works Test");
 
 			//arrange
-			var zoneScaffolder = new ZoneScaffolder();
-			zoneScaffolder.Initialize(ConfigurationManager.AppSettings["TestProgramModuleDirectory"]);
-
-			var leftWing = new OPCZone(FadeCandyController.Instance, "LeftWing");
-			leftWing.AddOPCLights(6);
+			var leftWing = new Zone(new TestLightingController("tlc1", null), "LeftWing");
+			leftWing.AddLights(6);
 
 			dynamic scrollDotDictionary = new ISV();
 			scrollDotDictionary.DelayTime = 30;
 			scrollDotDictionary.DotColor = (Color?)Color.Red;
-
-			FadeCandyController.Instance.Initialize();	//needs to be faked somehow
 
 			leftWing.Run(new ScrollDot(), scrollDotDictionary);
 
@@ -76,7 +66,6 @@ namespace ZoneLightingTests
 
 			//cleanup
 			leftWing.Dispose();
-			FadeCandyController.Instance.Dispose();
 
 			DebugTools.AddEvent("Test.CooperativeStop_Works", "END CooperativeStop_Works Test");
 

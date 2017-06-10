@@ -1,4 +1,6 @@
-﻿//using System.Configuration;
+﻿//TODO: Move to a new project next to FadeCandyController project.
+
+//using System.Configuration;
 //using FakeItEasy;
 //using NUnit.Framework;
 //using WebSocketSharp;
