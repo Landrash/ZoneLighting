@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Anshul.Utilities;
 using Graphics;
 using LightingControllerBase;
@@ -86,7 +87,7 @@ namespace OPCWebSocketController
             Channel = channel;
 
             WebSocket = new WebSocket(ServerURL);
-            Connect();
+            Task.Run(() => Connect());
         }
 
         public abstract void Initialize(string lcConfig);

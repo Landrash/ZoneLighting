@@ -45,7 +45,7 @@ namespace ZoneLighting.ZoneProgramNS.Factories
         [ImportMany(typeof(ILightingController), AllowRecomposition = true)]
         public IList<ExportFactory<ILightingController, ILightingControllerMetadata>> LightingControllerFactories { get; set; }
 
-        private List<LightingControllerInfo> LightingControllerInfos { get; set; } = new List<LightingControllerInfo>();
+        public List<LightingControllerInfo> LightingControllerInfos { get; set; } = new List<LightingControllerInfo>();
 
         public class LightingControllerInfo
         {
@@ -300,7 +300,6 @@ namespace ZoneLighting.ZoneProgramNS.Factories
                 Console.WriteLine($"No lighting controller with name {lightingControllerName} found.");
             }
             return AddZone(zones, name, LightingControllers[lightingControllerName], numberOfLights, brightness);
-
         }
 
         public Zone AddZone(BetterList<Zone> zones, string name, ILightingController lightingController, int numberOfLights,

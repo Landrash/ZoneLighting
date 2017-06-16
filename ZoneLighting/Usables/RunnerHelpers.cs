@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using Anshul.Utilities;
 using ZoneLighting.Graphics.Drawing;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
@@ -206,13 +207,26 @@ namespace ZoneLighting.Usables
                 startingParams.ClockedTrailShapes.Add(clockedTrailShape);
             }
 
-	        ZoneScaffolder.Instance.AddNodeMCUZone(zlm.Zones, "PicassoZone", 64, "Picasso", 1);
-	        ZoneScaffolder.Instance.AddNodeMCUZone(zlm.Zones, "DaliZone", 64, "Dali", 1);
+			CreateZonesFromConfig(zlm.Zones);
 
 			zlm.CreateProgramSet("ShimmerSet", "Shimmer", false, null /*isv*/, zlm.Zones/*, startingParameters: startingParams*/);
         }
-        
-  //      public static void RunMidiPlayInLivingRoom(ZLM zlm)
+
+		/// <summary>
+		/// Creates Zones from configs and puts them inside the provided list of zones.
+		/// </summary>
+		private static void CreateZonesFromConfig(BetterList<Zone> zones)
+		{
+			foreach (var info in ZoneScaffolder.Instance.LightingControllerInfos)
+			{
+				var name = (string) info.Config.Name.Value;
+				var pixelCount = (int) info.Config.Pixels.Count;
+				ZoneScaffolder.Instance.AddZone(zones, name + "Zone", ZoneScaffolder.Instance.LightingControllers[name],
+					pixelCount, 1.0);
+			}
+		}
+
+		//      public static void RunMidiPlayInLivingRoom(ZLM zlm)
 		//{
 		//	dynamic startingParameters = new ExpandoObject();
 		//	startingParameters.DeviceID = int.Parse(Config.Get("MIDIDeviceID"));
