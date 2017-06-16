@@ -135,9 +135,6 @@
     <None Include="LightingControllers\Picasso.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="LightingControllers\OPCWebSocketController_LR.dll.json.bak">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
