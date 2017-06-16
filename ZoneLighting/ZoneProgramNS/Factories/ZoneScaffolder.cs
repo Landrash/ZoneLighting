@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
@@ -8,6 +9,8 @@ using System.Linq;
 using System.Reflection;
 using Anshul.Utilities;
 using LightingControllerBase;
+using Microsoft.CSharp.RuntimeBinder;
+using Newtonsoft.Json.Linq;
 using ZoneLighting.MEF;
 using ZoneLighting.ZoneNS;
 
@@ -42,7 +45,16 @@ namespace ZoneLighting.ZoneProgramNS.Factories
         [ImportMany(typeof(ILightingController), AllowRecomposition = true)]
         public IList<ExportFactory<ILightingController, ILightingControllerMetadata>> LightingControllerFactories { get; set; }
 
-        private List<string> LightingControllerConfigs { get; set; } = new List<string>();
+        private List<LightingControllerInfo> LightingControllerInfos { get; set; } = new List<LightingControllerInfo>();
+
+        public class LightingControllerInfo
+        {
+            public string ConfigString { get; set; }
+
+            public dynamic Config { get; set; }
+
+            public ExportFactory<ILightingController, ILightingControllerMetadata> Factory { get; set; }
+        }
 
         /// <summary>
         /// Container for the external modules.
@@ -68,27 +80,17 @@ namespace ZoneLighting.ZoneProgramNS.Factories
 
         public void InitLightingControllers()
         {
-
-
-            //for now - initialize a lighting controller for each of the lighting controller types imported
+            //for now - initialize using infos loaded based on json
             //later - this needs to be driven by the user somehow - maybe during setup of ZL
             //or manually when they wanna add new controllers
-            LightingControllerFactories.ToList().ForEach(factory =>
+            LightingControllerInfos.ForEach(info =>
             {
+                var factory = info.Factory;
                 var lightingController = factory.CreateExport().Value;
-
-                //var pixelMap = LightingControllerConfigs.First().PixelMap;
-                //var name = LightingControllerConfigs.First().Name;
-                //Console.WriteLine(name);
-                //Console.WriteLine(pixelMap[0].LogicalIndex);
-
-                lightingController.Initialize(LightingControllerConfigs.First());
-
+                lightingController.Initialize(info.ConfigString);
                 LightingControllers.Add(lightingController);
             });
         }
-
-
 
         public void UninitLightingControllers()
         {
@@ -126,27 +128,21 @@ namespace ZoneLighting.ZoneProgramNS.Factories
             var aggregateCatalog = new AggregateCatalog(fileCatalogs);
             ModuleContainer = new CompositionContainer(aggregateCatalog);
             ModuleContainer.ComposeParts(this);
+
+            //lighting controller infos are loaded after everything 
+            //because they require the ComposeParts call to finish
+            if (!string.IsNullOrEmpty(lightingControllerModuleDirectory))
+                LoadLightingControllerInfos(lightingControllerModuleDirectory);
         }
 
         private void LoadLightingControllerModules(string lightingControllerModuleDirectory, List<ComposablePartCatalog> fileCatalogs)
         {
-            LoadModulesCore(lightingControllerModuleDirectory, fileCatalogs, typeof(LightingControllerAssemblyAttribute),
-                loadLightingControllerModules: true);
-        }
-
-        private void LoadProgramModules(string programModuleDirectory, List<ComposablePartCatalog> fileCatalogs)
-        {
-            LoadModulesCore(programModuleDirectory, fileCatalogs, typeof(ZoneProgramAssemblyAttribute));
-        }
-
-        private void LoadModulesCore(string moduleDirectory, List<ComposablePartCatalog> fileCatalogs, Type assemblyAttribute, bool loadLightingControllerModules = false)
-        {
-            foreach (var file in Directory.GetFiles(moduleDirectory, "*.dll").ToList())
+            foreach (var file in Directory.GetFiles(lightingControllerModuleDirectory, "*.dll").ToList())
             {
                 var assembly = Assembly.LoadFrom(file);
 
                 if (assembly.GetCustomAttributesData()
-                    .Any(ass => ass.AttributeType == assemblyAttribute))
+                    .Any(ass => ass.AttributeType == typeof(LightingControllerAssemblyAttribute)))
                 {
                     fileCatalogs.Add(new AssemblyCatalog(assembly));
 
@@ -167,15 +163,76 @@ namespace ZoneLighting.ZoneProgramNS.Factories
                             // only copy if file is not in use
                         }
                     }
+                }
+            }
 
-                    if (loadLightingControllerModules)
+
+        }
+
+        private void LoadLightingControllerInfos(string lightingControllerModuleDirectory)
+        {
+            foreach (var file in Directory.GetFiles(lightingControllerModuleDirectory, "*.json").ToList())
+            {
+                var configString = File.ReadAllText(file);
+                dynamic config = JObject.Parse(configString);
+
+                try
+                {
+                    var matchedLightingControllerFactories =
+                        LightingControllerFactories.Where(lcf => lcf.Metadata.Name == config.Type.Value).ToList();
+
+                    if (matchedLightingControllerFactories.Any())
                     {
-                        //if loading lc modules, load the config file with it, if exists
-                        var configFileName = $"{file}.json";
-                        if (File.Exists(configFileName))
+                        if (matchedLightingControllerFactories.Count() <= 1)
                         {
-                            var config = File.ReadAllText(configFileName);
-                            LightingControllerConfigs.Add(config);
+                            var info = new LightingControllerInfo
+                            {
+                                ConfigString = configString,
+                                Config = config,
+                                Factory = matchedLightingControllerFactories.First()
+                            };
+                            LightingControllerInfos.Add(info);
+                        }
+                        else
+                        {
+                            throw new Exception("Too many matching Lighting Controllers.");
+                        }
+                    }
+                }
+                catch (RuntimeBinderException)
+                {
+                    Console.Write($"{file}: Could not read JSON or it is missing the type of LightingController.");
+                }
+            }
+
+        }
+
+        private void LoadProgramModules(string programModuleDirectory, List<ComposablePartCatalog> fileCatalogs)
+        {
+            foreach (var file in Directory.GetFiles(programModuleDirectory, "*.dll").ToList())
+            {
+                var assembly = Assembly.LoadFrom(file);
+
+                if (assembly.GetCustomAttributesData()
+                    .Any(ass => ass.AttributeType == typeof(ZoneProgramAssemblyAttribute)))
+                {
+                    fileCatalogs.Add(new AssemblyCatalog(assembly));
+
+                    foreach (var referencedFile in Directory.GetFiles(Path.GetDirectoryName(file), "*.dll").ToList())
+                    {
+                        //TODO: this try-catch needs to be replaced with a function that actually checks to see the file before copying
+                        //TODO: can this whole process be removed completely? this seesm hacky because
+                        //TODO: we are doing file copy to load dynamic modules, but ideally we should point
+                        //TODO: to the location of the file instead of file copy? seems like a better way
+                        try
+                        {
+                            File.Copy(referencedFile,
+                                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetFileName(referencedFile)),
+                                false);
+                        }
+                        catch (Exception ex)
+                        {
+                            // only copy if file is not in use
                         }
                     }
                 }
@@ -236,9 +293,14 @@ namespace ZoneLighting.ZoneProgramNS.Factories
         //    return AddZone(zones, name, FadeCandyController.Instance, numberOfLights, brightness);
         //}
 
-        public Zone AddNodeMCUZone(BetterList<Zone> zones, string name, int numberOfLights, double? brightness = null)
+        public Zone AddNodeMCUZone(BetterList<Zone> zones, string name, int numberOfLights, string lightingControllerName, double? brightness = null)
         {
-            return AddZone(zones, name, LightingControllers["NodeMCUController1"], numberOfLights, brightness);
+            if (LightingControllers[lightingControllerName] == null)
+            {
+                Console.WriteLine($"No lighting controller with name {lightingControllerName} found.");
+            }
+            return AddZone(zones, name, LightingControllers[lightingControllerName], numberOfLights, brightness);
+
         }
 
         public Zone AddZone(BetterList<Zone> zones, string name, ILightingController lightingController, int numberOfLights,

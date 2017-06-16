@@ -206,8 +206,10 @@ namespace ZoneLighting.Usables
                 startingParams.ClockedTrailShapes.Add(clockedTrailShape);
             }
 
-            CreateNodeMCUZone(zlm);
-            zlm.CreateProgramSet("ShimmerSet", "Shimmer", false, null /*isv*/, zlm.Zones/*, startingParameters: startingParams*/);
+	        ZoneScaffolder.Instance.AddNodeMCUZone(zlm.Zones, "PicassoZone", 64, "Picasso", 1);
+	        ZoneScaffolder.Instance.AddNodeMCUZone(zlm.Zones, "DaliZone", 64, "Dali", 1);
+
+			zlm.CreateProgramSet("ShimmerSet", "Shimmer", false, null /*isv*/, zlm.Zones/*, startingParameters: startingParams*/);
         }
         
   //      public static void RunMidiPlayInLivingRoom(ZLM zlm)
@@ -236,14 +238,6 @@ namespace ZoneLighting.Usables
 		//	var zone = CreateNeoMatrixZone(zlm);
 		//	zlm.CreateProgramSet("StopWatchBlinkSet", "StopWatchBlink", false, null, zlm.Zones);
 		//}
-
-	    public static Zone CreateNodeMCUZone(ZLM zlm)
-	    {
-            var zone  = ZoneScaffolder.Instance.AddNodeMCUZone(zlm.Zones, "NodeMCUZone",
-                64, 1);
-
-            return zone;
-        }
 
 		//public static Zone CreateNeoMatrixZone(ZLM zlm)
 		//{
