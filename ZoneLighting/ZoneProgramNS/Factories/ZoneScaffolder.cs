@@ -142,7 +142,7 @@ namespace ZoneLighting.ZoneProgramNS.Factories
                 var assembly = Assembly.LoadFrom(file);
 
                 if (assembly.GetCustomAttributesData()
-                    .Any(ass => ass.AttributeType == typeof(LightingControllerAssemblyAttribute)))
+                    .Any(ass => ass.AttributeType.FullName == typeof(LightingControllerAssemblyAttribute).FullName))
                 {
                     fileCatalogs.Add(new AssemblyCatalog(assembly));
 
@@ -171,6 +171,9 @@ namespace ZoneLighting.ZoneProgramNS.Factories
 
         private void LoadLightingControllerInfos(string lightingControllerModuleDirectory)
         {
+            if (!Directory.Exists(lightingControllerModuleDirectory))
+                throw new Exception("Lighting Controller module directory does not exist.");
+
             foreach (var file in Directory.GetFiles(lightingControllerModuleDirectory, "*.json").ToList())
             {
                 var configString = File.ReadAllText(file);
@@ -209,6 +212,9 @@ namespace ZoneLighting.ZoneProgramNS.Factories
 
         private void LoadProgramModules(string programModuleDirectory, List<ComposablePartCatalog> fileCatalogs)
         {
+            if (!Directory.Exists(programModuleDirectory))
+                throw new Exception("Programs module directory does not exist.");
+
             foreach (var file in Directory.GetFiles(programModuleDirectory, "*.dll").ToList())
             {
                 var assembly = Assembly.LoadFrom(file);

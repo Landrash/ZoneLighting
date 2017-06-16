@@ -48,6 +48,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Zones", "Zones", "{9747B978
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BaseLibraries", "BaseLibraries", "{1F128D02-3249-4693-84F6-DAE253E9A093}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPluginController", "TestPluginController\TestPluginController.csproj", "{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -209,6 +211,22 @@ Global
 		{60287C11-06CC-4F24-9473-20A58D4A6EF8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{60287C11-06CC-4F24-9473-20A58D4A6EF8}.Release|x86.ActiveCfg = Release|Any CPU
 		{60287C11-06CC-4F24-9473-20A58D4A6EF8}.Release|x86.Build.0 = Release|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Debug|ARM.Build.0 = Debug|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Debug|x86.Build.0 = Debug|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Release|ARM.ActiveCfg = Release|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Release|ARM.Build.0 = Release|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Release|x86.ActiveCfg = Release|Any CPU
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -224,6 +242,7 @@ Global
 		{0BEB7A94-13E9-495D-81C5-BA767DCD9103} = {2DE95A6E-A310-4A77-B735-6FBF1401D2C4}
 		{9747B978-CAAB-41AB-A4E4-E07FC5956B2B} = {2DE95A6E-A310-4A77-B735-6FBF1401D2C4}
 		{1F128D02-3249-4693-84F6-DAE253E9A093} = {2DE95A6E-A310-4A77-B735-6FBF1401D2C4}
+		{2C5D028C-CFDF-4253-8BDE-C6B6C4BBF619} = {4CF8894A-26F4-444E-B3D6-038B853AE2F8}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = AustinHarris.JsonRpc.vsmdi
