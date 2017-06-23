@@ -19,7 +19,7 @@ namespace ZoneLightingTests.ProgramTests
 			//act
 			var zlm = new ZLM(false, false, false, zlmInner =>
 			{
-				var neomatrix = RunnerHelpers.CreateNeoMatrixZone(zlmInner);
+				var neomatrix = RunnerHelpers.CreateNodeMCUZone(zlmInner);
 				var isv = new ISV();
 				isv.Add("Interval", interval);
 				zlmInner.CreateSingularProgramSet("MicroClockBlinkSet", new MicroClockBlink(), isv, neomatrix);

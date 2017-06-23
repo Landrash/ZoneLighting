@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Anshul.Utilities;
 using ZoneLighting.Usables;
 
 namespace ZoneLighting
@@ -10,21 +11,10 @@ namespace ZoneLighting
 		public static BetterList<T> ToBetterList<T>(this IEnumerable<T> list) where T : IBetterListType
 		{
 			var betterList = new BetterList<T>();
-			betterList.AddRange(list);
+			betterList.AddRange(list); //this is buggy - if list has objects with duplicate names, they can still be added. that should not be allowed.
 			return betterList;
 		}
 
-
-		//TODO: Remove this and use the Listify in Anshul.Utilities after updating it to the latest version
-		/// <summary>
-		/// Takes an object and turns it into a list of its type. Basically puts the incoming object
-		/// into a list.
-		/// </summary>
-		public static List<T> Listify<T>(this T input)
-		{
-			var list = new List<T> {input};
-			return list;
-		}
 
 		/// <summary>
 		/// This runs the given actions for each item in the given list on separate threads simultaneously (TaskCreationOptions.LongRunning).

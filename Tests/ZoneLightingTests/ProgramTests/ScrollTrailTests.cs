@@ -4,7 +4,6 @@ using System.Threading;
 using NUnit.Framework;
 using Refigure;
 using ZoneLighting;
-using ZoneLighting.Communication;
 using ZoneLighting.Graphics.Drawing;
 using ZoneLighting.StockPrograms;
 using ZoneLighting.ZoneProgramNS;
@@ -36,8 +35,7 @@ namespace ZoneLightingTests.ProgramTests
 					new TrailShape(new Trail(4, Color.Blue.Darken(0.5)), new Shape(36, 37, 38, 39, 47, 55, 63, 62, 61, 60, 52, 44)),
 					new TrailShape(new Trail(4, Color.Red.Darken(0.5)), new Shape(63, 62, 61, 60, 52, 44,36, 37, 38, 39, 47, 55)),
 				});
-				var neomatrix = ZoneScaffolder.Instance.AddFadeCandyZone(zlmInner.Zones, "NeoMatrix", OPCPixelType.OPCRGBPixel,
-					64, 1);
+				var neomatrix = ZoneScaffolder.Instance.AddFadeCandyZone(zlmInner.Zones, "NeoMatrix", 64);
 				zlmInner.CreateSingularProgramSet("", new ScrollTrail(), isv, neomatrix);
 			}, Config.Get("NeoMatrixOneZone"));
 
@@ -69,8 +67,7 @@ namespace ZoneLightingTests.ProgramTests
 					new TrailShape(new Trail(4, Color.Blue.Darken(0.5)), new Shape(36, 37, 38, 39, 47, 55, 63, 62, 61, 60, 52, 44)),
 					new TrailShape(new Trail(4, Color.Red.Darken(0.5)), new Shape(63, 62, 61, 60, 52, 44,36, 37, 38, 39, 47, 55)),
 				});
-				var neomatrix = ZoneScaffolder.Instance.AddFadeCandyZone(zlmInner.Zones, "NeoMatrix", OPCPixelType.OPCRGBPixel,
-					64, 1);
+				var neomatrix = ZoneScaffolder.Instance.AddFadeCandyZone(zlmInner.Zones, "NeoMatrix", 64);
 				zlmInner.CreateSingularProgramSet("", new ScrollTrail(), isv, neomatrix);
 			}, Config.Get("NeoMatrixOneZone"));
 
@@ -102,8 +99,7 @@ namespace ZoneLightingTests.ProgramTests
 					new TrailShape(new Trail(4, ProgramCommon.GetRandomColor().Darken(0.5)), new Shape(36, 37, 38, 39, 47, 55, 63, 62, 61, 60, 52, 44)),
 					new TrailShape(new Trail(4, ProgramCommon.GetRandomColor().Darken(0.5)), new Shape(63, 62, 61, 60, 52, 44,36, 37, 38, 39, 47, 55)),
 				});
-				var neomatrix = ZoneScaffolder.Instance.AddFadeCandyZone(zlmInner.Zones, "NeoMatrix", OPCPixelType.OPCRGBPixel,
-					64, 1);
+				var neomatrix = ZoneScaffolder.Instance.AddFadeCandyZone(zlmInner.Zones, "NeoMatrix", 64);
 				zlmInner.CreateSingularProgramSet("", new ScrollTrail(), isv, neomatrix);
 			}, Config.Get("NeoMatrixOneZone"));
 
@@ -135,8 +131,7 @@ namespace ZoneLightingTests.ProgramTests
 					new TrailShape(new Trail(4, Color.Blue.Darken(0.5)), new Shape(48, 49, 50, 51, 52, 53, 54, 55)),
 					new TrailShape(new Trail(4, Color.Red.Darken(0.5)), new Shape(56, 57, 58, 59, 60, 61, 62, 63)),
 				});
-				var neomatrix = ZoneScaffolder.Instance.AddFadeCandyZone(zlmInner.Zones, "NeoMatrix", OPCPixelType.OPCRGBPixel,
-					64, 1);
+				var neomatrix = ZoneScaffolder.Instance.AddFadeCandyZone(zlmInner.Zones, "NeoMatrix", 64);
 				zlmInner.CreateSingularProgramSet("", new ScrollTrail(), isv, neomatrix);
 			}, Config.Get("NeoMatrixOneZone"));
 

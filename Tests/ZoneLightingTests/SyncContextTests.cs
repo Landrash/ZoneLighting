@@ -590,7 +590,7 @@ namespace ZoneLightingTests
 			stringBuilder.Append(Environment.NewLine);
 			stringBuilder.Append(Environment.NewLine);
 
-			foreach (var stepper in steppers)
+			foreach (var unused in steppers)
 			{
 				stringBuilder.Append("--------");
 			}

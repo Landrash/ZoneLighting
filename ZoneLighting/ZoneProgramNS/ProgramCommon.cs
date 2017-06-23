@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
-using ZoneLighting.Communication;
+using Graphics;
+using LightingControllerBase;
 using ZoneLighting.ZoneNS;
 
 namespace ZoneLighting.ZoneProgramNS
@@ -88,9 +89,9 @@ namespace ZoneLighting.ZoneProgramNS
 
 	public static class ProgramExtensions
 	{
-		public static void Send(this IList<ILogicalRGBLight> lights, ILightingController lc)
+		public static void Send(this IList<IPixel> lights, ILightingController lc)
 		{
-			lc.SendLights(lights.Cast<ILightingControllerPixel>().ToList());
+			lc.SendLights(lights.ToList());
 		}
 
 		/// <summary>

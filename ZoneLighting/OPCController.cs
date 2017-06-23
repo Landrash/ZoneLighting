@@ -1,10 +1,10 @@
 ﻿using System;
-using ZoneLighting.Communication;
+using System.Collections.Generic;
 
 namespace ZoneLighting
 {
-    public abstract class OPCController : LightingController
-    {
-        public override Type PixelType => typeof(IOPCPixelContainer);
-    }
+    //public abstract class OPCController : ILightingController
+    //{
+    //    public abstract void SendLights(IList<ILightingControllerPixel> lights);
+    //}
 }

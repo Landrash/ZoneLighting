@@ -1,0 +1,10 @@
+{
+	"Name": "TestLC1",
+	"Type":  "TestPluginController",
+	"Pixels": [
+		{
+			"LogicalIndex": 0,
+			"PhysicalIndex": 0
+		}
+	]
+}

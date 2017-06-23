@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
+using System.Linq;
 using NUnit.Framework;
-using ZoneLighting.Communication;
 using ZoneLighting.ConfigNS;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
@@ -19,13 +19,13 @@ namespace ZoneLightingTests
 		//{
 		//	//arrange
 		//	var zones = new List<Zone>();
-		//	var zone = new FadeCandyZone("TestZone");
+		//	var zone = new Zone("TestZone");
 
 		//	zones.Add(zone);
-		//	zone.AddOPCLights(PixelType.FadeCandyWS2812Pixel, 6, 1);
+		//	zone.AddLights(6);
 
 		//	var zoneScaffolder = new ZoneScaffolder();
-		//	zoneScaffolder.Initialize(ConfigurationManager.AppSettings["TestProgramModuleDirectory"]);
+		//	ZoneScaffolder.Instance.Initialize(ConfigurationManager.AppSettings["ProgramDLLFolder"], ConfigurationManager.AppSettings["LightingControllerDLLFolder"]);
 
 		//	//act
 		//	zoneScaffolder.InitializeFromZoneConfiguration(zones, ConfigurationManager.AppSettings["InitializeFromZoneConfiguration_Works_TestFile"]);
@@ -49,28 +49,46 @@ namespace ZoneLightingTests
 		//	}
 		//}
 
-		/// <summary>
-		/// This is just there to generate the test file for this test in case the code changes something
-		/// fundamental that is reflected in the saved configuration.
-		/// </summary>
-		/// <param name="filename"></param>
-		[Ignore("Not a test, just a piece of code that needs to be reused often.")]
-		[TestCase(@"C:\Temp\test.config")] //NOTE: Insert file path in test case to generate to the path.
-		public void GenerateTestConfiguration(string filename)
+		[Test]
+		public void Initialize_LightingController_Works()
 		{
 			var zoneScaffolder = new ZoneScaffolder();
-			zoneScaffolder.Initialize(ConfigurationManager.AppSettings["TestProgramModuleDirectory"]);
-
-			var leftWing = new OPCZone(FadeCandyController.Instance, "TestZone");
-			leftWing.AddOPCLights(OPCPixelType.OPCRGBPixel, 6, 1);
-
-			dynamic scrollDotDictionary = new ISV();
-			scrollDotDictionary.DelayTime = 30;
-			scrollDotDictionary.DotColor = (Color?) Color.Red;
-
-			zoneScaffolder.RunZone(leftWing, "ScrollDot", scrollDotDictionary);
-
-			Config.SaveZones(new List<Zone>() {leftWing}, filename);
+			zoneScaffolder.Initialize("Resources\\Programs", "Resources\\LightingControllers");
+			Assert.That(zoneScaffolder.LightingControllerFactories.ToList().Select(x => x.Metadata.Name).Contains("TestPluginController"));
 		}
+
+		[Test]
+		public void InitLightingController_Works()
+		{
+			var zoneScaffolder = new ZoneScaffolder();
+			zoneScaffolder.Initialize("Resources\\Programs", "Resources\\LightingControllers");
+			zoneScaffolder.InitLightingControllers();
+			Assert.That(zoneScaffolder.LightingControllerFactories.ToList().Select(x => x.Metadata.Name).Contains("TestPluginController"));
+		}
+
+		///// <summary>
+		///// This is just there to generate the test file for this test in case the code changes something
+		///// fundamental that is reflected in the saved configuration.
+		///// </summary>
+		///// <param name="filename"></param>
+		//[Ignore("Not a test, just a piece of code that needs to be reused often.")]
+		//[TestCase(@"C:\Temp\test.config")] //NOTE: Insert file path in test case to generate to the path.
+		//public void GenerateTestConfiguration(string filename)
+		//{
+		//	var zoneScaffolder = new ZoneScaffolder();
+		//	zoneScaffolder.Initialize(ConfigurationManager.AppSettings["TestProgramModuleDirectory"]);
+
+		//	var leftWing = new OPCZone(FadeCandyController.Instance, "TestZone");
+		//	leftWing.AddOPCLights(6);
+
+		//	dynamic scrollDotDictionary = new ISV();
+		//	scrollDotDictionary.DelayTime = 30;
+		//	scrollDotDictionary.DotColor = (Color?)Color.Red;
+
+		//	zoneScaffolder.RunZone(leftWing, "ScrollDot", scrollDotDictionary);
+
+		//	Config.SaveZones(new List<Zone>() { leftWing }, filename);
+		//}
 	}
 }
+

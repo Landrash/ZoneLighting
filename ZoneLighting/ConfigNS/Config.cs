@@ -3,50 +3,110 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using Anshul.Utilities;
+using Graphics;
 using Newtonsoft.Json;
-using ZoneLighting.Communication;
+using Newtonsoft.Json.Serialization;
 using ZoneLighting.Usables;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
+using ZoneLighting.ZoneProgramNS.Factories;
 
 namespace ZoneLighting.ConfigNS
 {
 	public class Config
 	{
+		public class InterfaceToClassMappings
+		{
+			public IDictionary<string, Type> TypeMap { get; set; }
+
+			public InterfaceToClassMappings()
+			{
+				TypeMap = new Dictionary<string, Type>
+				{
+					[typeof(List<IPixel>).FullName] = typeof(List<LED>)
+				};
+			}
+
+			public bool CanMap(string fullTypeName)
+			{
+				return TypeMap.Keys.Contains(fullTypeName);
+			}
+
+			public Type Map(string fullTypeName)
+			{
+				if (CanMap(fullTypeName))
+					return TypeMap[fullTypeName];
+
+				throw new Exception($"Type {fullTypeName} is not in candidate types.");
+			}
+		}
+
+		public class TypeNameSerializationBinder : SerializationBinder
+		{
+			private InterfaceToClassMappings InterfaceToClassMappings { get; } = new InterfaceToClassMappings();
+			private SerializationBinder DefaultSerializationBinder { get; } = new DefaultSerializationBinder();
+				
+			public override void BindToName(Type serializedType, out string assemblyName, out string typeName)
+			{
+				DefaultSerializationBinder.BindToName(serializedType, out assemblyName, out typeName);
+			}
+
+			public override Type BindToType(string assemblyName, string typeName)
+			{
+				if (InterfaceToClassMappings.CanMap(typeName))
+				{
+					return InterfaceToClassMappings.Map(typeName);
+				}
+
+				return DefaultSerializationBinder.BindToType(assemblyName, typeName);
+			}
+		}
+
+
 		#region Serialization Settings
+
+		public static TypeNameHandling TypeNameHandling { get; } = TypeNameHandling.All;
+
+		public static SerializationBinder SerializationBinder { get; } = new TypeNameSerializationBinder();
 
 		public static JsonSerializerSettings SaveZonesSerializerSettings => new JsonSerializerSettings()
 		{
 			//PreserveReferencesHandling = PreserveReferencesHandling.All,
-			TypeNameHandling = TypeNameHandling.All,
+			TypeNameHandling = TypeNameHandling,
 			TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Full,
-			Formatting = Formatting.Indented
+			Formatting = Formatting.Indented,
+			Binder = SerializationBinder
 		};
 
 		public static JsonSerializerSettings LoadZonesSerializerSettings => new JsonSerializerSettings()
 		{
 			//PreserveReferencesHandling = PreserveReferencesHandling.All,
-			TypeNameHandling = TypeNameHandling.All,
+			TypeNameHandling = TypeNameHandling,
 			TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Full,
 			Formatting = Formatting.Indented,
-			Converters = new JsonConverter[] { new UnderlyingTypeConverter() }
+			Converters = new JsonConverter[] { new UnderlyingTypeConverter() },
+			Binder = SerializationBinder
 		};
 
 		public static JsonSerializerSettings LoadProgramSetsSerializerSettings => new JsonSerializerSettings()
 		{
 			//PreserveReferencesHandling = PreserveReferencesHandling.All,
-			TypeNameHandling = TypeNameHandling.All,
+			TypeNameHandling = TypeNameHandling,
 			TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Full,
 			Formatting = Formatting.Indented,
-			Converters = new JsonConverter[] { new UnderlyingTypeConverter() }
+			Converters = new JsonConverter[] { new UnderlyingTypeConverter() },
+			Binder = SerializationBinder
 		};
 
 		public static JsonSerializerSettings SaveProgramSetsSerializerSettings => new JsonSerializerSettings()
 		{
 			//PreserveReferencesHandling = PreserveReferencesHandling.All,
-			TypeNameHandling = TypeNameHandling.All,
+			TypeNameHandling = TypeNameHandling,
 			TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Full,
-			Formatting = Formatting.Indented
+			Formatting = Formatting.Indented,
+			Binder = SerializationBinder
 		};
 
 		#endregion
@@ -69,7 +129,8 @@ namespace ZoneLighting.ConfigNS
 
 		public static BetterList<Zone> DeserializeZones(string config)
 		{
-			var zones = ((IEnumerable<Zone>)JsonConvert.DeserializeObject(config, LoadZonesSerializerSettings)).ToBetterList();
+			var des = JsonConvert.DeserializeObject<IEnumerable<Zone>>(config, LoadZonesSerializerSettings);
+			var zones = des.ToBetterList();
 			zones.ForEach(AssignLightingController);
 			return zones.ToBetterList();
 		}
@@ -96,7 +157,7 @@ namespace ZoneLighting.ConfigNS
 
 					isvs.Add(zone.ZoneProgramInputs[deserializedProgramSet.ProgramName].ToISV());
 				}
-				
+
 				//create new program set with all values from the deserialized version
 				reinstantiatedProgramSets.Add(new ProgramSet(deserializedProgramSet.ProgramName, zonesToPassIn,
 					deserializedProgramSet.Sync, isvs, deserializedProgramSet.Name));
@@ -122,12 +183,12 @@ namespace ZoneLighting.ConfigNS
 			var json = SerializeProgramSets(programSets);
 			File.WriteAllText(filename, json);
 		}
+
 		private static void AssignLightingController(Zone zone)
 		{
-			if (zone.GetType() == typeof(OPCZone))
-			{
-				zone.SetLightingController(FadeCandyController.Instance);
-			}
+
+
+			zone.SetLightingController(ZoneScaffolder.Instance.LightingControllers[zone.LightingControllerName]);
 		}
 
 		public static IEnumerable<Zone> LoadZones(string filename = "", string zoneConfiguration = "")
@@ -138,5 +199,5 @@ namespace ZoneLighting.ConfigNS
 					LoadZonesSerializerSettings);
 			return (IEnumerable<Zone>)deserializedZones;
 		}
-    }
+	}
 }

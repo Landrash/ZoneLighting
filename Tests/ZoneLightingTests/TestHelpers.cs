@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Anshul.Utilities;
 using NUnit.Framework;
+using Refigure;
 using ZoneLighting;
-using ZoneLighting.Communication;
 using ZoneLighting.StockPrograms;
+using ZoneLighting.TestApparatus;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS.Factories;
 
@@ -15,15 +17,15 @@ namespace ZoneLightingTests
 	{
 		public static void InitializeZoneScaffolder()
 		{
-			ZoneScaffolder.Instance.Initialize(ConfigurationManager.AppSettings["TestProgramModuleDirectory"]);
+			ZoneScaffolder.Instance.Initialize(Config.Get("ProgramModuleDirectory"), Config.Get("LightingControllerModuleDirectory"));
 		}
 
 		public static void ValidateSteppersInSync(IEnumerable<IStepper> steppers, int numberOfChecks, int msToWaitBeforeStart = 10, int msToWaitBetweenChecks = 1, bool print = false)
 		{
 			int[,] stepperSteps;
-		    var stepperArray = steppers as IStepper[] ?? steppers.ToArray();
-		    var invalidStepIndex = SyncContextTests.ValidateStepperSyncPhase(stepperArray.ToArray(), out stepperSteps, numberOfChecks);
-            if (print) SyncContextTests.PrintStepperSteps(stepperArray.ToArray(), stepperSteps);
+			var stepperArray = steppers as IStepper[] ?? steppers.ToArray();
+			var invalidStepIndex = SyncContextTests.ValidateStepperSyncPhase(stepperArray.ToArray(), out stepperSteps, numberOfChecks);
+			if (print) SyncContextTests.PrintStepperSteps(stepperArray.ToArray(), stepperSteps);
 			Assert.True(invalidStepIndex.Length == 0 && stepperSteps.Length != 0);
 		}
 
@@ -52,20 +54,27 @@ namespace ZoneLightingTests
 		public static void AddFourZonesAndStepperProgramSetWithSyncToZLM(ZLM zlm)
 		{
 			var notificationSyncContext = new SyncContext("NotificationContext");
+			var testLC = new TestLightingController("tlc1", null);
 
 			//add zones
-			var zoneA = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "ZoneA", OPCPixelType.OPCRGBPixel, 16, 1);
-			var zoneB = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "ZoneB", OPCPixelType.OPCRGBPixel, 16, 2);
-			var zoneC = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "ZoneC", OPCPixelType.OPCRGBPixel, 16, 3);
-			var zoneD = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "ZoneD", OPCPixelType.OPCRGBPixel, 16, 4);
+			var zoneA = ZoneScaffolder.Instance.AddZone(zlm.Zones, "ZoneA", testLC, 16);
+			var zoneB = ZoneScaffolder.Instance.AddZone(zlm.Zones, "ZoneB", testLC, 16);
+			var zoneC = ZoneScaffolder.Instance.AddZone(zlm.Zones, "ZoneC", testLC, 16);
+			var zoneD = ZoneScaffolder.Instance.AddZone(zlm.Zones, "ZoneD", testLC, 16);
 
 			zlm.CreateProgramSet("StepperSet", "Stepper", true, null, zlm.Zones);
 
 			//setup interrupting inputs - in the real code this method should not be used. The ZoneScaffolder.AddInterruptingProgram should be used.
-			zoneA.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
-			zoneB.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
-			zoneC.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
-			zoneD.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
+
+			new [] { zoneA, zoneB, zoneC, zoneD }.Listify().ForEach(zone =>
+			{
+				zone.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
+			});
+
+			//zoneA.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
+			//zoneB.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
+			//zoneC.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
+			//zoneD.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
 
 			//synchronize and start interrupting programs
 			notificationSyncContext.Sync(zoneA.InterruptingPrograms[0],

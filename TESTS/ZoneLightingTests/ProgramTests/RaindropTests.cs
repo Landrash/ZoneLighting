@@ -5,7 +5,6 @@ using System.Threading;
 using NUnit.Framework;
 using Refigure;
 using ZoneLighting;
-using ZoneLighting.Communication;
 using ZoneLighting.Graphics.Drawing;
 using ZoneLighting.StockPrograms;
 using ZoneLighting.ZoneProgramNS;
@@ -72,8 +71,7 @@ namespace ZoneLightingTests.ProgramTests
 				//startingParams.TrailShapes.Add(new TrailShape(new Trail(4, ProgramCommon.GetRandomColor()),
 				//	new Shape(56, 57, 58, 59, 60, 61, 62, 63)));
 
-				var neomatrix = ZoneScaffolder.Instance.AddFadeCandyZone(zlmInner.Zones, "NeoMatrix", OPCPixelType.OPCRGBPixel,
-					64, 1);
+				var neomatrix = ZoneScaffolder.Instance.AddFadeCandyZone(zlmInner.Zones, "NeoMatrix", 64);
 				zlmInner.CreateSingularProgramSet("", new Raindrops(), null, neomatrix, startingParams);
 			}, Config.Get("NeoMatrixOneZone"));
 

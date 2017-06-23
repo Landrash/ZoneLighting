@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using AustinHarris.JsonRpc;
 using Newtonsoft.Json;
 
 namespace ZoneLighting.ZoneProgramNS

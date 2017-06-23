@@ -8,7 +8,9 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using ZoneLighting.Communication;
+using Anshul.Utilities;
+using LightingControllerBase;
+using ZoneLighting.MEF;
 using ZoneLighting.Usables;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
@@ -26,9 +28,9 @@ namespace ZoneLighting
 
 		#region Admin
 
-		public Zone AddFadeCandyZone(string name, OPCPixelType pixelType, int numberOfLights, byte? channel)
+		public Zone AddZone(string name, ILightingController lightingController, int numberOfLights)
 		{
-			return ZoneScaffolder.Instance.AddFadeCandyZone(Zones, name, pixelType, numberOfLights, channel);
+			return ZoneScaffolder.Instance.AddZone(Zones, name, lightingController, numberOfLights);
 		}
 
 		public void Save()
@@ -95,7 +97,7 @@ namespace ZoneLighting
 		/// <summary>
 		/// Disposes the given program set(s). If no specific program sets are provided, disposes all program sets.
 		/// </summary>
-		public void DisposeProgramSets(List<string>programSetNames = null, bool force = false)
+		public void DisposeProgramSets(List<string> programSetNames = null, bool force = false)
 		{
 			if (programSetNames == null || !programSetNames.Any())
 			{
@@ -269,12 +271,10 @@ namespace ZoneLighting
 		/// <param name="loadZonesFromConfig">if set to <c>true</c>, loads external zones from the saved configuration file provided in the application configuration (app/web.config) appSetting with key "ZoneConfigurationSaveFile".</param>
 		/// <param name="loadProgramSetsFromConfig">if set to <c>true</c>, loads program sets from the saved configuration file provided in the application configuration appSetting (app/web.config) with key "ProgramSetConfigurationSaveFile".</param>
 		/// <param name="initAction">If provided, this action will be executed after this instance is initialized.</param>
-		/// <param name="fadeCandyConfigFilePath">The path at which the FadeCandy configuration file is located.</param>
-		public ZLM(bool loadZoneModules = false, bool loadZonesFromConfig = true, bool loadProgramSetsFromConfig = true,
-			Action<ZLM> initAction = null, string fadeCandyConfigFilePath = null)
+		public ZLM(bool loadZoneModules = false, bool loadZonesFromConfig = true, bool loadProgramSetsFromConfig = true, Action<ZLM> initAction = null)
 		{
-			InitLightingControllers(fadeCandyConfigFilePath);
 			InitZoneScaffolder();
+			InitLightingControllers();
 			if (loadZoneModules && ExternalZoneContainer != null)
 				ComposeWithExternalModules();
 			if (loadZonesFromConfig)
@@ -287,10 +287,10 @@ namespace ZoneLighting
 		/// <summary>
 		/// Add code here to initialize any other lighting controllers.
 		/// </summary>
-		private void InitLightingControllers(string configFilePath)
+		/// <param name="config"></param>
+		private void InitLightingControllers()
 		{
-			//FadeCandyController.Instance.Initialize(configFilePath);
-		    NodeMCUController.Instance.Initialize();
+			ZoneScaffolder.Instance.InitLightingControllers();
 		}
 
 		/// <summary>
@@ -298,8 +298,7 @@ namespace ZoneLighting
 		/// </summary>
 		private void UninitLightingControllers()
 		{
-			//FadeCandyController.Instance.Uninitialize();
-            NodeMCUController.Instance.Uninitialize();
+			ZoneScaffolder.Instance.UninitLightingControllers();
 		}
 
 		/// <summary>
@@ -307,7 +306,7 @@ namespace ZoneLighting
 		/// </summary>
 		private void InitZoneScaffolder()
 		{
-			ZoneScaffolder.Instance.Initialize(ConfigurationManager.AppSettings["ProgramDLLFolder"]);
+			ZoneScaffolder.Instance.Initialize(ConfigurationManager.AppSettings["ProgramDLLFolder"], ConfigurationManager.AppSettings["LightingControllerDLLFolder"]);
 		}
 
 		/// <summary>
@@ -323,12 +322,17 @@ namespace ZoneLighting
 			Zones.Parallelize(zone => zone.Stop());
 		}
 
-		public void Dispose()
+		public void DisposeProgramSetsAndZones()
 		{
 			DisposeProgramSets();
 			ProgramSets = null;
 			DisposeZones();
 			Zones = null;
+		}
+
+		public void Dispose()
+		{
+			DisposeProgramSetsAndZones();
 			UninitLightingControllers();
 			UninitZoneScaffolder();
 			ExternalZoneContainer?.Dispose();

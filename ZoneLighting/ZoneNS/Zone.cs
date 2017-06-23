@@ -4,8 +4,11 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks.Dataflow;
-using ZoneLighting.Communication;
-using ZoneLighting.Usables;
+using Anshul.Utilities;
+using Graphics;
+using LightingControllerBase;
+using Newtonsoft.Json;
+using ZoneLighting.ConfigNS;
 using ZoneLighting.ZoneProgramNS;
 
 namespace ZoneLighting.ZoneNS
@@ -22,6 +25,7 @@ namespace ZoneLighting.ZoneNS
 		public void SetLightingController(ILightingController lightingController)
 		{
 			LightingController = lightingController;
+			LightingControllerName = lightingController.Name;
 		}
 
 		#region Transport Controls
@@ -67,29 +71,41 @@ namespace ZoneLighting.ZoneNS
 		/// <param name="color"></param>
 		public void SetAllLightsColor(Color color)
 		{
-			Lights.ToList().ForEach(x => x.SetColor(color));
+			Lights.ToList().ForEach(x => x.Color = color);
 		}
 
 		/// <summary>
 		/// Adds a new light to this zone.
 		/// </summary>
 		/// <param name="light"></param>
-		public void AddLight(ILogicalRGBLight light)
+		public void AddLight(IPixel light)
 		{
 			Lights.Add(light);
 		}
 
-		/// <summary>
-		/// Gets the number of lights in this zone.
-		/// </summary>
-		public int LightCount => Lights.Count;
+        /// <summary>
+        /// Adds an array of lights with the given number of total lights.
+        /// </summary>
+        /// <param name="numLights"></param>
+	    public void AddLights(int numLights)
+	    {
+	        for (var i = 0; i < numLights; i++)
+	        {
+	            AddLight(new LED(index: i));
+	        }
+	    }
+
+        /// <summary>
+        /// Gets the number of lights in this zone.
+        /// </summary>
+        public int LightCount => Lights.Count;
 
 		/// <summary>
 		/// Gets the color of the light at the given index.
 		/// </summary>
 		public Color GetColor(int index)
 		{
-			return Lights[index].GetColor();
+			return Lights[index].Color;
 		}
 
 		public void ClearColors()
@@ -110,7 +126,7 @@ namespace ZoneLighting.ZoneNS
 				Lights.SetColor(brightnessAdjustedColor);
 			else
 			{
-				Lights[(int)index].SetColor(brightnessAdjustedColor);
+				Lights[(int)index].Color = brightnessAdjustedColor;
 			}
 
 		}
@@ -163,20 +179,23 @@ namespace ZoneLighting.ZoneNS
 		/// All lights in the zone.
 		/// </summary>
 		[DataMember]
-		private IList<ILogicalRGBLight> Lights { get; set; }
+		private IList<IPixel> Lights { get; set; }
 		
 		/// <summary>
 		/// The Lights list as a dictionary with the logical index as the key and the light as the value.
 		/// </summary>
-		public Dictionary<int, ILogicalRGBLight> SortedLights
+		public Dictionary<int, IPixel> SortedLights
 		{
-			get { return Lights?.ToDictionary(x => x.LogicalIndex); }
+			get { return Lights?.ToDictionary(x => x.Index); }
 		}
 
 		/// <summary>
 		/// The Lighting Controller used to control this Zone.
 		/// </summary>
 		public ILightingController LightingController { get; private set; }
+
+		[DataMember]
+		public string LightingControllerName { get; private set; }
 
 		/// <summary>
 		/// The program that is active on this zone.
@@ -209,12 +228,14 @@ namespace ZoneLighting.ZoneNS
 		/// <param name="lightingController"></param>
 		/// <param name="name"></param>
 		/// <param name="brightness">Brightness for this zone.</param>
-		public Zone(ILightingController lightingController, string name = "", double? brightness = 1.0)
+		[JsonConstructor]
+		public Zone(ILightingController lightingController, string name = "", double? brightness = 1.0, string lightingControllerName = null, List<LED> lights = null)
 		{
-			Construct();
+			Construct(lights);
 			LightingController = lightingController;
 			Name = name;
 			Brightness = brightness ?? 1.0;
+			LightingControllerName = lightingControllerName ?? LightingController.Name;
 		}
 
 		public Zone(string name)
@@ -223,9 +244,9 @@ namespace ZoneLighting.ZoneNS
 			Name = name;
 		}
 
-		private void Construct()
+		private void Construct(IEnumerable<IPixel> lights= null)
 		{
-			Lights = new List<ILogicalRGBLight>();
+			Lights = lights?.ToList() ?? new List<IPixel>();
 		}
 
 		#region Interrupt Processing

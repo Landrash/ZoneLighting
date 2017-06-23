@@ -8,7 +8,8 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Threading.Tasks.Dataflow;
-using ZoneLighting.Communication;
+using LightingControllerBase;
+using ZoneLighting.MEF;
 using ZoneLighting.TriggerDependencyNS;
 using ZoneLighting.ZoneNS;
 

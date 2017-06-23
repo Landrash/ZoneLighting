@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
-using FakeItEasy;
-using FakeItEasy.ExtensionSyntax.Full;
+﻿using System.Drawing;
 using NUnit.Framework;
-using ZoneLighting.Communication;
 using ZoneLighting.StockPrograms;
+using ZoneLighting.TestApparatus;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
 
@@ -15,8 +12,9 @@ namespace ZoneLightingTests
 		[Test]
 		public void SetAllLightsColor_Works()
 		{
-			var zone = A.Fake<Zone>();
-			var color = A.Dummy<Color>();
+			var zone = new Zone(new TestLightingController("tlc1"), "TestZone");
+			zone.AddLights(6);
+			var color = Color.Red;
 			zone.SetAllLightsColor(color);
 
 			for (int i = 0; i < zone.LightCount; i++)
@@ -28,9 +26,9 @@ namespace ZoneLightingTests
 		[Test]
 		public void Run_Works()
 		{
-			var zone = new OPCZone(FadeCandyController.Instance, "TestZone");
+			var zone = new Zone(new TestLightingController("tlc1"), "TestZone");
 			var program = new Rainbow();
-			zone.AddOPCLights(OPCPixelType.OPCRGBPixel, 6, 1);
+			zone.AddLights(6);
 			Assert.DoesNotThrow(() => zone.Run(program));
 			Assert.True(zone.Running);
 			Assert.True(program.State == ProgramState.Started);
@@ -39,10 +37,10 @@ namespace ZoneLightingTests
 		[Test]
 		public void Run_WithSync_Works()
 		{
-			var zone = new OPCZone(FadeCandyController.Instance, "TestZone");
+			var zone = new Zone(new TestLightingController("tlc1"), "TestZone");
 			var program = new Rainbow();
 			var syncContext = new SyncContext();
-			zone.AddOPCLights(OPCPixelType.OPCRGBPixel, 6, 1);
+			zone.AddLights(6);
 			Assert.DoesNotThrow(() => zone.Run(program, null, true, syncContext));
 			Assert.True(zone.Running);
 			Assert.True(program.State == ProgramState.Started);
@@ -51,11 +49,10 @@ namespace ZoneLightingTests
 		[Test]
 		public void Stop_Works()
 		{
-			var lightingController = A.Fake<LightingController>();
-			lightingController.CallsTo(controller => controller.SendLEDs(A.Fake<List<ILightingControllerPixel>>())).DoesNothing();
-			var zone = new OPCZone(FadeCandyController.Instance, "TestZone");
+			var lightingController = new TestLightingController("tlc1");
+			var zone = new Zone(lightingController, "TestZone");
 			var program = new Rainbow();
-			zone.AddOPCLights(OPCPixelType.OPCRGBPixel, 6, 1);
+			zone.AddLights(6);
 			zone.Run(program);
 			Assert.DoesNotThrow(() => zone.Stop(true));
 			Assert.False(zone.Running);

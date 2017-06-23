@@ -16,7 +16,7 @@ namespace ZoneLighting.TriggerDependencyNS
 
 		public string Name;
 
-		protected Dependency<T> _dependency;
+		protected Dependency<T> Dependency;
 
 		/// <summary>
 		/// Indicates whether or not the Trigger is active.
@@ -26,7 +26,7 @@ namespace ZoneLighting.TriggerDependencyNS
 		/// <summary>
 		/// EventHandler for the firing of the Trigger
 		/// </summary>
-		private event EventHandler<T> _fireTrigger;
+		private event EventHandler<T> FireTrigger;
 
 		/// <summary>
 		/// Fires alongwith the Trigger. Allows for simpler notifications.
@@ -51,11 +51,11 @@ namespace ZoneLighting.TriggerDependencyNS
 		public Trigger(Dependency<T> dependency, string name = "", bool active = true)
 			: this(name, active)
 		{
-			_dependency = dependency;
+			Dependency = dependency;
 			//Action<object, EventArgs> action = _repositoryDependency.Action;
 			//AddPublication(_dependency.Action);
 			//if the above code doesn't work, try this:
-			_dependency.Action += Fire;
+			Dependency.Action += Fire;
 		}
 
 		/// <summary>
@@ -73,23 +73,23 @@ namespace ZoneLighting.TriggerDependencyNS
 		public void Dispose(bool recursive)
 		{
 			//if requested, dispose the dependency this trigger is attached to
-			if (recursive && _dependency != null)
-				_dependency.Dispose(true);
+			if (recursive)
+				Dependency?.Dispose(true);
 
-			if (_fireTrigger != null)
+			if (FireTrigger != null)
 			{
 				//remove all subscriptions to the underlying event
-				foreach (var triggerEvent in _fireTrigger.GetInvocationList())
+				foreach (var triggerEvent in FireTrigger.GetInvocationList())
 				{
 					Unsubscribe((EventHandler<T>)triggerEvent);
 				}
 
 				Active = false;
 				Name = null;
-				if (_dependency != null)
+				if (Dependency != null)
 				{
-					_dependency.Action -= Fire;
-					_dependency = null;
+					Dependency.Action -= Fire;
+					Dependency = null;
 				}
 			}
 
@@ -125,10 +125,7 @@ namespace ZoneLighting.TriggerDependencyNS
 		/// <summary>
 		/// Returns true is Trigger is active, false otherwise
 		/// </summary>
-		public bool IsActive
-		{
-			get { return Active; }
-		}
+		public bool IsActive => Active;
 
 		/// <summary>
 		/// Activates the Trigger.
@@ -176,12 +173,9 @@ namespace ZoneLighting.TriggerDependencyNS
 				//DebugTools.AddEvent("*" + this.Name + ".OnFireTrigger", "START WaitHandle set.");
 				_waitHandle.Set();
 
-				if (_fireTrigger != null)
-				{
-					//Debug.Print(Name + ".FireTrigger delegate called.");
-					//DebugTools.AddEvent(this.Name + ".OnFireTrigger", "START Trigger fired.");
-					_fireTrigger(sender, e);
-				}
+				//Debug.Print(Name + ".FireTrigger delegate called.");
+				//DebugTools.AddEvent(this.Name + ".OnFireTrigger", "START Trigger fired.");
+				FireTrigger?.Invoke(sender, e);
 			}
 		}
 
@@ -223,7 +217,7 @@ namespace ZoneLighting.TriggerDependencyNS
 		/// <param name="fireTrigger">Method to add to the Trigger Event Handler</param>
 		public void Subscribe(EventHandler<T> fireTrigger)
 		{
-			_fireTrigger += fireTrigger;
+			FireTrigger += fireTrigger;
 		}
 
 		/// <summary>
@@ -232,7 +226,7 @@ namespace ZoneLighting.TriggerDependencyNS
 		/// <param name="fireTrigger">Method to remove from the Trigger Event Handler</param>
 		public void Unsubscribe(EventHandler<T> fireTrigger)
 		{
-			_fireTrigger -= fireTrigger;
+			FireTrigger -= fireTrigger;
 		}
 
 		/// <summary>
@@ -240,20 +234,18 @@ namespace ZoneLighting.TriggerDependencyNS
 		/// </summary>
 		public void UnsubscribeAll()
 		{
-			foreach (var eventHandlerDelegate in _fireTrigger.GetInvocationList())
-			{
-				var eventHandler = (EventHandler<T>)eventHandlerDelegate;
-				_fireTrigger -= eventHandler;
-			}
+			if (FireTrigger != null)
+				foreach (var eventHandlerDelegate in FireTrigger.GetInvocationList())
+				{
+					var eventHandler = (EventHandler<T>) eventHandlerDelegate;
+					FireTrigger -= eventHandler;
+				}
 		}
 
 		/// <summary>
 		/// The list of subscriptions this Trigger has
 		/// </summary>
-		public List<Delegate> Subscriptions
-		{
-			get { return _fireTrigger != null ? _fireTrigger.GetInvocationList().ToList() : null; }
-		}
+		public List<Delegate> Subscriptions => FireTrigger?.GetInvocationList().ToList();
 
 		#endregion
 

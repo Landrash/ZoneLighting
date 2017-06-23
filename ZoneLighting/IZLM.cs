@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using ZoneLighting.Communication;
+using Anshul.Utilities;
+using LightingControllerBase;
 using ZoneLighting.Usables;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
@@ -15,15 +16,15 @@ namespace ZoneLighting
 
 		void Dispose();
 
-		/// <summary>
-		/// Adds a fade candy zone to the manager.
-		/// </summary>
-		/// <param name="name">Name of the zone</param>
-		/// <param name="pixelType">Type of pixel for the zone</param>
-		/// <param name="numberOfLights">Number of lights in the zone</param>
-		/// <param name="channel">FadeCandy channel on which this zone is connected</param>
-		/// <returns></returns>
-		Zone AddFadeCandyZone(string name, OPCPixelType pixelType, int numberOfLights, byte? channel);
+		///// <summary>
+		///// Adds a fade candy zone to the manager.
+		///// </summary>
+		///// <param name="name">Name of the zone</param>
+		///// <param name="pixelType">Type of pixel for the zone</param>
+		///// <param name="numberOfLights">Number of lights in the zone</param>
+		///// <param name="channel">FadeCandy channel on which this zone is connected</param>
+		///// <returns></returns>
+		//Zone AddFadeCandyZone(string name, int numberOfLights);
 
 		/// <summary>
 		/// Saves active program sets and zones
@@ -73,5 +74,6 @@ namespace ZoneLighting
 		void SetLightColor(string zoneName, string color, int index, float brightness = 1);
 
 		void SetAllZonesColor(string color, float brightness = 1);
+		Zone AddZone(string name, ILightingController lightingController, int numberOfLights);
 	}
 }
