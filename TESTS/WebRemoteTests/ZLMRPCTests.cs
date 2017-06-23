@@ -5,10 +5,9 @@ using WebRemote;
 using WebRemote.IoC;
 using ZoneLighting;
 using ZoneLighting.TestApparatus;
-using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
 
-namespace WebControllerTests
+namespace WebRemoteTests
 {
 	[Category("Integration")]
 	public class ZLMRPCTests

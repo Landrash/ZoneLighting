@@ -7,8 +7,8 @@
     <ProjectGuid>{78F92D31-CA64-4CA8-9305-23B9484BB0E2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebControllerTests</RootNamespace>
-    <AssemblyName>WebControllerTests</AssemblyName>
+    <RootNamespace>WebRemoteTests</RootNamespace>
+    <AssemblyName>WebRemoteTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
