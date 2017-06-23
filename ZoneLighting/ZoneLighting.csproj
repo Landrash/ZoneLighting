@@ -40,8 +40,14 @@
       <HintPath>..\packages\EventSourceProxy.3.0.3\lib\EventSourceProxy.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Graphics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZoneLighting.Graphics.1.0.0\lib\net461\Graphics.dll</HintPath>
+    </Reference>
     <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.10.2.1\lib\net\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="LightingControllerBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZoneLighting.LightingControllerBase.1.0.1\lib\net461\LightingControllerBase.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
@@ -287,16 +293,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TypeLite.Net4.tt</DependentUpon>
     </TypeScriptCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Modules\Graphics\Graphics.csproj">
-      <Project>{60287C11-06CC-4F24-9473-20A58D4A6EF8}</Project>
-      <Name>Graphics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Modules\LightingControllerBase\LightingControllerBase.csproj">
-      <Project>{cab28797-ddc5-4151-bd67-cb0de2b134dd}</Project>
-      <Name>LightingControllerBase</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

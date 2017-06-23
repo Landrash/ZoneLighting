@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LightingControllerBase")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ZoneLighting.LightingControllerBase")]
+[assembly: AssemblyDescription("This is the base library to using which to build lighting controllers for ZoneLighting.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LightingControllerBase")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCompany("Anshul Vishwakarma")]
+[assembly: AssemblyProduct("ZoneLighting.LightingControllerBase")]
+[assembly: AssemblyCopyright("Copyright © 2017 Anshul Vishwakarma")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

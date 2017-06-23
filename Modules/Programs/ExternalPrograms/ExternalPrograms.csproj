@@ -35,6 +35,9 @@
     <Reference Include="Anshul.Utilities, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Anshul.Utilities.1.0.27.0\lib\net45\Anshul.Utilities.dll</HintPath>
     </Reference>
+    <Reference Include="Graphics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ZoneLighting.Graphics.1.0.0\lib\net461\Graphics.dll</HintPath>
+    </Reference>
     <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\JetBrains.Annotations.10.2.1\lib\net\JetBrains.Annotations.dll</HintPath>
     </Reference>
@@ -147,17 +150,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Graphics\Graphics.csproj">
-      <Project>{60287c11-06cc-4f24-9473-20a58d4a6ef8}</Project>
-      <Name>Graphics</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\ZoneLighting\ZoneLighting.csproj">
       <Project>{FE00DB62-6C3C-4D04-9F03-23DA814298B6}</Project>
       <Name>ZoneLighting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\LightingControllerBase\LightingControllerBase.csproj">
-      <Project>{cab28797-ddc5-4151-bd67-cb0de2b134dd}</Project>
-      <Name>LightingControllerBase</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

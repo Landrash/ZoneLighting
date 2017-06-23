@@ -33,11 +33,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Anshul.Utilities">
-      <HintPath>..\..\Modules\LightingControllerBase\bin\Debug\Anshul.Utilities.dll</HintPath>
+    <Reference Include="Anshul.Utilities, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Anshul.Utilities.1.0.27.0\lib\net45\Anshul.Utilities.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="FakeItEasy, Version=1.25.1.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FakeItEasy.1.25.1\lib\net40\FakeItEasy.dll</HintPath>
+    </Reference>
+    <Reference Include="Graphics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ZoneLighting.Graphics.1.0.0\lib\net461\Graphics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LightingControllerBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ZoneLighting.LightingControllerBase.1.0.1\lib\net461\LightingControllerBase.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Moq, Version=4.2.1409.1722, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
@@ -156,14 +165,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Modules\Graphics\Graphics.csproj">
-      <Project>{60287C11-06CC-4F24-9473-20A58D4A6EF8}</Project>
-      <Name>Graphics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Modules\LightingControllerBase\LightingControllerBase.csproj">
-      <Project>{CAB28797-DDC5-4151-BD67-CB0DE2B134DD}</Project>
-      <Name>LightingControllerBase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\ZoneLighting\ZoneLighting.csproj">
       <Project>{FE00DB62-6C3C-4D04-9F03-23DA814298B6}</Project>
       <Name>ZoneLighting</Name>
@@ -174,62 +175,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logs\Deadlock4Steppers.txt" />
-    <Content Include="Resources\LightingControllers\Anshul.Utilities.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\EventSourceProxy.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\Graphics.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\LightingControllerBase.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\MIDIator.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\MIDIator.UIGenerator.Consumables.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\Newtonsoft.Json.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\NLog.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\nunit.framework.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\LightingControllers\OPCWebSocketController.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\Refigure.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\System.Reactive.Core.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\System.Reactive.Interfaces.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\System.Reactive.Linq.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\System.Threading.Tasks.Dataflow.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\LightingControllers\TestPluginController.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\TypeLite.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\websocket-sharp.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightingControllers\ZoneLighting.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Programs\ExternalPrograms.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

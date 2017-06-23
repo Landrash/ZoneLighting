@@ -41,6 +41,12 @@
       <HintPath>..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Graphics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZoneLighting.Graphics.1.0.0\lib\net461\Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="LightingControllerBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZoneLighting.LightingControllerBase.1.0.1\lib\net461\LightingControllerBase.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
@@ -141,62 +147,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Modules\LightingControllerBase\LightingControllerBase.csproj">
-      <Project>{CAB28797-DDC5-4151-BD67-CB0DE2B134DD}</Project>
-      <Name>LightingControllerBase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ZoneLighting\ZoneLighting.csproj">
       <Project>{fe00db62-6c3c-4d04-9f03-23da814298b6}</Project>
       <Name>ZoneLighting</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LightingControllers\Anshul.Utilities.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\EventSourceProxy.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\MIDIator.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\MIDIator.UIGenerator.Consumables.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\Newtonsoft.Json.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\NLog.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\nunit.framework.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="LightingControllers\OPCWebSocketController.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\Refigure.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\System.Reactive.Core.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\System.Reactive.Interfaces.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\System.Reactive.Linq.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\System.Threading.Tasks.Dataflow.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\TypeLite.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\websocket-sharp.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\ZoneLighting.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Programs\ExternalPrograms.dll">

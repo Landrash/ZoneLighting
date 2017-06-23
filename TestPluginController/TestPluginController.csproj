@@ -34,6 +34,12 @@
     <Reference Include="Anshul.Utilities, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Anshul.Utilities.1.0.27.0\lib\net45\Anshul.Utilities.dll</HintPath>
     </Reference>
+    <Reference Include="Graphics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZoneLighting.Graphics.1.0.0\lib\net461\Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="LightingControllerBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZoneLighting.LightingControllerBase.1.0.1\lib\net461\LightingControllerBase.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -53,16 +59,6 @@
   <ItemGroup>
     <Compile Include="TestPluginController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Modules\Graphics\Graphics.csproj">
-      <Project>{60287C11-06CC-4F24-9473-20A58D4A6EF8}</Project>
-      <Name>Graphics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Modules\LightingControllerBase\LightingControllerBase.csproj">
-      <Project>{CAB28797-DDC5-4151-BD67-CB0DE2B134DD}</Project>
-      <Name>LightingControllerBase</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

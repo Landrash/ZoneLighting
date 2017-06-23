@@ -142,7 +142,7 @@ namespace ZoneLighting.ZoneProgramNS.Factories
                 var assembly = Assembly.LoadFrom(file);
 
                 if (assembly.GetCustomAttributesData()
-                    .Any(ass => ass.AttributeType.FullName == typeof(LightingControllerAssemblyAttribute).FullName))
+                    .Any(ass => ass.AttributeType == typeof(LightingControllerAssemblyAttribute)))
                 {
                     fileCatalogs.Add(new AssemblyCatalog(assembly));
 
