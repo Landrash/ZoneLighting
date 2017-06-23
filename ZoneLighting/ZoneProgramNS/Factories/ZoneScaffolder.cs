@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
@@ -145,28 +144,8 @@ namespace ZoneLighting.ZoneProgramNS.Factories
                     .Any(ass => ass.AttributeType == typeof(LightingControllerAssemblyAttribute)))
                 {
                     fileCatalogs.Add(new AssemblyCatalog(assembly));
-
-                    foreach (var referencedFile in Directory.GetFiles(Path.GetDirectoryName(file), "*.dll").ToList())
-                    {
-                        //TODO: this try-catch needs to be replaced with a function that actually checks to see the file before copying
-                        //TODO: can this whole process be removed completely? this seesm hacky because
-                        //TODO: we are doing file copy to load dynamic modules, but ideally we should point
-                        //TODO: to the location of the file instead of file copy? seems like a better way
-                        try
-                        {
-                            File.Copy(referencedFile,
-                                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetFileName(referencedFile)),
-                                false);
-                        }
-                        catch (Exception ex)
-                        {
-                            // only copy if file is not in use
-                        }
-                    }
                 }
             }
-
-
         }
 
         private void LoadLightingControllerInfos(string lightingControllerModuleDirectory)
@@ -223,24 +202,6 @@ namespace ZoneLighting.ZoneProgramNS.Factories
                     .Any(ass => ass.AttributeType == typeof(ZoneProgramAssemblyAttribute)))
                 {
                     fileCatalogs.Add(new AssemblyCatalog(assembly));
-
-                    foreach (var referencedFile in Directory.GetFiles(Path.GetDirectoryName(file), "*.dll").ToList())
-                    {
-                        //TODO: this try-catch needs to be replaced with a function that actually checks to see the file before copying
-                        //TODO: can this whole process be removed completely? this seesm hacky because
-                        //TODO: we are doing file copy to load dynamic modules, but ideally we should point
-                        //TODO: to the location of the file instead of file copy? seems like a better way
-                        try
-                        {
-                            File.Copy(referencedFile,
-                                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetFileName(referencedFile)),
-                                false);
-                        }
-                        catch (Exception ex)
-                        {
-                            // only copy if file is not in use
-                        }
-                    }
                 }
             }
         }

@@ -97,7 +97,7 @@ namespace ZoneLighting
 		/// <summary>
 		/// Disposes the given program set(s). If no specific program sets are provided, disposes all program sets.
 		/// </summary>
-		public void DisposeProgramSets(List<string>programSetNames = null, bool force = false)
+		public void DisposeProgramSets(List<string> programSetNames = null, bool force = false)
 		{
 			if (programSetNames == null || !programSetNames.Any())
 			{
@@ -274,8 +274,8 @@ namespace ZoneLighting
 		public ZLM(bool loadZoneModules = false, bool loadZonesFromConfig = true, bool loadProgramSetsFromConfig = true, Action<ZLM> initAction = null)
 		{
 			InitZoneScaffolder();
-		    InitLightingControllers();
-            if (loadZoneModules && ExternalZoneContainer != null)
+			InitLightingControllers();
+			if (loadZoneModules && ExternalZoneContainer != null)
 				ComposeWithExternalModules();
 			if (loadZonesFromConfig)
 				LoadZonesFromConfig();
@@ -284,13 +284,13 @@ namespace ZoneLighting
 			initAction?.Invoke(this);
 		}
 
-	    /// <summary>
-	    /// Add code here to initialize any other lighting controllers.
-	    /// </summary>
-	    /// <param name="config"></param>
-	    private void InitLightingControllers()
+		/// <summary>
+		/// Add code here to initialize any other lighting controllers.
+		/// </summary>
+		/// <param name="config"></param>
+		private void InitLightingControllers()
 		{
-            ZoneScaffolder.Instance.InitLightingControllers();
+			ZoneScaffolder.Instance.InitLightingControllers();
 		}
 
 		/// <summary>
@@ -298,8 +298,8 @@ namespace ZoneLighting
 		/// </summary>
 		private void UninitLightingControllers()
 		{
-		    ZoneScaffolder.Instance.UninitLightingControllers();
-        }
+			ZoneScaffolder.Instance.UninitLightingControllers();
+		}
 
 		/// <summary>
 		/// Initializes the ZoneScaffolder singleton instance by feeding the factories into it.
@@ -322,12 +322,17 @@ namespace ZoneLighting
 			Zones.Parallelize(zone => zone.Stop());
 		}
 
-		public void Dispose()
+		public void DisposeProgramSetsAndZones()
 		{
 			DisposeProgramSets();
 			ProgramSets = null;
 			DisposeZones();
 			Zones = null;
+		}
+
+		public void Dispose()
+		{
+			DisposeProgramSetsAndZones();
 			UninitLightingControllers();
 			UninitZoneScaffolder();
 			ExternalZoneContainer?.Dispose();

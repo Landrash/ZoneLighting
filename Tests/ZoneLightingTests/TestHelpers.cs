@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Anshul.Utilities;
 using NUnit.Framework;
 using Refigure;
 using ZoneLighting;
@@ -64,10 +65,16 @@ namespace ZoneLightingTests
 			zlm.CreateProgramSet("StepperSet", "Stepper", true, null, zlm.Zones);
 
 			//setup interrupting inputs - in the real code this method should not be used. The ZoneScaffolder.AddInterruptingProgram should be used.
-			zoneA.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
-			zoneB.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
-			zoneC.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
-			zoneD.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
+
+			new [] { zoneA, zoneB, zoneC, zoneD }.Listify().ForEach(zone =>
+			{
+				zone.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
+			});
+
+			//zoneA.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
+			//zoneB.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
+			//zoneC.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
+			//zoneD.AddInterruptingProgram(new BlinkColorReactive(), null, notificationSyncContext);
 
 			//synchronize and start interrupting programs
 			notificationSyncContext.Sync(zoneA.InterruptingPrograms[0],

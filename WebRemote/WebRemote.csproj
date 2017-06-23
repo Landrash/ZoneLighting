@@ -138,6 +138,7 @@
     <None Include="LightingControllers\Dali.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="LightingControllers\OPCWebSocketController_LR.dll.json.bak" />
     <None Include="LightingControllers\Picasso.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -152,6 +153,9 @@
   <ItemGroup>
     <Content Include="LightingControllers\OPCWebSocketController.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LightingControllers\websocket-sharp.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Programs\ExternalPrograms.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

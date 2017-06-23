@@ -29,23 +29,21 @@ namespace ZoneLightingTests
 			});
 
 			//cleanup
-			zlm.Dispose();
+			zlm.DisposeProgramSetsAndZones();
 		}
 
 		[Test]
-		public void Dispose_Works()
+		public void DisposeProgramSetsAndZones_Works()
 		{
 			//arrange
 			var zlm = new ZLM(false, false, false, TestHelpers.AddFourZonesAndStepperProgramSetWithSyncToZLM);
 
 			//act
-			zlm.Dispose();
+			zlm.DisposeProgramSetsAndZones();
 
 			//assert
 			Assert.That(zlm.ProgramSets, Is.Null);
 			Assert.That(zlm.Zones, Is.Null);
-			//TODO: Assert that all lighting controllers are unintialized
-			Assert.That(ZoneScaffolder.Instance.Initialized, Is.False);
 		}
 	}
 }

@@ -50,7 +50,7 @@ namespace ZoneLightingTests
 			Assert.True(zlm.AvailableZones[0] == rightWing);
 
 			//cleanup
-			zlm.Dispose();
+			zlm.DisposeProgramSetsAndZones();
 		}
 
 		[Test]
@@ -74,7 +74,7 @@ namespace ZoneLightingTests
 			TestHelpers.ValidateSteppersRunning(zlm.Zones.Select(z => z.ZoneProgram).Cast<IStepper>(), 100);
 
 			//cleanup
-			zlm.Dispose();
+			zlm.DisposeProgramSetsAndZones();
 		}
 
 		[Test]
@@ -98,7 +98,7 @@ namespace ZoneLightingTests
 			TestHelpers.ValidateSteppersRunning(new BetterList<Zone> {leftWing, center}.Select(z => z.ZoneProgram).Cast<IStepper>(), 100);
 
 			//cleanup
-			zlm.Dispose();
+			zlm.DisposeProgramSetsAndZones();
 		}
 
 		[Test]
@@ -123,7 +123,7 @@ namespace ZoneLightingTests
 				}));
 
 			//cleanup
-			zlm.Dispose();
+			zlm.DisposeProgramSetsAndZones();
 		}
 
 		[Test]
@@ -154,7 +154,7 @@ namespace ZoneLightingTests
 				new BetterList<Zone> { rightWing }.Select(z => z.ZoneProgram).Cast<IStepper>(), 10);
 
 			//cleanup
-			zlm.Dispose();
+			zlm.DisposeProgramSetsAndZones();
 		}
 	}
 }
