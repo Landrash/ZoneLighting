@@ -1,7 +1,7 @@
 {
-	"Name": "LivingRoomPosterLights",
+	"Name": "TurntablePoster",
 	"Type": "NodeMCUController",
-	"ServerURL": "ws://192.168.29.247:81/",
+	"ServerURL": "ws://#{TurntablePosterURL}/",
 	"PixelType": 1,
 	"Channel": 1,
 	"Pixels": [

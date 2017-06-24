@@ -1,7 +1,7 @@
 {
 	"Name": "Picasso",
 	"Type":  "NodeMCUController",
-	"ServerURL": "ws://192.168.29.110:81/",
+	"ServerURL": "ws://#{PicassoURL}/",
 	"PixelType": 1,
 	"Channel": 1,
 	"Pixels": [

@@ -134,7 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="LightingControllers\LivingRoomPosterLights.json">
+    <None Include="LightingControllers\TurntablePoster.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="LightingControllers\Dali.json">

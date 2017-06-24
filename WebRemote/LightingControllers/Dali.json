@@ -1,7 +1,7 @@
 {
 	"Name": "Dali",
-	"Type":  "NodeMCUController",
-	"ServerURL": "ws://192.168.29.113:81/",
+	"Type": "NodeMCUController",
+	"ServerURL": "ws://#{DaliURL}/",
 	"PixelType": 1,
 	"Channel": 1,
 	"Pixels": [
