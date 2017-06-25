@@ -41,9 +41,9 @@ namespace WebRemote
 				});
 				x.RunAsLocalSystem();
 
-				x.SetDescription("ZoneLighting.WebRemote");
-				x.SetDisplayName("ZoneLighting.WebRemote");
-				x.SetServiceName("ZoneLighting.WebRemote");
+				x.SetDescription("WebRemote");
+				x.SetDisplayName("WebRemote");
+				x.SetServiceName("WebRemote");
 			});
 		}
 
