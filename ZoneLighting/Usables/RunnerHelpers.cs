@@ -209,7 +209,7 @@ namespace ZoneLighting.Usables
 
 			CreateZonesFromConfig(zlm.Zones);
 
-			zlm.CreateProgramSet("ShimmerSet", "Shimmer", false, null /*isv*/, zlm.Zones/*, startingParameters: startingParams*/);
+			zlm.CreateProgramSet("ShimmerSet", "Shimmer", false, isv, zlm.Zones/*, startingParameters: startingParams*/);
         }
 
 		/// <summary>

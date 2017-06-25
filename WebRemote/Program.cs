@@ -5,22 +5,48 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Owin.Hosting;
+using Topshelf;
 
 namespace WebRemote
 {
 	class Program
 	{
+		public class WebAppStarter
+		{
+			private IDisposable App { get; set; }
+
+			public void Start()
+			{
+				string baseAddress = "http://localhost:9000/";
+				App = WebApp.Start<Startup>(new StartOptions(url: baseAddress));
+				Console.WriteLine($"Server running at {baseAddress}. Hit any key to exit.");
+			}
+
+			public void Stop()
+			{
+				App.Dispose();
+			}
+
+		}
+
 		static void Main(string[] args)
 		{
-			string baseAddress = "http://localhost:9000/";
-
-			// Start OWIN host 
-			using (WebApp.Start<Startup>(url: baseAddress))
+			HostFactory.Run(x =>
 			{
-				Console.WriteLine($"Server running at {baseAddress}. Hit any key to exit.");
+				x.Service<WebAppStarter>(s =>
+				{
+					s.ConstructUsing(name => new WebAppStarter());
+					s.WhenStarted(tc => tc.Start());
+					s.WhenStopped(tc => tc.Stop());
+				});
+				x.RunAsLocalSystem();
 
-				Console.ReadLine();
-			}
+				x.SetDescription("ZoneLighting.WebRemote");
+				x.SetDisplayName("ZoneLighting.WebRemote");
+				x.SetServiceName("ZoneLighting.WebRemote");
+			});
 		}
+
+
 	}
 }
