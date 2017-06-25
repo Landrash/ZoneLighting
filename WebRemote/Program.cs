@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Owin.Hosting;
+using Refigure;
 using Topshelf;
 
 namespace WebRemote
@@ -17,9 +18,9 @@ namespace WebRemote
 
 			public void Start()
 			{
-				string baseAddress = "http://localhost:9000/";
+				string baseAddress = Config.Get("BaseURL");
 				App = WebApp.Start<Startup>(new StartOptions(url: baseAddress));
-				Console.WriteLine($"Server running at {baseAddress}. Hit any key to exit.");
+				Console.WriteLine($"Server running at {baseAddress}.");
 			}
 
 			public void Stop()
