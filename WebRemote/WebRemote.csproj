@@ -142,7 +142,6 @@
     <None Include="LightingControllers\Dali.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="LightingControllers\OPCWebSocketController_LR.dll.json.bak" />
     <None Include="LightingControllers\Picasso.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
