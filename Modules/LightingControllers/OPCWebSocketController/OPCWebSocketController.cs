@@ -9,6 +9,7 @@ using Graphics;
 using LightingControllerBase;
 using Refigure;
 using WebSocketSharp;
+using WebSocketSharp.Server;
 
 namespace OPCWebSocketController
 {
@@ -78,7 +79,7 @@ namespace OPCWebSocketController
             ServerURL = null;
         }
 
-        protected void Initialize(string name, string serverURL, IPixelToOPCPixelMapper pixelMapper, OPCPixelType opcPixelType, byte channel)
+        protected void Initialize(string name, string serverURL, string username, string password, IPixelToOPCPixelMapper pixelMapper, OPCPixelType opcPixelType, byte channel)
         {
             Name = name;
             ServerURL = serverURL;
@@ -87,6 +88,7 @@ namespace OPCWebSocketController
             Channel = channel;
 
             WebSocket = new WebSocket(ServerURL);
+            WebSocket.SetCredentials(username, password, true);
             Task.Run(() => Connect());
         }
 

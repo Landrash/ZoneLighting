@@ -46,7 +46,8 @@ void setup() {
 	Serial.println(WiFi.localIP());
 
 	//start websocket
-	webSocket.begin();
+	webSocket.setAuthorization("***", "***");
+	webSocket.begin();	
 	webSocket.onEvent(webSocketEvent);
 }
 

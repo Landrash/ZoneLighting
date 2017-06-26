@@ -24,8 +24,8 @@ namespace OPCWebSocketController
 			
 			if (nodeMcuConfig.PixelMapperType == null || nodeMcuConfig.PixelMapperType == PixelMapperType.Static)
 			{
-				Initialize(nodeMcuConfig.Name, nodeMcuConfig.ServerURL,
-					new StaticPixelMapper(pixelMap), nodeMcuConfig.OPCPixelType,
+				Initialize(nodeMcuConfig.Name, nodeMcuConfig.ServerURL, nodeMcuConfig.Username,
+					nodeMcuConfig.Password, new StaticPixelMapper(pixelMap), nodeMcuConfig.OPCPixelType,
 					nodeMcuConfig.Channel);
 			}
 			else

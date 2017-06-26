@@ -1,7 +1,9 @@
 {
 	"Name": "Picasso",
 	"Type": "NodeMCUController",
-	"ServerURL": "ws://shootdaj.com:22224/",
+	"ServerURL": "ws://#{PicassoURL}/",
+	"Username": "#{PicassoUsername}",
+	"Password": "#{PicassoPassword}",
 	"PixelType": 1,
 	"Channel": 1,
 	"Pixels": [

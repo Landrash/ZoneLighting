@@ -2,6 +2,8 @@
 	"Name": "Picasso",
 	"Type":  "NodeMCUController",
 	"ServerURL": "ws://#{PicassoURL}/",
+	"Username": "#{PicassoUsername}",
+	"Password": "#{PicassoPassword}",
 	"PixelType": 1,
 	"Channel": 1,
 	"Pixels": [

@@ -1,7 +1,9 @@
 {
 	"Name": "Dali",
 	"Type": "NodeMCUController",
-	"ServerURL": "ws://shootdaj.com:22223/",
+	"ServerURL": "ws://#{DaliURL}/",
+	"Username": "#{DaliUsername}",
+	"Password": "#{DaliPassword}",
 	"PixelType": 1,
 	"Channel": 1,
 	"Pixels": [
