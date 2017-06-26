@@ -35,7 +35,7 @@ namespace OPCWebSocketController
 				//require passing in parameters, which is not happening here
 				//todo: create an init method into which params are passed in
 				//these params can be taken from the config also
-				Initialize(nodeMcuConfig.Name, nodeMcuConfig.ServerURL,
+				Initialize(nodeMcuConfig.Name, nodeMcuConfig.ServerURL, nodeMcuConfig.Username, nodeMcuConfig.Password,
 					(IPixelToOPCPixelMapper) Activator.CreateInstance(
 						new PixelMapperTypeResolver().Resolve((PixelMapperType) nodeMcuConfig.PixelMapperType)),
 					nodeMcuConfig.OPCPixelType,
