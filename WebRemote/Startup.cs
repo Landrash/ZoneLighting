@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Web.Http;
+using Microsoft.Owin.Cors;
+using Newtonsoft.Json.Serialization;
 using Owin;
 using WebRemote.IoC;
 using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.Task>;
@@ -53,6 +55,10 @@ namespace WebRemote
 
 			config.Routes.IgnoreRoute("JSONRPC", "json.rpc");
 			config.Routes.IgnoreRoute("Glimpse", "{resource}.axd/{*pathInfo}");
+			app.UseCors(CorsOptions.AllowAll);
+
+			config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+			config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
 
 			app.UseWebApi(config);
 

@@ -93,16 +93,19 @@
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)UI\.editorconfig" />
     <None Include="$(MSBuildThisFileDirectory)UI\.gitignore" />
-    <None Include="$(MSBuildThisFileDirectory)UI\hooks\README.md" />
     <None Include="$(MSBuildThisFileDirectory)UI\README.md" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\app\app.component.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\app\app.module.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\app\app.scss" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\app\main.ts" />
+    <None Include="$(MSBuildThisFileDirectory)UI\src\models\index.ts" />
+    <None Include="$(MSBuildThisFileDirectory)UI\src\models\domain.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\pages\home\home.scss" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\pages\home\home.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\pages\list\list.scss" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\pages\list\list.ts" />
+    <None Include="$(MSBuildThisFileDirectory)UI\src\providers\api\api.ts" />
+    <None Include="$(MSBuildThisFileDirectory)UI\src\providers\index.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\service-worker.js" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\theme\variables.scss" />
     <None Include="$(MSBuildThisFileDirectory)UI\www\.gitkeep" />
