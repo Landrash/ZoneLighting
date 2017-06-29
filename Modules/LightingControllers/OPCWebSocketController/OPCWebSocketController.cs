@@ -88,7 +88,7 @@ namespace OPCWebSocketController
             Channel = channel;
 
             WebSocket = new WebSocket(ServerURL);
-            //WebSocket.SetCredentials(username, password, true);
+            WebSocket.SetCredentials(username, password, true);
             Task.Run(() => Connect());
         }
 
