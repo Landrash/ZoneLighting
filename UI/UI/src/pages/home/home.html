@@ -30,8 +30,12 @@
                     <ion-list>
                       <ion-item>
                         <ion-label>MaxFadeDelay</ion-label>
-                        <ion-range min="1" max="100" [formControl]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay']" color="danger" pin="true"></ion-range>
-                        
+                        <ion-range [min]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].controls['min'].value"
+                                   [max]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].controls['max'].value"
+                                   [formControl]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].controls['value']"
+                                   color="danger" pin="true">
+                        </ion-range>
+
 
                         <!--<ion-select [formControl]="zlmForm.value.programSets[0].zones[0].inputs[1]">
                           <ion-option value="f">Female</ion-option>

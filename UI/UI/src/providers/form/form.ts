@@ -68,8 +68,20 @@ export class FormProvider {
     var returnValue = new FormGroup({});
 
     Object.keys(inputs).forEach(key => {
-      returnValue.addControl(key, new FormControl(inputs[key].value, Validators.nullValidator));
+      returnValue.addControl(key, this.getZoneInputGroup(inputs[key]));
     });
+    
+    return returnValue;
+  }
+
+  private getZoneInputGroup(input: any) {
+    var returnValue = new FormGroup({});
+
+    returnValue.addControl("value", new FormControl(input.value, Validators.nullValidator));
+    if (!!input.min)
+      returnValue.addControl("min", new FormControl(input.min, Validators.nullValidator));
+    if (!!input.max)
+      returnValue.addControl("max", new FormControl(input.max, Validators.nullValidator));
     
     return returnValue;
   }
