@@ -391,6 +391,31 @@ namespace ZoneLighting.ZoneProgramNS
 			return input;
 		}
 
+		protected ZoneProgramInput AddRangedInput(object instance, string propertyName, double min, double max)
+		{
+			var propertyInfo = instance.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+			var input = new RangedZoneProgramInput(propertyInfo.Name, propertyInfo.PropertyType, min, max);
+			Inputs.Add(input);
+
+			input.Subscribe(incomingValue =>
+			{
+				if (ProgramExtensions.IsInRange(ConvertIncomingValue<double>(incomingValue), input.Min, input.Max))
+				{
+					propertyInfo.SetValue(instance, incomingValue);
+				}
+				else
+				{
+					throw new WarningException("Incoming value out of range of valid input values.");
+				}
+			});
+
+
+			//set value of input to the value of the property
+			input.SetValue(propertyInfo.GetValue(instance));
+
+			return input;
+		}
+
 		/// <summary>
 		/// TODO: Inject this from somewhere else and possibly also do this at the Json-RPC level? (But ISV is inherent dynamic so maybe this is the right place?)
 		/// </summary>
@@ -409,7 +434,7 @@ namespace ZoneLighting.ZoneProgramNS
 					if (typeof(ColorScheme).GetProperties().Any(p => p.Name == incomingValue))
 					{
 						var outgoingValue =
-							(T) typeof(ColorScheme).GetProperties().First(p => p.Name == incomingValue).GetValue(null, null);
+							(T)typeof(ColorScheme).GetProperties().First(p => p.Name == incomingValue).GetValue(null, null);
 						return outgoingValue;
 					}
 				}
@@ -434,6 +459,11 @@ namespace ZoneLighting.ZoneProgramNS
 		/// <returns></returns>
 		public ZoneProgramInput GetInput(string name, bool silent = false)
 		{
+
+			var t = name.Substring(0, 1);
+			name = name.Remove(0, 1);
+			name = t.ToUpper() + name;
+
 			if (Inputs.Contains(name))
 				return Inputs[name];
 			else

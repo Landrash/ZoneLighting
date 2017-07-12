@@ -1,9 +1,9 @@
 {
 	"Name": "TurntablePoster",
 	"Type": "NodeMCUController",
-	"ServerURL": "ws://#{TurntablePosterURL}/",
-	"Username": "#{TurntablePosterUsername}",
-	"Password": "#{TurntablePosterPassword}",
+	"ServerURL": "ws://shootdaj.com:22222/",
+	"Username": "shootdaj",
+	"Password": "n00bn00b",
 	"PixelType": 1,
 	"Channel": 1,
 	"Pixels": [

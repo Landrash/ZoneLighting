@@ -19,14 +19,14 @@ namespace ZoneLighting.ZoneProgramNS
 				throw new Exception("Cannot insert null values into this collection.");
 			//try
 			//{
-				////override if it already exists
-				//if (base.Contains(item.Name))
-				//{
-				//	//index = base.First(x => x.Name == i
-				//	base.Remove(item.Name);
-				//}
+			////override if it already exists
+			//if (base.Contains(item.Name))
+			//{
+			//	//index = base.First(x => x.Name == i
+			//	base.Remove(item.Name);
+			//}
 
-				base.InsertItem(index, item);
+			base.InsertItem(index, item);
 			//}
 			//catch (Exception ex)
 			//{
@@ -39,8 +39,19 @@ namespace ZoneLighting.ZoneProgramNS
 			var inputStartingValues = new ISV();
 			this.ToList().ForEach(input =>
 			{
-				if (input.Value != null)
-					inputStartingValues.Add(input.Name, input.Value);
+				if (input is RangedZoneProgramInput)
+				{
+					if (input.Value != null)
+						inputStartingValues.Add(input.Name,
+							new
+							{
+								Value = input.Value,
+								Min = ((RangedZoneProgramInput)input).Min,
+								Max = ((RangedZoneProgramInput)input).Max
+							});
+				}
+				else if (input.Value != null)
+					inputStartingValues.Add(input.Name, new { Value = input.Value });
 			});
 			return inputStartingValues;
 		}

@@ -3,6 +3,7 @@ using System.Web.Http;
 using Newtonsoft.Json.Linq;
 using WebRemote.Extensions;
 using WebRemote.IoC;
+
 using WebRemote.Models;
 using ZoneLighting;
 using ZoneLighting.ZoneProgramNS;
@@ -29,6 +30,7 @@ namespace WebRemote
 		//	return ZLMJsonModel;
 		//}
 
+		[Route("")]
 		public ZLMJsonModel GetZLM()
 		{
 			return ZLMJsonModel;

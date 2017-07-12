@@ -6,15 +6,59 @@
     <ion-title>ZoneLighting</ion-title>
   </ion-navbar>
 </ion-header>
-
-<ion-content padding>
+<ion-content padding *ngIf="this.zlmForm">
   <ion-grid>
     <ion-row>
       <ion-col align-items-center style="text-align: center;">
-        Lorem Ipsum
+        <!--<form [formGroup]="form" *ngIf="this.form">-->
+        <ion-card>
+          <ion-card-content>
+            <ion-card-title>
+              ProgramSets
+            </ion-card-title>
+            <p>
+              <ion-list>
+                <ion-list-header>
+                  ProgramSets
+                </ion-list-header>
+                <ion-item padding *ngFor="let programSet of zlmForm.controls.programSets.controls" (click)="toggleDetails(programSet)">
+                  <ion-icon name="ios-arrow-dropdown" item-right></ion-icon>
+                  <ion-label>
+                    {{programSet.value.name}}
+                  </ion-label>
+                  <div item-content *ngIf="programSet.showDetails">
+                    <ion-list>
+                      <ion-item>
+                        <ion-label>MaxFadeDelay</ion-label>
+                        <ion-range min="1" max="100" [formControl]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay']" color="danger" pin="true"></ion-range>
+                        
+
+                        <!--<ion-select [formControl]="zlmForm.value.programSets[0].zones[0].inputs[1]">
+                          <ion-option value="f">Female</ion-option>
+                          <ion-option value="m">Male</ion-option>
+                        </ion-select>-->
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                </ion-item>
+              </ion-list>
+            </p>
+          </ion-card-content>
+        </ion-card>
+        <!--<ion-range min="1" max="100" [formControl]="this.form.controls.zones.controls[0].controls.inputs.controls.brightness" color="danger" pin="true"></ion-range>-->
+        <!--</form>-->
       </ion-col>
       <ion-col align-items-center style="text-align: center;">
-        Lorem Ipsum
+        <ion-card>
+          <ion-card-content>
+            <ion-card-title>
+              Zones
+            </ion-card-title>
+            <p>
+              These are the fucking zones.
+            </p>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>

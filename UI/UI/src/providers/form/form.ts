@@ -1,0 +1,76 @@
+﻿import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ZLM, Zone, ProgramSet } from '../../models';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+
+@Injectable()
+export class FormProvider {
+
+  private zlmForm: FormGroup = null;
+
+  constructor(private fb: FormBuilder) {
+  }
+
+  public setZLMForm(zlm: ZLM) {
+    this.zlmForm = this.populateZLMFormGroup(zlm);
+  }
+
+  public getZLMForm(): FormGroup {
+    return this.zlmForm;
+  }
+
+  public populateZLMFormGroup(zlm: ZLM): FormGroup {
+    return this.fb.group({
+      availablePrograms: this.fb.array(zlm.availablePrograms),
+      availableZones: this.fb.array(this.getZoneGroups(zlm.availableZones)),
+      programSets: this.fb.array(this.getProgramSetGroups(zlm.programSets)),
+      zones: this.fb.array(this.getZoneGroups(zlm.zones))
+    });
+  }
+
+  private getProgramSetGroups(programSets: ProgramSet[]): FormGroup[] {
+    var returnValue = Array<FormGroup>();
+
+    programSets.forEach(programSet =>
+      returnValue.push(this.fb.group({
+        name: [programSet.name],
+        zones: this.fb.array(this.getZoneGroups(programSet.zones)),
+        programName: [programSet.programName],
+        sync: [programSet.sync],
+        state: [programSet.state]
+      }))
+    );
+
+    return returnValue;
+  }
+
+  private getZoneGroups(zones: Zone[]): FormGroup[] {
+    var returnValue = Array<FormGroup>();
+
+    zones.forEach(zone =>
+      returnValue.push(this.fb.group({
+        name: [zone.name],
+        zoneProgramName: [zone.zoneProgramName],
+        brightness: [zone.brightness],
+        running: [zone.running],
+        lightCount: [zone.lightCount],
+        inputs: this.getZoneInputGroups(zone.inputs)
+      }))
+    );
+
+    return returnValue;
+  }
+
+  private getZoneInputGroups(inputs: any[]): FormGroup {
+    var returnValue = new FormGroup({});
+
+    Object.keys(inputs).forEach(key => {
+      returnValue.addControl(key, new FormControl(inputs[key].value, Validators.nullValidator));
+    });
+    
+    return returnValue;
+  }
+}

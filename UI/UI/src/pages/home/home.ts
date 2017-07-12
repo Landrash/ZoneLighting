@@ -1,19 +1,36 @@
 ﻿import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { ApiProvider } from '../../providers'
-import { ViewChild, Injectable, Input, Output, EventEmitter, DoCheck, OnInit, AfterViewInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { ZLMFormProvider } from '../../providers'
+import { OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
-  ngOnInit() {
-    this.api.getZLM();
+
+  get zlmForm(): FormGroup {
+    return this.zlmFormProvider.getZLMForm();
   }
 
   constructor(public navCtrl: NavController,
-  private api: ApiProvider) {
+    private zlmFormProvider: ZLMFormProvider) {
+  }
 
+  ngOnInit() {
+    this.zlmFormProvider.loadZLM();
+  }
+
+  toggleDetails(item) {
+    if (item.showDetails) {
+      //item.showDetails = false;
+      item.showDetails = true;
+      item.icon = 'ios-add-circle-outline';
+    } else {
+      item.showDetails = true;
+      item.icon = 'ios-remove-circle-outline';
+    }
   }
 }

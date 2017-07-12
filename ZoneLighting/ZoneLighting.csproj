@@ -210,6 +210,7 @@
     <Compile Include="ZoneProgramNS\CamelCaseToPascalCaseExpandoObjectConverter.cs" />
     <Compile Include="ZoneProgramNS\UnderlyingTypeConverter.cs" />
     <Compile Include="MEF\ZoneProgramAssemblyAttribute.cs" />
+    <Compile Include="ZoneProgramNS\RangedZoneProgramInput.cs" />
     <Compile Include="ZoneProgramNS\ZoneProgramInput.cs" />
     <Compile Include="ZoneProgramNS\ZoneProgramInputCollection.cs" />
     <Compile Include="ZoneProgramNS\ZoneProgramJsonConverter.cs" />

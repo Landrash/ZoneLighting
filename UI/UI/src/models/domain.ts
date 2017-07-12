@@ -17,7 +17,7 @@ export class Zone {
   brightness: number;
   running: boolean;
   lightCount: number;
-  isv: any;
+  inputs: any[];
 }
 
 export class ZLM {

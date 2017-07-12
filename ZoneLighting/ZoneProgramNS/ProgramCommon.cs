@@ -105,6 +105,11 @@ namespace ZoneLighting.ZoneProgramNS
 		/// <returns></returns>
 		public static bool IsInRange(this double input, double low, double high, bool lowInclusive = true, bool highInclusive = true)
 		{
+			return IsInRangeMethod(input, low, high, lowInclusive, highInclusive);
+		}
+
+		public static bool IsInRangeMethod(double input, double low, double high, bool lowInclusive, bool highInclusive)
+		{
 			if (lowInclusive)
 			{
 				if (highInclusive)

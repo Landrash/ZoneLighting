@@ -1,9 +1,9 @@
 {
 	"Name": "Dali",
 	"Type": "NodeMCUController",
-	"ServerURL": "ws://#{DaliURL}/",
-	"Username": "#{DaliUsername}",
-	"Password": "#{DaliPassword}",
+	"ServerURL": "ws://192.168.43.192:81/",
+	"Username": "shootdaj",
+	"Password": "n00bn00b",
 	"PixelType": 1,
 	"Channel": 1,
 	"Pixels": [

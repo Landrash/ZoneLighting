@@ -23,7 +23,7 @@ namespace WebRemote
 			config.Routes.MapHttpRoute(
 				name: "DefaultApi",
 				routeTemplate: "{controller}/{action}",
-				defaults: new { controller = "ZLM", action = "Index" }
+				defaults: new { controller = "ZLM", action = "GetZLM" }
 
 			);
 
@@ -59,6 +59,7 @@ namespace WebRemote
 
 			config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 			config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
+			config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new CamelCaseToPascalCaseExpandoObjectConverter());
 
 			app.UseWebApi(config);
 

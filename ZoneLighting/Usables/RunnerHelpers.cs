@@ -212,6 +212,51 @@ namespace ZoneLighting.Usables
 			zlm.CreateProgramSet("ShimmerSet", "Shimmer", false, isv, zlm.Zones/*, startingParameters: startingParams*/);
         }
 
+		//public static void RunShimmerOnNodeMCUWithoutMIDI(ZLM zlm)
+		//{
+		//	var isv = new ISV();
+		//	isv.Add("MaxFadeSpeed", 1);
+		//	isv.Add("MaxFadeDelay", 5);
+		//	isv.Add("Density", 1.0);
+		//	isv.Add("Brightness", 1.0);
+		//	isv.Add("Random", true);
+		//	//isv.Add("ColorScheme", ColorScheme.Primaries);
+
+		//	//dynamic startingParameters = new ExpandoObject();
+		//	//startingParameters.DeviceID = int.Parse(Config.Get("MIDIDeviceID"));
+
+		//	int trailLengthAvg = 4;
+		//	int trailLengthVariability = 2;
+		//	int intervalAvg = 70;
+		//	int intervalVariability = 70;
+
+		//	dynamic startingParams = new ExpandoObject();
+		//	startingParams.ClockedTrailShapes = new List<dynamic>();
+
+		//	for (int i = 0; i < 64; i += 8)
+		//	{
+		//		dynamic clockedTrailShape = new ExpandoObject();
+		//		var trailLength = ProgramCommon.RandomIntBetween(trailLengthAvg - trailLengthVariability, trailLengthAvg + trailLengthVariability);
+		//		var interval = ProgramCommon.RandomIntBetween(intervalAvg - intervalVariability, intervalAvg + intervalVariability);
+
+		//		var darkenFactor = (float)0.7;
+		//		clockedTrailShape.TrailShape = new TrailShape(new Trail(trailLength, ProgramCommon.GetRandomColor().Darken(0.5)),
+		//			new Shape(i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7));
+		//		clockedTrailShape.TrailShape.DarkenFactor = darkenFactor;
+		//		clockedTrailShape.Interval = interval;
+		//		clockedTrailShape.GetNewInterval =
+		//			(Func<int>)(() => ProgramCommon.RandomIntBetween(intervalAvg - intervalVariability,
+		//				intervalAvg + intervalVariability));
+		//		clockedTrailShape.AutoTrail = true; //todo: implement autotrail 
+		//		clockedTrailShape.AutoSpeed = true; //todo: implement autospeed
+		//		startingParams.ClockedTrailShapes.Add(clockedTrailShape);
+		//	}
+
+		//	CreateZonesFromConfig(zlm.Zones);
+
+		//	zlm.CreateProgramSet("MidiPlaySet", "", false, isv, zlm.Zones/*, startingParameters: startingParams*/);
+		//}
+
 		/// <summary>
 		/// Creates Zones from configs and puts them inside the provided list of zones.
 		/// </summary>
@@ -226,14 +271,15 @@ namespace ZoneLighting.Usables
 			}
 		}
 
-		//      public static void RunMidiPlayInLivingRoom(ZLM zlm)
-		//{
-		//	dynamic startingParameters = new ExpandoObject();
-		//	startingParameters.DeviceID = int.Parse(Config.Get("MIDIDeviceID"));
 
-		//	var zone = CreateLivingRoomZone(zlm);
-		//	zlm.CreateProgramSet("MidiPlaySet", "LivingRoomMidiPlay", false, null, zlm.Zones, startingParameters);
-		//}
+		public static void RunMidiPlayInLivingRoom(ZLM zlm)
+		{
+			dynamic startingParameters = new ExpandoObject();
+			startingParameters.DeviceID = 3;
+
+			CreateZonesFromConfig(zlm.Zones);
+			zlm.CreateProgramSet("MidiPlaySet", "LivingRoomMidiPlay", false, null, zlm.Zones, startingParameters);
+		}
 
 		//public static void RunStopWatchBlinkInLivingRoom(ZLM zlm)
 		//{
@@ -302,30 +348,30 @@ namespace ZoneLighting.Usables
 		//	zlm.CreateProgramSet("RainbowSet", "Rainbow", true, null, zlm.Zones);
 		//}
 
-	 //   public static void RunMidiTwoDimensionalFadeOnNeoMatrix(ZLM zlm)
-	 //   {
-	 //       var neomatrix = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "NeoMatrix",
-	 //           64, 1);
-	 //       dynamic startingParameters = new ExpandoObject();
-	 //       startingParameters.DeviceID = int.Parse(Config.Get("MIDIDeviceID"));
-	 //       zlm.CreateProgramSet("MidiTwoDimensionalFadeSet", "MidiTwoDimensionalFade", false, null, zlm.Zones,
-	 //           startingParameters);
-	 //   }
+		//   public static void RunMidiTwoDimensionalFadeOnNeoMatrix(ZLM zlm)
+		//   {
+		//       var neomatrix = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "NeoMatrix",
+		//           64, 1);
+		//       dynamic startingParameters = new ExpandoObject();
+		//       startingParameters.DeviceID = int.Parse(Config.Get("MIDIDeviceID"));
+		//       zlm.CreateProgramSet("MidiTwoDimensionalFadeSet", "MidiTwoDimensionalFade", false, null, zlm.Zones,
+		//           startingParameters);
+		//   }
 
-	 //   public static void RunMidiTwoDimensionalFadeInBasement(ZLM zlm)
-	 //   {
-  //          var isv = new ISV();
-  //          var leftWing = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "LeftWing",
-  //              6, 1);
-  //          var rightwing = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "RightWing",
-  //              12, 3);
-  //          var center = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "Center",
-  //              21, 2);
+		//   public static void RunMidiTwoDimensionalFadeInBasement(ZLM zlm)
+		//   {
+		//          var isv = new ISV();
+		//          var leftWing = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "LeftWing",
+		//              6, 1);
+		//          var rightwing = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "RightWing",
+		//              12, 3);
+		//          var center = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "Center",
+		//              21, 2);
 		//	dynamic startingParameters = new ExpandoObject();
 		//	startingParameters.DeviceID = int.Parse(Config.Get("MIDIDeviceID"));
 		//    zlm.CreateProgramSet("MidiTwoDimensionalFadeSet", "MidiTwoDimensionalFade", false, isv, zlm.Zones,
 		//	    startingParameters);
-	 //   }
+		//   }
 
 		//public static void RunShimmerOnNeoMatrixFourZones(ZLM zlm)
 		//{
@@ -342,10 +388,10 @@ namespace ZoneLighting.Usables
 		//	zlm.CreateProgramSet("ShimmerSet", "Shimmer", false, isv, zlm.Zones);
 		//}
 
-  //      public static void RunVisualClockOnNeoMatrix(ZLM zlm)
-  //      {
-  //          CreateNeoMatrixZone(zlm);
-  //          zlm.CreateProgramSet("VisualClockSet", "VisualClock", false, null, zlm.Zones);
-  //      }
-    }
+		//      public static void RunVisualClockOnNeoMatrix(ZLM zlm)
+		//      {
+		//          CreateNeoMatrixZone(zlm);
+		//          zlm.CreateProgramSet("VisualClockSet", "VisualClock", false, null, zlm.Zones);
+		//      }
+	}
 }

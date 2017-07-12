@@ -132,6 +132,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Models\ProgramSetJsonModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CamelCaseToPascalCaseExpandoObjectConverter.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="DynamicModelBinder.cs" />
     <Compile Include="DynamicModelBinderProvider.cs" />
@@ -141,11 +142,13 @@
     <Compile Include="Models\ZoneJsonModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="LightingControllers\TurntablePoster.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="LightingControllers\Dali.json.bak">
+    <None Include="LightingControllers\Dali.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="LightingControllers\Picasso.json.bak">
