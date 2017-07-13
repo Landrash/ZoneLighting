@@ -60,7 +60,12 @@ export class ZLMFormProvider {
       err => console.log(err));
   }
 
-  public setInputs(programSet: string, value: any[]) {
-    return this.http.post('http://localhost:9999/ZLM/SetInputs', [programSet, value]).map(res => <ZLM>res.json());
+  public setInputs(programSet: string, inputs: any) {
+
+    Object.keys(inputs).forEach(key => {
+      inputs[key] = inputs[key].value;
+    });
+    
+    return this.http.post('http://localhost:9999/ZLM/SetInputs', [programSet, inputs]).map(res => <ZLM>res.json());
   }
 }

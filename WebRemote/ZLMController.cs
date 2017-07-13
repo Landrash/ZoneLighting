@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Dynamic;
 using System.Web.Http;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebRemote.Extensions;
 using WebRemote.IoC;
@@ -85,9 +88,12 @@ namespace WebRemote
 		[HttpPost]
 		public ZLMJsonModel SetInputs(JArray param)
 		{
-			string programSetOrZoneName = param[0].ToObject<string>();
-			ISV isv = param[1].ToObject<ISV>();
+			var programSetOrZoneName = param[0].ToObject<string>();
 
+			var serializer = new JsonSerializer();
+			serializer.Converters.Add(new CamelCaseToPascalCaseExpandoObjectConverter());
+
+			var isv = param[1].ToObject<ISV>(serializer);
 			ZLMRPC.SetInputs(programSetOrZoneName, isv);
 
 			return ZLMJsonModel;

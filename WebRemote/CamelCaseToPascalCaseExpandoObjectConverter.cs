@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using WebRemote.Extensions;
+using ZoneLighting.ZoneProgramNS;
 
 namespace WebRemote
 {
@@ -145,7 +146,7 @@ namespace WebRemote
 		/// </returns>
 		public override bool CanConvert(Type objectType)
 		{
-			return (objectType == typeof(ExpandoObject));
+			return (objectType == typeof(ISV));
 		}
 
 		/// <summary>

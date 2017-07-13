@@ -70,25 +70,6 @@
     <Content Include="$(MSBuildThisFileDirectory)UI\src\pages\list\list.html" />
     <Content Include="$(MSBuildThisFileDirectory)UI\tsconfig.json" />
     <Content Include="$(MSBuildThisFileDirectory)UI\tslint.json" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\ionicons.eot" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\ionicons.ttf" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\ionicons.woff" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\noto-sans-bold.ttf" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\noto-sans-bold.woff" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\noto-sans-regular.ttf" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\noto-sans-regular.woff" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\roboto-bold.ttf" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\roboto-bold.woff" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\roboto-light.ttf" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\roboto-light.woff" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\roboto-medium.ttf" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\roboto-medium.woff" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\roboto-regular.ttf" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\roboto-regular.woff" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\assets\icon\favicon.ico" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\build\main.css" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\index.html" />
-    <Content Include="$(MSBuildThisFileDirectory)UI\www\manifest.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)UI\.editorconfig" />
@@ -110,21 +91,5 @@
     <None Include="$(MSBuildThisFileDirectory)UI\src\providers\index.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\service-worker.js" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\theme\variables.scss" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\.gitkeep" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\ionicons.scss" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\ionicons.svg" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\ionicons.woff2" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\noto-sans.scss" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\roboto-bold.woff2" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\roboto-light.woff2" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\roboto-medium.woff2" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\roboto-regular.woff2" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\assets\fonts\roboto.scss" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\build\main.css.map" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\build\main.js" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\build\main.js.map" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\build\polyfills.js" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\build\sw-toolbox.js" />
-    <None Include="$(MSBuildThisFileDirectory)UI\www\service-worker.js" />
   </ItemGroup>
 </Project>
