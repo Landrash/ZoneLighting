@@ -20,7 +20,7 @@ namespace ZoneLighting
 
 			while (reader.TokenType == JsonToken.PropertyName)
 			{
-				var propertyName = (string)reader.Value;
+				var propertyName = ((string)reader.Value).ToPascalCase();
 				reader.Read();
 
 				var value = reader.TokenType == JsonToken.Integer ? Convert.ToInt32(reader.Value) : serializer.Deserialize(reader);

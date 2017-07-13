@@ -459,11 +459,6 @@ namespace ZoneLighting.ZoneProgramNS
 		/// <returns></returns>
 		public ZoneProgramInput GetInput(string name, bool silent = false)
 		{
-			//TODO: WTF is this shit?
-			var t = name.Substring(0, 1);
-			name = name.Remove(0, 1);
-			name = t.ToUpper() + name;
-
 			if (Inputs.Contains(name))
 				return Inputs[name];
 			else

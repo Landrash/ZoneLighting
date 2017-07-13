@@ -89,11 +89,7 @@ namespace WebRemote
 		public ZLMJsonModel SetInputs(JArray param)
 		{
 			var programSetOrZoneName = param[0].ToObject<string>();
-
-			var serializer = new JsonSerializer();
-			serializer.Converters.Add(new CamelCaseToPascalCaseExpandoObjectConverter());
-
-			var isv = param[1].ToObject<ISV>(serializer);
+			var isv = param[1].ToObject<ISV>();
 			ZLMRPC.SetInputs(programSetOrZoneName, isv);
 
 			return ZLMJsonModel;

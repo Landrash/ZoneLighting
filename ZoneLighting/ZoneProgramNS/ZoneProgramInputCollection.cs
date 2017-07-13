@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
+using MIDIator.UIGenerator.Consumables;
 
 namespace ZoneLighting.ZoneProgramNS
 {
@@ -42,16 +43,22 @@ namespace ZoneLighting.ZoneProgramNS
 				if (input is RangedZoneProgramInput)
 				{
 					if (input.Value != null)
-						inputStartingValues.Add(input.Name,
+						inputStartingValues.Add(input.Name.ToPascalCase(),
 							new
 							{
 								Value = input.Value,
 								Min = ((RangedZoneProgramInput)input).Min,
-								Max = ((RangedZoneProgramInput)input).Max
+								Max = ((RangedZoneProgramInput)input).Max,
+								Type = input.Type.FullName
 							});
 				}
 				else if (input.Value != null)
-					inputStartingValues.Add(input.Name, new { Value = input.Value });
+					inputStartingValues.Add(input.Name.ToPascalCase(),
+						new
+						{
+							Value = input.Value,
+							Type = input.Type.FullName
+						});
 			});
 			return inputStartingValues;
 		}
