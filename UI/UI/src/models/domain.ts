@@ -26,3 +26,12 @@ export class ZLM {
   availablePrograms: string[];
   programSets: ProgramSet[];
 }
+
+
+export enum ControlType {
+  Text,
+  Number,
+  Range,
+  Checkbox,
+  Radio
+}

@@ -12,6 +12,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ApiProvider, FormProvider, ZLMFormProvider } from '../providers';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HelperProvider } from '../providers/helper/helper';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiProvider,
     FormProvider,
-    ZLMFormProvider
+    ZLMFormProvider,
+    HelperProvider
   ]
 })
 export class AppModule {}

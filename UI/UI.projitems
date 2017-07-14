@@ -85,6 +85,7 @@
     <None Include="$(MSBuildThisFileDirectory)UI\src\pages\home\home.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\pages\list\list.scss" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\pages\list\list.ts" />
+    <None Include="$(MSBuildThisFileDirectory)UI\src\providers\helper\helper.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\providers\zlm\zlm.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\providers\form\form.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\providers\api\api.ts" />
