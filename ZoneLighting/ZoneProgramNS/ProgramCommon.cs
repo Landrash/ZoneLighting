@@ -94,6 +94,14 @@ namespace ZoneLighting.ZoneProgramNS
 			lc.SendLights(lights.ToList());
 		}
 
+		public static bool IsInRange<T>(this T input, T low, T high, bool lowInclusive = true, bool highInclusive = true)
+		{
+			if (T is int)
+			{
+				return IsInRangeMethod(input, low, high lowInclusive, highInclusive);
+			}
+		}
+
 		/// <summary>
 		/// Determines if input is in the between the low and high bound (low and high bounds are included in range by default).
 		/// </summary>

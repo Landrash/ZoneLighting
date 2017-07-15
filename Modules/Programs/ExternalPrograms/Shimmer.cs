@@ -69,7 +69,7 @@ namespace ExternalPrograms
 		/// </summary>
 		public override void Setup()
 		{
-			AddMappedInput<int>(this, "MaxFadeSpeed", i => i.IsInRange(1, 127));
+			AddRangedInput<int>(this, "MaxFadeSpeed", 1, 127);
 			AddRangedInput(this, "MaxFadeDelay", 1, 100);
 			AddMappedInput<double>(this, "Density", i => i.IsInRange(0, 1));
 			AddMappedInput<double>(this, "Brightness", i => i.IsInRange(0, 1));

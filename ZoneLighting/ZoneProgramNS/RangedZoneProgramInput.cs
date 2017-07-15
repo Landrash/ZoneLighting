@@ -6,16 +6,17 @@ using ZoneLighting.ZoneNS;
 namespace ZoneLighting.ZoneProgramNS
 {
 	[DataContract]
-	public class RangedZoneProgramInput : ZoneProgramInput
+	public class RangedZoneProgramInput<T> : ZoneProgramInput
 	{
-		public RangedZoneProgramInput(string name, Type type, double min, double max) : base(name, type)
+		public RangedZoneProgramInput(string name, Type type, T min, T max) : base(name, type)
 		{
 			Min = min;
 			Max = max;
 		}
 
 		[DataMember]
-		public double Min { get; set; }
-		public double Max { get; set; }
+		public T Min { get; set; }
+		[DataMember]
+		public T Max { get; set; }
 	}
 }

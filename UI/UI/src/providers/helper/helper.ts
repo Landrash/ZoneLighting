@@ -17,6 +17,16 @@ export class HelperProvider {
     if (input.type === "System.String") {
       return ControlType.Text;
     }
+    else if (input.type === "System.Int32" && !!input.min && !!input.max) {
+      return ControlType.Range;
+    }
+    else if (input.type === "System.Int32") {
+      return ControlType.Number;
+    }
+    else if (input.type === "System.Double") {
+      return ControlType.Number;
+    }
+
   }
 }
 
