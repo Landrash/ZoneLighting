@@ -69,10 +69,10 @@ namespace ZoneLighting.StockPrograms
 		/// </summary>
 		public override void Setup()
 		{
-			AddMappedInput<int>(this, "MaxFadeSpeed", i => i.IsInRange(1, 127));
-			AddRangedInput(this, "MaxFadeDelay", 1, 50);
-			AddMappedInput<double>(this, "Density", i => i.IsInRange(0, 1));
-			AddMappedInput<double>(this, "Brightness", i => i.IsInRange(0, 1));
+			AddRangedInput(this, "MaxFadeSpeed", 1, 127);
+			AddRangedInput(this, "MaxFadeDelay", 1, 100);
+			AddRangedInput<double>(this, "Density", 0, 1);
+			AddRangedInput<double>(this, "Brightness", 0, 1);
 			AddMappedInput<bool>(this, "Random");
 			AddMappedInput<ColorScheme>(this, "ColorScheme");
 			AddMappedInput<bool>(this, "Sparkle");

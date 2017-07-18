@@ -66,7 +66,7 @@ namespace WebRemote.IoC
 			MapperConfiguration = new MapperConfiguration(cfg =>
 				{
 					cfg.CreateMap<Zone, ZoneJsonModel>().ForMember(x => x.Inputs, opt => opt.ResolveUsing<ZoneJsonModelInputsResolver>());
-					cfg.CreateMap<ProgramSet, ProgramSetJsonModel>();
+					cfg.CreateMap<ProgramSet, ProgramSetJsonModel>().ForMember(x => x.Inputs, opt => opt.ResolveUsing<ProgramSetJsonModelInputsResolver>());
 					cfg.CreateMap<ZLM, ZLMJsonModel>();
 				});
 			MapperConfiguration.AssertConfigurationIsValid();

@@ -13,12 +13,14 @@ import { ApiProvider, FormProvider, ZLMFormProvider } from '../providers';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HelperProvider } from '../providers/helper/helper';
+import { DynamicInputComponent } from '../components/dynamic-input/dynamic-input';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    DynamicInputComponent
   ],
   imports: [
     BrowserModule,

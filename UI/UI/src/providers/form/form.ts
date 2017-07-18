@@ -40,7 +40,8 @@ export class FormProvider {
         zones: this.fb.array(this.getZoneGroups(programSet.zones)),
         programName: [programSet.programName],
         sync: [programSet.sync],
-        state: [programSet.state]
+        state: [programSet.state],
+        inputs: this.getZoneInputGroups(programSet.inputs)
       }))
     );
 
@@ -82,6 +83,8 @@ export class FormProvider {
       returnValue.addControl("min", new FormControl(input.min, Validators.nullValidator));
     if (!!input.max)
       returnValue.addControl("max", new FormControl(input.max, Validators.nullValidator));
+    if (!!input.type)
+      returnValue.addControl("type", new FormControl(input.type, Validators.nullValidator));
     
     return returnValue;
   }

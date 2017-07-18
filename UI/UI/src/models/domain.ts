@@ -4,6 +4,7 @@
   programName: string;
   sync: boolean;
   state: ProgramState;
+  inputs: any[];
 }
 
 export enum ProgramState {

@@ -123,6 +123,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Automapper\ProgramSetJsonModelInputsResolver.cs" />
     <Compile Include="Automapper\ZLMJsonModelConverter.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="IoC\Container.cs" />

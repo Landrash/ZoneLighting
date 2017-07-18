@@ -1,0 +1,20 @@
+﻿<!--<div [ngSwitch]="controlType">
+  <ion-range *ngSwitchCase="controlTypeEnum.Range"
+             [min]="inputForm.controls['min'].value"
+             [max]="inputForm.controls['max'].value"
+             [formControl]="inputForm.controls['value']"
+             color="danger" pin="true">
+  </ion-range>
+</div>-->
+
+
+<ion-item [ngSwitch]="controlType">
+  <ion-label>{{name}}</ion-label>
+
+  <ion-range *ngSwitchCase="controlTypeEnum.Range"
+             [min]="inputForm.controls['min'].value"
+             [max]="inputForm.controls['max'].value"
+             [formControl]="inputForm.controls['value']"
+             color="danger" pin="true">
+  </ion-range>
+</ion-item>

@@ -1,9 +1,10 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component,Pipe, PipeTransform  } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { ZLMFormProvider } from '../../providers'
+import { ZLMFormProvider, HelperProvider } from '../../providers'
 import { OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
+import { ControlType } from '../../models'
 
 @Component({
   selector: 'page-home',
@@ -15,8 +16,13 @@ export class HomePage implements OnInit {
     return this.zlmFormProvider.getZLMForm();
   }
 
+  private objectType = Object;
+
+  private controlTypeEnum = ControlType;
+
   constructor(public navCtrl: NavController,
-    private zlmFormProvider: ZLMFormProvider) {
+    private zlmFormProvider: ZLMFormProvider,
+    private helperProvider: HelperProvider) {
   }
 
   ngOnInit() {
@@ -25,7 +31,6 @@ export class HomePage implements OnInit {
 
   toggleDetails(item) {
     if (item.showDetails) {
-      //item.showDetails = false;
       item.showDetails = true;
       item.icon = 'ios-add-circle-outline';
     } else {

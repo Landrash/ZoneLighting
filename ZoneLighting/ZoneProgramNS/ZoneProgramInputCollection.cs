@@ -40,25 +40,40 @@ namespace ZoneLighting.ZoneProgramNS
 			var inputStartingValues = new ISV();
 			this.ToList().ForEach(input =>
 			{
-				if (input is RangedZoneProgramInput)
+				if (input is RangedZoneProgramInput<int>)
 				{
 					if (input.Value != null)
-						inputStartingValues.Add(input.Name.ToPascalCase(),
+						inputStartingValues.Add(input.Name,
 							new
 							{
 								Value = input.Value,
-								Min = ((RangedZoneProgramInput)input).Min,
-								Max = ((RangedZoneProgramInput)input).Max,
+								Min = ((RangedZoneProgramInput<int>)input).Min,
+								Max = ((RangedZoneProgramInput<int>)input).Max,
 								Type = input.Type.FullName
 							});
 				}
-				else if (input.Value != null)
-					inputStartingValues.Add(input.Name.ToPascalCase(),
+				else if (input is RangedZoneProgramInput<double>)
+				{
+					if (input.Value != null)
+						inputStartingValues.Add(input.Name,
+							new
+							{
+								Value = input.Value,
+								Min = ((RangedZoneProgramInput<double>)input).Min,
+								Max = ((RangedZoneProgramInput<double>)input).Max,
+								Type = input.Type.FullName
+							});
+				}
+				else
+				{
+					inputStartingValues.Add(input.Name,
 						new
 						{
 							Value = input.Value,
 							Type = input.Type.FullName
 						});
+				}
+
 			});
 			return inputStartingValues;
 		}

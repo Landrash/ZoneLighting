@@ -26,19 +26,57 @@ namespace ZoneLighting.ZoneProgramNS
 
 		public SyncContext SyncContext { get; private set; }
 
-        [DataMember]
+		[DataMember]
 		public List<Zone> Zones { get; private set; }
 
-        [DataMember]
+		[DataMember]
 		public string ProgramName { get; private set; }
 
-		private List<ZoneProgram> ZonePrograms
-		{
-			get { return Zones.Select(zone => zone.ZoneProgram).ToList(); }
-		}
+		//public ZoneProgramInputCollection Inputs
+		//{
+			//get
+			//{
+			//	var inputs = ZonePrograms.First().Inputs;
 
-        [DataMember]
-	    public bool Sync { get; private set; }
+			//	foreach (var input in inputs)
+			//	{
+			//		if (ZonePrograms.Any(x =>
+			//		{
+			//			var value = x.Inputs[input.Name].Value;
+			//			return value != null && ((input.Value == null) ||
+			//				                                              !value.Equals(input.Value));
+			//		}))
+			//		{
+			//			input.SetValue("Indeterminate");
+			//		}
+			//	}
+
+			//	return inputs;
+				
+			//	//var areInputValuesSame = true;
+			//	//object value;
+
+			//	//var inputs = ZonePrograms[0].Inputs;
+
+			//	//foreach (var input in inputs)
+			//	//{
+			//	//	if (ZonePrograms.Any(p => p.Inputs[input.Name] != input.Value))
+			//	//	{
+			//	//		return
+			//	//	}
+			//	//}
+
+			//	//inputs.ForEach(program =>
+			//	//{
+			//	//	program.Inputs
+			//	//});
+			//}
+		//}
+
+		public List<ZoneProgram> ZonePrograms => Zones.Select(zone => zone.ZoneProgram).ToList();
+
+		[DataMember]
+		public bool Sync { get; private set; }
 
 		[DataMember]
 		public dynamic StartingParameters { get; private set; }
@@ -83,7 +121,7 @@ namespace ZoneLighting.ZoneProgramNS
 			Name = name;
 			Zones = zonesListed.ToList();
 			ProgramName = programName;
-		    Sync = sync;
+			Sync = sync;
 			StartingParameters = startingParameters;
 
 			if (Sync)
@@ -91,7 +129,7 @@ namespace ZoneLighting.ZoneProgramNS
 				Zones.ForEach(zone =>
 				{
 					zone.Stop(true);
-				    ZoneScaffolder.Instance.RunZone(zone, programName, null, true, SyncContext, true, startingParameters);
+					ZoneScaffolder.Instance.RunZone(zone, programName, null, true, SyncContext, true, startingParameters);
 				});
 
 				SyncContext = new SyncContext();
@@ -104,9 +142,9 @@ namespace ZoneLighting.ZoneProgramNS
 					var zone = Zones[i];
 					zone.Stop(true);
 
-				    ZoneScaffolder.Instance.RunZone(zone, programName,
-				        isvsListed?.Count() == zonesListed.Count() ? isvsListed.ElementAt(i) : isvsListed?.First(),
-				        startingParameters: startingParameters);
+					ZoneScaffolder.Instance.RunZone(zone, programName,
+						isvsListed?.Count() == zonesListed.Count() ? isvsListed.ElementAt(i) : isvsListed?.First(),
+						startingParameters: startingParameters);
 				}
 			}
 		}

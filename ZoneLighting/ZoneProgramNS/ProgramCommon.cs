@@ -50,9 +50,9 @@ namespace ZoneLighting.ZoneProgramNS
 		}
 	}
 
-    /// <summary>
-    /// Use this class for Random generation. This is to avoid cross-thread issues with Random.
-    /// </summary>
+	/// <summary>
+	/// Use this class for Random generation. This is to avoid cross-thread issues with Random.
+	/// </summary>
 	public static class RandomGen
 	{
 		private static Random _global = new Random();
@@ -67,7 +67,7 @@ namespace ZoneLighting.ZoneProgramNS
 			{
 				int seed;
 				lock (_global)
-                    seed = _global.Next();
+					seed = _global.Next();
 				_local = inst = new Random(seed);
 			}
 			return inst.Next(maxValue);
@@ -80,7 +80,7 @@ namespace ZoneLighting.ZoneProgramNS
 			{
 				int seed;
 				lock (_global)
-                    seed = _global.Next();
+					seed = _global.Next();
 				_local = inst = new Random(seed);
 			}
 			return inst.Next(minValue, maxValue);
@@ -96,10 +96,7 @@ namespace ZoneLighting.ZoneProgramNS
 
 		public static bool IsInRange<T>(this T input, T low, T high, bool lowInclusive = true, bool highInclusive = true)
 		{
-			if (T is int)
-			{
-				return IsInRangeMethod(input, low, high lowInclusive, highInclusive);
-			}
+			return IsInRangeMethod((double)(object)input, (double)(object)low, (double)(object)high, lowInclusive, highInclusive);
 		}
 
 		/// <summary>

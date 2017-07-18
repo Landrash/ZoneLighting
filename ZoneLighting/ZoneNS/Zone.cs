@@ -389,9 +389,15 @@ namespace ZoneLighting.ZoneNS
 
 		#region De/Serialization
 
+		/// <summary>
+		/// This is only for serialization
+		/// </summary>
 		[DataMember]
 		public Dictionary<string, ZoneProgramInputCollection> ZoneProgramInputs { get; set; } = new Dictionary<string, ZoneProgramInputCollection>();
 
+		/// <summary>
+		/// This is only for serialization
+		/// </summary>
 		public void SetZoneProgramInputs()
 		{
 			ZoneProgramInputs = new Dictionary<string, ZoneProgramInputCollection> {[ZoneProgram.Name] = ZoneProgram.Inputs};

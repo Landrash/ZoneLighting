@@ -39,6 +39,8 @@ export class ZLMFormProvider {
           console.log(value);
         });
 
+        console.log(this.formProvider.getZLMForm());
+
         (<FormArray>(this.formProvider.getZLMForm().controls['programSets'])).controls.forEach(programSet => {
           (<FormArray>(<FormGroup>programSet).controls['zones']).controls.forEach(zone => {
 
@@ -65,7 +67,7 @@ export class ZLMFormProvider {
     Object.keys(inputs).forEach(key => {
       inputs[key] = inputs[key].value;
     });
-    
+
     return this.http.post('http://localhost:9999/ZLM/SetInputs', [programSet, inputs]).map(res => <ZLM>res.json());
   }
 }

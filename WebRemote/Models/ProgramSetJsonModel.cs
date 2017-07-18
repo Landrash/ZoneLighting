@@ -16,5 +16,7 @@ namespace WebRemote.Models
 		public bool Sync { get; set; }
 
 		public ProgramState State { get; set; }
+
+		public ISV Inputs { get; set; }
 	}
 }

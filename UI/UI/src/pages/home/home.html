@@ -28,20 +28,43 @@
                   </ion-label>
                   <div item-content *ngIf="programSet.showDetails">
                     <ion-list>
-                      <ion-item>
-                        <ion-label>MaxFadeDelay</ion-label>
-                        <ion-range [min]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].controls['min'].value"
-                                   [max]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].controls['max'].value"
-                                   [formControl]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].controls['value']"
-                                   color="danger" pin="true">
-                        </ion-range>
+                      <dynamic-input *ngFor="let input of objectType.keys(programSet.controls.inputs.controls)"
+                                     [name]="programSet.controls.inputs.controls[input].value.name"
+                                     [inputForm]="programSet.controls.inputs.controls[input]"
+                                     [controlType]="helperProvider.resolveControlTypeForInput(programSet.controls.inputs.controls[input].value)"></dynamic-input>
 
 
-                        <!--<ion-select [formControl]="zlmForm.value.programSets[0].zones[0].inputs[1]">
-                          <ion-option value="f">Female</ion-option>
-                          <ion-option value="m">Male</ion-option>
-                        </ion-select>-->
-                      </ion-item>
+                      <!--<ion-item [ngSwitch]="helperProvider.resolveControlTypeForInput(programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].value)">-->
+
+                      <!--<ion-label>MaxFadeDelay</ion-label>-->
+                      <!--<div item-content [ngSwitch]="helperProvider.resolveControlTypeForInput(programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].value)">-->
+                      <!--<ion-range *ngSwitchCase="controlTypeEnum.Range"
+                                     [min]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].controls['min'].value"
+                                     [max]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].controls['max'].value"
+                                     [formControl]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].controls['value']"
+                                     color="danger" pin="true">
+                      </ion-range>-->
+                      <!--</div>-->
+
+
+
+
+
+                      <!--<ion-range [min]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].controls['min'].value"
+                                     [max]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].controls['max'].value"
+                                     [formControl]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].controls['value']"
+                                     color="danger" pin="true">
+                      </ion-range>-->
+                      <!--Hello-->
+                      <!--<div item-content>
+                        <dynamic-input [inputForm]="programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay']"
+                                       [controlType]="helperProvider.resolveControlTypeForInput(programSet.controls['zones'].controls[0].controls['inputs'].controls['maxFadeDelay'].value)"></dynamic-input>
+                      </div>-->
+                      <!--<ion-select [formControl]="zlmForm.value.programSets[0].zones[0].inputs[1]">
+                        <ion-option value="f">Female</ion-option>
+                        <ion-option value="m">Male</ion-option>
+                      </ion-select>-->
+                      <!--</ion-item>-->
                     </ion-list>
                   </div>
                 </ion-item>

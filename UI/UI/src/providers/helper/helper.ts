@@ -26,8 +26,5 @@ export class HelperProvider {
     else if (input.type === "System.Double") {
       return ControlType.Number;
     }
-
   }
 }
-
-
