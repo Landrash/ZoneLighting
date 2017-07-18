@@ -9,6 +9,9 @@ namespace ZoneLighting.ZoneProgramNS
 	[DataContract]
 	public class ZoneProgramInputCollection : KeyedCollection<string, ZoneProgramInput>
 	{
+
+		public ZoneProgramInputCollection() : base(StringComparer.OrdinalIgnoreCase) { }
+
 		protected override string GetKeyForItem(ZoneProgramInput item)
 		{
 			return item.Name;

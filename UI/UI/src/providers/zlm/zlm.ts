@@ -55,6 +55,11 @@ export class ZLMFormProvider {
             //  });
             //});
           });
+
+          programSet.valueChanges.debounceTime(200).subscribe(value => {
+            //value.field.replace()
+            this.setInputs(programSet.value.name, value.inputs).subscribe(response => console.log(response));
+          });
         });
 
         this.slimLoadingBarService.complete();
