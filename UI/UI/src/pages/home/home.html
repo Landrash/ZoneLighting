@@ -29,7 +29,7 @@
                   <div item-content *ngIf="programSet.showDetails">
                     <ion-list>
                       <dynamic-input *ngFor="let input of objectType.keys(programSet.controls.inputs.controls)"
-                                     [name]="programSet.controls.inputs.controls[input].value.name"
+                                     [name]="input"
                                      [inputForm]="programSet.controls.inputs.controls[input]"
                                      [controlType]="helperProvider.resolveControlTypeForInput(programSet.controls.inputs.controls[input].value)"></dynamic-input>
 
