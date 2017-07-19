@@ -24,7 +24,7 @@ export class HelperProvider {
       return ControlType.Number;
     }
     else if (input.type === "System.Double") {
-      return ControlType.Number;
+      return ControlType.Decimal;
     }
     else if (input.type === "System.Boolean") {
       return ControlType.Toggle;

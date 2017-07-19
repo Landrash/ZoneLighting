@@ -18,26 +18,25 @@
             </ion-card-title>
             <p>
               <ion-list>
-                <ion-item padding *ngFor="let programSet of zlmForm.controls.programSets.controls" (click)="toggleDetails(programSet)">
-                  <ion-icon name="ios-arrow-dropdown" item-right></ion-icon>
-                  <ion-label>
-                    {{programSet.value.name}}
-                  </ion-label>
-                  <div item-content *ngIf="programSet.showDetails">
-                    <ion-list>
+                <ion-item padding *ngFor="let programSet of zlmForm.controls.programSets.controls">
+                  <!--<ion-label stacked>-->
+                    <h2 (click)="toggleDetails(programSet)">{{programSet.value.name}} <ion-icon [name]="!programSet.showDetails ? 'ios-arrow-dropdown' : 'ios-arrow-dropup'" item-right></ion-icon></h2>
+                  <!--</ion-label>-->
+                  <!--<div >-->
+                    <ion-list *ngIf="programSet.showDetails">
                       <dynamic-input *ngFor="let input of objectType.keys(programSet.controls.inputs.controls)"
                                      [name]="input"
                                      [inputForm]="programSet.controls.inputs.controls[input]"
                                      [controlType]="helperProvider.resolveControlTypeForInput(programSet.controls.inputs.controls[input].value)"></dynamic-input>
                     </ion-list>
-                  </div>
+                  <!--</div>-->
                 </ion-item>
               </ion-list>
             </p>
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col align-items-center style="text-align: center;">
+      <!--<ion-col align-items-center style="text-align: center;">
         <ion-card>
           <ion-card-content>
             <ion-card-title>
@@ -48,7 +47,7 @@
             </p>
           </ion-card-content>
         </ion-card>
-      </ion-col>
+      </ion-col>-->
     </ion-row>
   </ion-grid>
 </ion-content>

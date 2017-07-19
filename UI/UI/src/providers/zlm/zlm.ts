@@ -10,7 +10,7 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 export class ZLMFormProvider {
 
   private zlm: ZLM;
-  private zlmURL = "http://localhost:9999/zlm";
+  private zlmURL = "http://192.168.29.187:80/zlm";
 
   constructor(private http: Http,
     private formProvider: FormProvider,
@@ -56,8 +56,15 @@ export class ZLMFormProvider {
             //});
           });
 
-          programSet.valueChanges.debounceTime(200).subscribe(value => {
-            //value.field.replace()
+          programSet.valueChanges.debounceTime(1000).subscribe(value => {
+
+            Object.keys(value.inputs).forEach(inputName => {
+              if (value.inputs[inputName].type === "System.Int32" ||
+                value.inputs[inputName].type === "System.Double") {
+                value.inputs[inputName].value = Number(value.inputs[inputName].value);
+              }
+            });
+
             this.setInputs(programSet.value.name, value.inputs).subscribe(response => console.log(response));
           });
         });
@@ -73,6 +80,6 @@ export class ZLMFormProvider {
       inputs[key] = inputs[key].value;
     });
 
-    return this.http.post('http://localhost:9999/ZLM/SetInputs', [programSet, inputs]).map(res => <ZLM>res.json());
+    return this.http.post(this.zlmURL + '/SetInputs', [programSet, inputs]).map(res => <ZLM>res.json());
   }
 }

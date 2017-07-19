@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
 
   toggleDetails(item) {
     if (item.showDetails) {
-      item.showDetails = true;
+      item.showDetails = false;
       item.icon = 'ios-add-circle-outline';
     } else {
       item.showDetails = true;

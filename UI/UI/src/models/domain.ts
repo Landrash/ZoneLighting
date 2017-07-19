@@ -32,6 +32,7 @@ export class ZLM {
 export enum ControlType {
   Text,
   Number,
+  Decimal,
   Range,
   Radio,
   Toggle
