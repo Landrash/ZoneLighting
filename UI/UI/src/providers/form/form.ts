@@ -78,7 +78,7 @@ export class FormProvider {
   private getZoneInputGroup(input: any) {
     var returnValue = new FormGroup({});
 
-    returnValue.addControl("value", new FormControl(input.value, Validators.nullValidator));
+    returnValue.addControl("value", new FormControl(input.value, Validators.required));
     if (!!input.min)
       returnValue.addControl("min", new FormControl(input.min, Validators.nullValidator));
     if (!!input.max)

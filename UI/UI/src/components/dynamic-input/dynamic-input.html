@@ -9,12 +9,29 @@
 
 
 <ion-item [ngSwitch]="controlType">
-  <ion-label>{{name}}</ion-label>
-
+  
+  <ion-label *ngSwitchCase="controlTypeEnum.Range">{{name}}</ion-label>
   <ion-range *ngSwitchCase="controlTypeEnum.Range"
              [min]="inputForm.controls['min'].value"
              [max]="inputForm.controls['max'].value"
              [formControl]="inputForm.controls['value']"
              color="danger" pin="true">
   </ion-range>
+
+  <ion-label *ngSwitchCase="controlTypeEnum.Text" floating>{{name}}</ion-label>
+  <ion-input *ngSwitchCase="controlTypeEnum.Text"
+             [formControl]="inputForm.controls['value']">
+  </ion-input>
+  
+  <ion-label *ngSwitchCase="controlTypeEnum.Number" floating>{{name}}</ion-label>
+  <ion-input *ngSwitchCase="controlTypeEnum.Number"
+             type="number"
+             [formControl]="inputForm.controls['value']">
+  </ion-input>
+  
+  <ion-label *ngSwitchCase="controlTypeEnum.Toggle">{{name}}</ion-label>
+  <ion-toggle *ngSwitchCase="controlTypeEnum.Toggle"
+              [formControl]="inputForm.controls['value']">
+  </ion-toggle>
+
 </ion-item>

@@ -4,16 +4,16 @@ import { FormGroup, FormArray, FormControl } from '@angular/forms'
 import 'rxjs/add/operator/map';
 import { ZLM } from '../../models';
 import { FormProvider } from '../../providers'
-import {ControlType} from '../../models'
+import { ControlType } from '../../models'
 
 @Injectable()
 export class HelperProvider {
 
   constructor(public http: Http) {
-    
+
   }
 
-  public resolveControlTypeForInput(input: any) : ControlType {
+  public resolveControlTypeForInput(input: any): ControlType {
     if (input.type === "System.String") {
       return ControlType.Text;
     }
@@ -25,6 +25,12 @@ export class HelperProvider {
     }
     else if (input.type === "System.Double") {
       return ControlType.Number;
+    }
+    else if (input.type === "System.Boolean") {
+      return ControlType.Toggle;
+    }
+    else {
+      return ControlType.Text;
     }
   }
 }

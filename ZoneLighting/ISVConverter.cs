@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using ZoneLighting.ZoneProgramNS;
 
 namespace ZoneLighting
@@ -31,10 +33,20 @@ namespace ZoneLighting
 			return result;
 		}
 
+		/// <summary>
+		/// Suppresses camel casing for input property names
+		/// </summary>
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var isv = (ISV)value;
-			serializer.Serialize(writer, isv.Dictionary);
+
+			writer.WriteStartObject();
+			isv.Keys.ToList().ForEach(key =>
+			{
+				writer.WritePropertyName(key.ToPascalCase());
+				serializer.Serialize(writer, isv[key]);
+			});
+			writer.WriteEndObject();
 		}
 	}
 }

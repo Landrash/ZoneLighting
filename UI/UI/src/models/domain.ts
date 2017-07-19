@@ -33,6 +33,6 @@ export enum ControlType {
   Text,
   Number,
   Range,
-  Checkbox,
-  Radio
+  Radio,
+  Toggle
 }

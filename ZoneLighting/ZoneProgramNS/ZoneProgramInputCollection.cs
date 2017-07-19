@@ -46,7 +46,7 @@ namespace ZoneLighting.ZoneProgramNS
 				if (input is RangedZoneProgramInput<int>)
 				{
 					if (input.Value != null)
-						inputStartingValues.Add(input.Name,
+						inputStartingValues.Add(input.Name.ToPascalCase(),
 							new
 							{
 								Value = input.Value,
@@ -58,7 +58,7 @@ namespace ZoneLighting.ZoneProgramNS
 				else if (input is RangedZoneProgramInput<double>)
 				{
 					if (input.Value != null)
-						inputStartingValues.Add(input.Name,
+						inputStartingValues.Add(input.Name.ToPascalCase(),
 							new
 							{
 								Value = input.Value,
@@ -69,7 +69,7 @@ namespace ZoneLighting.ZoneProgramNS
 				}
 				else
 				{
-					inputStartingValues.Add(input.Name,
+					inputStartingValues.Add(input.Name.ToPascalCase(),
 						new
 						{
 							Value = input.Value,
