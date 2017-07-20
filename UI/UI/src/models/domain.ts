@@ -35,5 +35,6 @@ export enum ControlType {
   Decimal,
   Range,
   Radio,
-  Toggle
+  Toggle,
+  Dropdown
 }

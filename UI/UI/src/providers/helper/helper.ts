@@ -29,6 +29,9 @@ export class HelperProvider {
     else if (input.type === "System.Boolean") {
       return ControlType.Toggle;
     }
+    else if (input.type === "System.Enum") {
+      return ControlType.Dropdown;
+    }
     else {
       return ControlType.Text;
     }

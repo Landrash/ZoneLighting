@@ -1,14 +1,4 @@
-﻿<!--<div [ngSwitch]="controlType">
-  <ion-range *ngSwitchCase="controlTypeEnum.Range"
-             [min]="inputForm.controls['min'].value"
-             [max]="inputForm.controls['max'].value"
-             [formControl]="inputForm.controls['value']"
-             color="danger" pin="true">
-  </ion-range>
-</div>-->
-
-
-<ion-item [ngSwitch]="controlType">
+﻿<ion-item [ngSwitch]="controlType">
   
   <ion-label *ngSwitchCase="controlTypeEnum.Range">{{name}}</ion-label>
   <ion-range *ngSwitchCase="controlTypeEnum.Range"
@@ -41,9 +31,15 @@
              step="0.05">
   </ion-input>
   
-  <ion-label *ngSwitchCase="controlTypeEnum.Toggle">{{name}}</ion-label>
+  <ion-label *ngSwitchCase="controlTypeEnum.Toggle" stacked>{{name}}</ion-label>
   <ion-toggle *ngSwitchCase="controlTypeEnum.Toggle"
               [formControl]="inputForm.controls['value']">
   </ion-toggle>
+  
+  <ion-label *ngSwitchCase="controlTypeEnum.Dropdown" stacked>{{name}}</ion-label>
+  <ion-select *ngSwitchCase="controlTypeEnum.Dropdown"
+              [formControl]="inputForm.controls['value']">
+    <ion-option *ngFor="let enum of inputForm.controls['options'].value" [value]="enum">{{enum}}</ion-option>
+  </ion-select>
 
 </ion-item>

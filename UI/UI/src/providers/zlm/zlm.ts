@@ -10,7 +10,8 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 export class ZLMFormProvider {
 
   private zlm: ZLM;
-  private zlmURL = "http://192.168.29.187:80/zlm";
+  private zlmURL = "http://localhost:9999/zlm";
+  private debounceTime = 1000;
 
   constructor(private http: Http,
     private formProvider: FormProvider,
@@ -43,20 +44,12 @@ export class ZLMFormProvider {
 
         (<FormArray>(this.formProvider.getZLMForm().controls['programSets'])).controls.forEach(programSet => {
           (<FormArray>(<FormGroup>programSet).controls['zones']).controls.forEach(zone => {
-
-            zone.valueChanges.debounceTime(200).subscribe(value => {
-              //value.field.replace()
+            zone.valueChanges.debounceTime(this.debounceTime).subscribe(value => {
               this.setInputs(programSet.value.name, value.inputs).subscribe(response => console.log(response));
             });
-
-            //(<FormArray>(<FormGroup>zone).controls['inputs']).controls.forEach(input => {
-            //  input.valueChanges.subscribe(value => {
-            //    this
-            //  });
-            //});
           });
 
-          programSet.valueChanges.debounceTime(1000).subscribe(value => {
+          programSet.valueChanges.debounceTime(this.debounceTime).subscribe(value => {
 
             Object.keys(value.inputs).forEach(inputName => {
               if (value.inputs[inputName].type === "System.Int32" ||

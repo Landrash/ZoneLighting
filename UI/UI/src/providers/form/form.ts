@@ -85,6 +85,8 @@ export class FormProvider {
       returnValue.addControl("max", new FormControl(input.max, Validators.nullValidator));
     if (!!input.type)
       returnValue.addControl("type", new FormControl(input.type, Validators.nullValidator));
+    if (!!input.options)
+      returnValue.addControl("options", new FormControl(input.options, Validators.nullValidator));
     
     return returnValue;
   }

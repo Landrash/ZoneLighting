@@ -9,7 +9,9 @@ import { List, Item, Range } from 'ionic-angular';
 })
 export class DynamicInputComponent implements AfterViewInit {
   ngAfterViewInit(): void {
-    console.log(this.controlType);
+    if (!!this.inputForm.controls['options']) {
+      console.log(this.inputForm.controls['options'].value);
+    }
   }
 
 
