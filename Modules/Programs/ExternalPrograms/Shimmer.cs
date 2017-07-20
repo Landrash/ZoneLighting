@@ -27,7 +27,7 @@ namespace ExternalPrograms
 		int MaxFadeSpeed { get; set; } = 1;
 		int MaxFadeDelay { get; set; } = 20;
 		double Density { get; set; } = 1.0;
-		double Brightness { get; set; } = 0.3;
+		double Brightness { get; set; } = 1.0;
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Shimmer"/> will exhibit the Sparkle effect.
@@ -198,7 +198,8 @@ namespace ExternalPrograms
 			Task.WaitAll(Tasks.ToArray());
 			Tasks.ForEach(task =>
 			{
-				task.Dispose();
+				if (!task.IsCanceled && !task.IsCompleted)
+					task.Dispose();
 			});
 			Tasks.Clear();
 			PixelStates = null;

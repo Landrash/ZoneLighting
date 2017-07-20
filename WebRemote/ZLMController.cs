@@ -95,6 +95,17 @@ namespace WebRemote
 			return ZLMJsonModel;
 		}
 
+		[HttpPost]
+		public ZLMJsonModel RecreateProgramSet(JArray param)
+		{
+			string programSetName = param[0].ToObject<string>();
+			string programName = param[1].ToObject<string>();
+			var zoneNames = param[2].ToObject<List<string>>();
+
+			ZLMRPC.RecreateProgramSet(programSetName, programName, zoneNames, null);
+			return ZLMJsonModel;
+		}
+
 		#endregion
 
 		#region Zone API

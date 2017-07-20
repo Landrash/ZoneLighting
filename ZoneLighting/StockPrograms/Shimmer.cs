@@ -27,7 +27,7 @@ namespace ZoneLighting.StockPrograms
 		int MaxFadeSpeed { get; set; } = 1;
 		int MaxFadeDelay { get; set; } = 20;
 		double Density { get; set; } = 1.0;
-		double Brightness { get; set; } = 0.3;
+		double Brightness { get; set; } = 1.0;
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Shimmer"/> will exhibit the Sparkle effect.
@@ -120,52 +120,52 @@ namespace ZoneLighting.StockPrograms
 			switch (message.MidiChannel)
 			{
 				case 0:
+				{
+					switch (message.Data1)
 					{
-						switch (message.Data1)
+						case (int)NumarkOrbitMidiNote.XAxis:
 						{
-							case (int)NumarkOrbitMidiNote.XAxis:
-								{
-									var scaledValue = Anshul.Utilities.Math.Scale(message.Data2, 0, 127, 1, 99);
-									//Debug.Print(scaledValue.ToString());
-									MaxFadeDelay = scaledValue;
-									//SetInput("MaxFadeDelay", scaledValue);
-								}
-								break;
-							case (int)NumarkOrbitMidiNote.YAxis:
-								{
-									var scaledValue = Anshul.Utilities.Math.Scale(message.Data2, 0, 127, 0.0, 1.0);
-									SetInput("Density", scaledValue);
-								}
-								break;
-							case (int)NumarkOrbitMidiNote.K1_BigKnob:
-								{
-									var scaledValue = Anshul.Utilities.Math.Scale(message.Data2, 0, 127, 0.0, 1.0);
-									SetInput("Brightness", scaledValue);
-								}
-								break;
-							case (int)NumarkOrbitMidiNote.A1:
-								SetInput("ColorScheme", ColorScheme.All);
-								break;
-							case (int)NumarkOrbitMidiNote.A2:
-								SetInput("ColorScheme", ColorScheme.Primaries);
-								break;
-							case (int)NumarkOrbitMidiNote.A3:
-								SetInput("ColorScheme", ColorScheme.Secondaries);
-								break;
-							case (int)NumarkOrbitMidiNote.B1:
-								SetInput("ColorScheme", ColorScheme.RedsBluesGreens);
-								break;
-							case (int)NumarkOrbitMidiNote.B2:
-								SetInput("ColorScheme", ColorScheme.Reds);
-								break;
-							case (int)NumarkOrbitMidiNote.B3:
-								SetInput("ColorScheme", ColorScheme.Blues);
-								break;
-							case (int)NumarkOrbitMidiNote.B4:
-								SetInput("ColorScheme", ColorScheme.Greens);
-								break;
+							var scaledValue = Anshul.Utilities.Math.Scale(message.Data2, 0, 127, 1, 99);
+							//Debug.Print(scaledValue.ToString());
+							MaxFadeDelay = scaledValue;
+							//SetInput("MaxFadeDelay", scaledValue);
 						}
+							break;
+						case (int)NumarkOrbitMidiNote.YAxis:
+						{
+							var scaledValue = Anshul.Utilities.Math.Scale(message.Data2, 0, 127, 0.0, 1.0);
+							SetInput("Density", scaledValue);
+						}
+							break;
+						case (int)NumarkOrbitMidiNote.K1_BigKnob:
+						{
+							var scaledValue = Anshul.Utilities.Math.Scale(message.Data2, 0, 127, 0.0, 1.0);
+							SetInput("Brightness", scaledValue);
+						}
+							break;
+						case (int)NumarkOrbitMidiNote.A1:
+							SetInput("ColorScheme", ColorScheme.All);
+							break;
+						case (int)NumarkOrbitMidiNote.A2:
+							SetInput("ColorScheme", ColorScheme.Primaries);
+							break;
+						case (int)NumarkOrbitMidiNote.A3:
+							SetInput("ColorScheme", ColorScheme.Secondaries);
+							break;
+						case (int)NumarkOrbitMidiNote.B1:
+							SetInput("ColorScheme", ColorScheme.RedsBluesGreens);
+							break;
+						case (int)NumarkOrbitMidiNote.B2:
+							SetInput("ColorScheme", ColorScheme.Reds);
+							break;
+						case (int)NumarkOrbitMidiNote.B3:
+							SetInput("ColorScheme", ColorScheme.Blues);
+							break;
+						case (int)NumarkOrbitMidiNote.B4:
+							SetInput("ColorScheme", ColorScheme.Greens);
+							break;
 					}
+				}
 					break;
 			}
 		}
@@ -198,7 +198,8 @@ namespace ZoneLighting.StockPrograms
 			Task.WaitAll(Tasks.ToArray());
 			Tasks.ForEach(task =>
 			{
-				task.Dispose();
+				if (!task.IsCanceled && !task.IsCompleted)
+					task.Dispose();
 			});
 			Tasks.Clear();
 			PixelStates = null;

@@ -33,38 +33,55 @@ export class ZLMFormProvider {
     this.http.get(this.zlmURL)
       .map(response => <ZLM>response.json())
       .subscribe(zlm => {
-
         console.log(zlm);
         this.formProvider.setZLMForm(zlm);
         this.formProvider.getZLMForm().valueChanges.subscribe(value => {
           console.log(value);
         });
-
         console.log(this.formProvider.getZLMForm());
-
-        (<FormArray>(this.formProvider.getZLMForm().controls['programSets'])).controls.forEach(programSet => {
-          (<FormArray>(<FormGroup>programSet).controls['zones']).controls.forEach(zone => {
-            zone.valueChanges.debounceTime(this.debounceTime).subscribe(value => {
-              this.setInputs(programSet.value.name, value.inputs).subscribe(response => console.log(response));
-            });
-          });
-
-          programSet.valueChanges.debounceTime(this.debounceTime).subscribe(value => {
-
-            Object.keys(value.inputs).forEach(inputName => {
-              if (value.inputs[inputName].type === "System.Int32" ||
-                value.inputs[inputName].type === "System.Double") {
-                value.inputs[inputName].value = Number(value.inputs[inputName].value);
-              }
-            });
-
-            this.setInputs(programSet.value.name, value.inputs).subscribe(response => console.log(response));
-          });
-        });
-
+        this.setupForm();
         this.slimLoadingBarService.complete();
       },
       err => console.log(err));
+  }
+
+  private setupForm() {
+    (<FormArray>(this.formProvider.getZLMForm().controls['programSets'])).controls.forEach(programSet => {
+      (<FormArray>(<FormGroup>programSet).controls['zones']).controls.forEach(zone => {
+        (<FormGroup>zone).controls['inputs'].valueChanges.debounceTime(this.debounceTime).subscribe(value => {
+          this.adjustAndSetInputs(value, programSet);
+        });
+      });
+
+      (<FormGroup>programSet).controls['programName'].valueChanges.debounceTime(this.debounceTime).subscribe(value => {
+        this.recreateProgramSet((<FormGroup>programSet).controls['name'].value,
+          value.toString(),
+          (<FormGroup>programSet).controls['zones'].value.map(x => x.name))
+          .subscribe(
+          response =>
+            console.log(response));
+      });
+
+      (<FormGroup>programSet).controls['inputs'].valueChanges.debounceTime(this.debounceTime).subscribe(value => {
+        this.adjustAndSetInputs(value, programSet);
+      });
+    });
+  }
+
+  public recreateProgramSet(programSetName: string, programName: string, zoneNames: string[], isv: any = null) {
+    return this.http.post(this.zlmURL + '/RecreateProgramSet', [programSetName, programName, zoneNames])
+      .map(res => <ZLM>res.json());
+  }
+
+  private adjustAndSetInputs(value: any, programSet: any) {
+    Object.keys(value).forEach(inputName => {
+      if (value[inputName].type === "System.Int32" ||
+        value[inputName].type === "System.Double") {
+        value[inputName].value = Number(value[inputName].value);
+      }
+    });
+
+    this.setInputs(programSet.value.name, value).subscribe(response => console.log(response));
   }
 
   public setInputs(programSet: string, inputs: any) {

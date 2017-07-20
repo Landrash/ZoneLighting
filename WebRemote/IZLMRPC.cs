@@ -21,7 +21,6 @@ namespace WebRemote
 		string GetZoneSummary();
 		void SetProgramSetInputs(string programSetName, ISV isv);
 		void StartProgramSet(string programSetName);
-		void RecreateProgramSet(string programSetName, string programName, List<string> zoneNames, ISV isv);
 
 		ProgramSetJsonModel CreateProgramSet(string programSetName, string programName, IEnumerable<string> zoneNames, bool sync = true, ISV isv = null, dynamic startingParameters = null);
 
@@ -43,5 +42,6 @@ namespace WebRemote
 
 		void SetAllZonesColor(string color, float brightness = 1);
 		void SetInputs(string programSetOrZoneName, ISV isv);
+		void RecreateProgramSet(string programSetName, string programName, List<string> zoneNames, ISV isv);
 	}
 }

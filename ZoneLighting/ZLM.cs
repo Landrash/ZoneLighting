@@ -90,7 +90,7 @@ namespace ZoneLighting
 		{
 			var zones = GetZonesByNames(zoneNames);
 
-			DisposeProgramSets(programSetName.Listify());
+			DisposeProgramSets(programSetName.Listify(), true);
 			CreateProgramSet(programSetName, programName, false, isv, zones);
 		}
 

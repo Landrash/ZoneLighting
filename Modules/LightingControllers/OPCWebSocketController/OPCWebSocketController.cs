@@ -149,7 +149,7 @@ namespace OPCWebSocketController
             //AssertInit();
 
             if (WebSocket.ReadyState == WebSocketState.Closed)
-                Connect();
+                Task.Run(() => Connect());
 
             WebSocket.Send(byteArray.ToArray());
             if (NodeMCUWifiThreadSleepTime > 0)
