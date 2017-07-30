@@ -97,7 +97,7 @@ export class ZLMFormProvider {
 
 
 
-  public recreateProgramSet(programSetName: string, programName: string, zoneNames: string[], isv: any = null) {
+  public recreateProgramSet(programSetName: string, programName: string, zoneNames: string[], inputBag: any = null) {
     return this.http.post(this.zlmURL + '/RecreateProgramSet', [programSetName, programName, zoneNames])
       .map(res => <ZLM>res.json());
   }

@@ -146,7 +146,7 @@ namespace WebRemote
 		/// </returns>
 		public override bool CanConvert(Type objectType)
 		{
-			return (objectType == typeof(ISV));
+			return (objectType == typeof(InputBag));
 		}
 
 		/// <summary>

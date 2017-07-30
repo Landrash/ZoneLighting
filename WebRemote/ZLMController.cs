@@ -72,10 +72,10 @@ namespace WebRemote
 			var zoneNames = param[2].ToObject<IEnumerable<string>>();
 			// ReSharper disable once SimplifyConditionalTernaryExpression
 			var sync = param.Count > 3 ? param[3].ToObject<bool>() : true;
-			var isv = param.Count > 4 ? param[4].ToObject<ISV>() : null;
+			var inputBag = param.Count > 4 ? param[4].ToObject<InputBag>() : null;
 			dynamic startingParameters = param.Count > 5 ? param[5] : null;
 
-			ZLMRPC.CreateProgramSet(programSetName, programName, zoneNames, sync, isv, startingParameters);
+			ZLMRPC.CreateProgramSet(programSetName, programName, zoneNames, sync, inputBag, startingParameters);
 			return ZLMJsonModel;
 		}
 
@@ -89,8 +89,8 @@ namespace WebRemote
 		public ZLMJsonModel SetInputs(JArray param)
 		{
 			var programSetOrZoneName = param[0].ToObject<string>();
-			var isv = param[1].ToObject<ISV>();
-			ZLMRPC.SetInputs(programSetOrZoneName, isv);
+			var inputBag = param[1].ToObject<InputBag>();
+			ZLMRPC.SetInputs(programSetOrZoneName, inputBag);
 
 			return ZLMJsonModel;
 		}

@@ -9,27 +9,27 @@ namespace ZoneLightingTests
 		[Test]
 		public void InputStartingValues_SetParameter_CreatesNewDictionaryEntry()
 		{
-			dynamic isv = new ISV();
-			isv.Speed = 1;
-			isv.Color = Color.Red;
-			isv.Name = "Test";
+			dynamic inputBag = new InputBag();
+			inputBag.Speed = 1;
+			inputBag.Color = Color.Red;
+			inputBag.Name = "Test";
 
-			Assert.True(isv["Speed"] == 1);
-			Assert.True(isv["Color"] == Color.Red);
-			Assert.True(isv["Name"] == "Test");
+			Assert.True(inputBag["Speed"] == 1);
+			Assert.True(inputBag["Color"] == Color.Red);
+			Assert.True(inputBag["Name"] == "Test");
 		}
 
 		[Test]
 		public void InputStartingValues_AddParameter_IsAccessibleUsingDotNotation()
 		{
-			dynamic isv = new ISV();
-			isv.Add("Speed", 1);
-			isv.Add("Color", Color.Red);
-			isv.Add("Name", "Test");
+			dynamic inputBag = new InputBag();
+			inputBag.Add("Speed", 1);
+			inputBag.Add("Color", Color.Red);
+			inputBag.Add("Name", "Test");
 
-			Assert.True(isv.Speed == 1);
-			Assert.True(isv.Color == Color.Red);
-			Assert.True(isv.Name == "Test");
+			Assert.True(inputBag.Speed == 1);
+			Assert.True(inputBag.Color == Color.Red);
+			Assert.True(inputBag.Name == "Test");
 		}
 	}
 }

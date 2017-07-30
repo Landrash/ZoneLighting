@@ -114,7 +114,7 @@ namespace WebRemote
 
 		
 		public ProgramSetJsonModel CreateProgramSet(string programSetName, string programName, IEnumerable<string> zoneNames, bool sync = true,
-			ISV isv = null, dynamic startingParameters = null)
+			InputBag inputBag = null, dynamic startingParameters = null)
 		{
 			var model = new ProgramSetJsonModel();
 			ProgramSet programSet = null;
@@ -122,7 +122,7 @@ namespace WebRemote
 			ZLMAction(
 				zlm =>
 					programSet =
-						zlm.CreateProgramSet(programSetName, programName, zoneNames, sync, isv, startingParameters)
+						zlm.CreateProgramSet(programSetName, programName, zoneNames, sync, inputBag, startingParameters)
 				);
 
 			model = programSet.ToJsonModel<ProgramSet, ProgramSetJsonModel>();
@@ -142,9 +142,9 @@ namespace WebRemote
 		}
 
 		
-		public void RecreateProgramSet(string programSetName, string programName, List<string> zoneNames, ISV isv)
+		public void RecreateProgramSet(string programSetName, string programName, List<string> zoneNames, InputBag inputBag)
 		{
-			ZLMAction(zlm => zlm.RecreateProgramSet(programSetName, programName, zoneNames, isv));
+			ZLMAction(zlm => zlm.RecreateProgramSet(programSetName, programName, zoneNames, inputBag));
 		}
 
 		
@@ -161,22 +161,22 @@ namespace WebRemote
 
 
 		
-		public void SetProgramSetInputs(string programSetName, ISV isv)
+		public void SetProgramSetInputs(string programSetName, InputBag inputBag)
 		{
-			ZLM.SetProgramSetInputs(programSetName, isv);
+			ZLM.SetProgramSetInputs(programSetName, inputBag);
 		}
 
 		
-		public void SetInputs(string programSetOrZoneName, ISV isv)
+		public void SetInputs(string programSetOrZoneName, InputBag inputBag)
 		{
 			//figure out if supplied name is program set or zone
 			if (ZLM.ProgramSets.Any(p => p.Name == programSetOrZoneName))
 			{
-				ZLM.SetProgramSetInputs(programSetOrZoneName, isv);
+				ZLM.SetProgramSetInputs(programSetOrZoneName, inputBag);
 			}
 			else if (ZLM.Zones.Any(z => z.Name == programSetOrZoneName))
 			{
-				ZLM.SetZoneInputs(programSetOrZoneName, isv);
+				ZLM.SetZoneInputs(programSetOrZoneName, inputBag);
 			}
 			else
 			{
@@ -223,9 +223,9 @@ namespace WebRemote
 		//}
 
 		
-		public void SetZoneInputs(string zoneName, ISV isv)
+		public void SetZoneInputs(string zoneName, InputBag inputBag)
 		{
-			ZLM.SetZoneInputs(zoneName, isv);
+			ZLM.SetZoneInputs(zoneName, inputBag);
 		}
 
 		
@@ -310,7 +310,7 @@ namespace WebRemote
 		//	//	ZLMAction(zlm =>
 		//	//	{
 		//	//		zlm.DisposeProgramSets(programSetName);
-		//	//		zlm.CreateProgramSet(programSetName, programName, false, isv, zlm.Zones);
+		//	//		zlm.CreateProgramSet(programSetName, programName, false, inputBag, zlm.Zones);
 		//	//	});
 		//	//}
 		//	//else if (commandName.ToLower().Trim() == "stop")

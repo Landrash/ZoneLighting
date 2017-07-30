@@ -70,9 +70,9 @@ namespace ZoneLighting.ZoneNS
 			Sync(zonePrograms.ToList());
 		}
 
-		public void Sync(IEnumerable<Zone> zones, bool forceStop = false, IEnumerable<ISV> isv = null)
+		public void Sync(IEnumerable<Zone> zones, bool forceStop = false, IEnumerable<InputBag> inputBags = null)
 		{
-			Sync(zones.Select(zone => zone.ZoneProgram), forceStop, isv);
+			Sync(zones.Select(zone => zone.ZoneProgram), forceStop, inputBags);
 		}
 
 		public void Sync(params Zone[] zones)
@@ -86,14 +86,14 @@ namespace ZoneLighting.ZoneNS
 		/// their synchronizable states before executing the synchronization. If no programs are already attached,
 		/// then this method attaches the given program(s) to this context and starts them.
 		/// </summary>
-		public void Sync(IEnumerable<ZoneProgram> zonePrograms, bool forceStop = false, IEnumerable<ISV> isvs = null, dynamic startingParameters = null)
+		public void Sync(IEnumerable<ZoneProgram> zonePrograms, bool forceStop = false, IEnumerable<InputBag> inputBags = null, dynamic startingParameters = null)
 		{
 			var incomingZonePrograms = zonePrograms as IList<ZoneProgram> ?? zonePrograms.ToList();
-			var isvsListed = isvs?.ToList();
+			var inputBagsListed = inputBags?.ToList();
 
-			if (isvsListed != null && isvsListed.Count() != 1 && isvsListed.Count() != incomingZonePrograms.Count())
+			if (inputBagsListed != null && inputBagsListed.Count() != 1 && inputBagsListed.Count() != incomingZonePrograms.Count())
 			{
-				throw new Exception("Number of items in isvs should be either 1 or equal to number of zone programs.");
+				throw new Exception("Number of items in inputBags should be either 1 or equal to number of zone programs.");
 			}
 
 			//stop programs if specified to do so
@@ -156,7 +156,7 @@ namespace ZoneLighting.ZoneNS
 						zoneProgram.SetSyncContext(this);
 						ZonePrograms.Add(zoneProgram);
 						zoneProgram.Start(sync: false,
-							isv: isvsListed?.Count() == incomingZonePrograms.Count() ? isvsListed.ElementAt(i) : isvsListed?.First(), startingParameters: startingParameters);
+							inputBag: inputBagsListed?.Count() == incomingZonePrograms.Count() ? inputBagsListed.ElementAt(i) : inputBagsListed?.First(), startingParameters: startingParameters);
 					}
 
 					//wait for sync-state from all programs (incoming and existing)

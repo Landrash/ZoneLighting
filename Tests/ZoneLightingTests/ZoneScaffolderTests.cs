@@ -81,7 +81,7 @@ namespace ZoneLightingTests
 		//	var leftWing = new OPCZone(FadeCandyController.Instance, "TestZone");
 		//	leftWing.AddOPCLights(6);
 
-		//	dynamic scrollDotDictionary = new ISV();
+		//	dynamic scrollDotDictionary = new InputBag();
 		//	scrollDotDictionary.DelayTime = 30;
 		//	scrollDotDictionary.DotColor = (Color?)Color.Red;
 

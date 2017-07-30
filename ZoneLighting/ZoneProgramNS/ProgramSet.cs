@@ -106,16 +106,16 @@ namespace ZoneLighting.ZoneProgramNS
 		/// <summary>
 		/// Creates a set of programs that run on a given set of zones with the given input starting values
 		/// </summary>
-		public ProgramSet(string programName, IEnumerable<Zone> zones, bool sync, IEnumerable<ISV> isvs, string name, dynamic startingParameters = null)
+		public ProgramSet(string programName, IEnumerable<Zone> zones, bool sync, IEnumerable<InputBag> inputBags, string name, dynamic startingParameters = null)
 		{
 			if (!ZoneScaffolder.Instance.DoesProgramExist(programName))
 				throw new Exception($"No program by the name '{programName}' exists.");
 
-			var isvsListed = isvs as IList<ISV> ?? isvs?.ToList();
+			var inputBagsListed = inputBags as IList<InputBag> ?? inputBags?.ToList();
 			var zonesListed = zones as IList<Zone> ?? zones.ToList();
-			if (isvsListed != null && isvsListed.Count() != 1 && isvsListed.Count() != zonesListed.Count())
+			if (inputBagsListed != null && inputBagsListed.Count() != 1 && inputBagsListed.Count() != zonesListed.Count())
 			{
-				throw new Exception("Number of items in isvs should be either 1 or equal to number of zones.");
+				throw new Exception("Number of items in inputBags should be either 1 or equal to number of zones.");
 			}
 
 			Name = name;
@@ -133,7 +133,7 @@ namespace ZoneLighting.ZoneProgramNS
 				});
 
 				SyncContext = new SyncContext();
-				SyncContext.Sync(Zones, isv: isvsListed);
+				SyncContext.Sync(Zones, inputBags: inputBagsListed);
 			}
 			else
 			{
@@ -143,7 +143,7 @@ namespace ZoneLighting.ZoneProgramNS
 					zone.Stop(true);
 
 					ZoneScaffolder.Instance.RunZone(zone, programName,
-						isvsListed?.Count() == zonesListed.Count() ? isvsListed.ElementAt(i) : isvsListed?.First(),
+						inputBagsListed?.Count() == zonesListed.Count() ? inputBagsListed.ElementAt(i) : inputBagsListed?.First(),
 						startingParameters: startingParameters);
 				}
 			}
@@ -167,7 +167,7 @@ namespace ZoneLighting.ZoneProgramNS
 		/// <summary>
 		/// Creates a program set with a single program on a single zone.
 		/// </summary>
-		public ProgramSet(ZoneProgram program, Zone zone, ISV isv, string setName, dynamic startingParameters = null)
+		public ProgramSet(ZoneProgram program, Zone zone, InputBag inputBag, string setName, dynamic startingParameters = null)
 		{
 			Name = setName;
 			ProgramName = program.Name;
@@ -175,8 +175,8 @@ namespace ZoneLighting.ZoneProgramNS
 
 			Zones = zone.Listify();
 			zone.Stop(true);
-			//ZoneScaffolder.Instance.RunZone(zone, "", isv); -- TODO: Why aren't we using this? This seems to be better than the next line
-			zone.Run(program, isv, startingParameters: startingParameters);
+			//ZoneScaffolder.Instance.RunZone(zone, "", inputBag); -- TODO: Why aren't we using this? This seems to be better than the next line
+			zone.Run(program, inputBag, startingParameters: startingParameters);
 		}
 
 		public void Start(dynamic startingParameters = null)
@@ -216,9 +216,9 @@ namespace ZoneLighting.ZoneProgramNS
 			SyncContext = null;
 		}
 
-		public void SetInputs(ISV isv)
+		public void SetInputs(InputBag inputBag)
 		{
-			ZonePrograms.Parallelize(zp => zp.SetInputs(isv));
+			ZonePrograms.Parallelize(zp => zp.SetInputs(inputBag));
 		}
 
 		#endregion

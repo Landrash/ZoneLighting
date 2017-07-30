@@ -111,18 +111,18 @@ namespace ZoneLighting.ZoneProgramNS
 		/// <summary>
 		/// Starts the zone program.
 		/// </summary>
-		/// <param name="isv">Starting values for the program.</param>
+		/// <param name="inputBag">Starting values for the program.</param>
 		/// <param name="sync">Whether or not to start the program in sync with a SyncContext.</param>
 		/// <param name="syncContext">If this parameter is supplied when sync=true, this method will use the supplied SyncContext to
 		/// sync this program with. If sync=true and this parameter is not supplied, this method will use the already assigned
 		/// SyncContext to sync this program with.</param>
 		/// <param name="startingParameters">Parameters to be passed into the StartCore method.</param>
-		public void Start(ISV isv = null, bool sync = false, SyncContext syncContext = null, dynamic startingParameters = null)
+		public void Start(InputBag inputBag = null, bool sync = false, SyncContext syncContext = null, dynamic startingParameters = null)
 		{
 			if (State == ProgramState.Stopped)
 			{
 				//set starting values
-				SetStartingValues(isv);
+				SetStartingValues(inputBag);
 
 				//if sync, or if synccontext is not null
 				if (sync || syncContext != null)
@@ -238,10 +238,10 @@ namespace ZoneLighting.ZoneProgramNS
 
 		#region Helpers
 
-		private void SetStartingValues(ISV isv)
+		private void SetStartingValues(InputBag inputBag)
 		{
-			if (isv != null)
-				SetInputs(isv);
+			if (inputBag != null)
+				SetInputs(inputBag);
 		}
 
 		/// <summary>
@@ -296,9 +296,9 @@ namespace ZoneLighting.ZoneProgramNS
 		/// Returns a key-value pair of the current values of this program's inputs.
 		/// </summary>
 		/// <returns></returns>
-		public ISV GetInputValues()
+		public InputBag GetInputBag()
 		{
-			return Inputs.ToISV();
+			return Inputs.ToInputBag();
 		}
 
 		/// <summary>
@@ -308,7 +308,7 @@ namespace ZoneLighting.ZoneProgramNS
 		/// <returns></returns>
 		public object GetInputValue(string name)
 		{
-			return GetInputValues()[name];
+			return GetInputBag()[name];
 		}
 
 		/// <summary>
@@ -418,7 +418,7 @@ namespace ZoneLighting.ZoneProgramNS
 		}
 
 		/// <summary>
-		/// TODO: Inject this from somewhere else and possibly also do this at the Json-RPC level? (But ISV is inherent dynamic so maybe this is the right place?)
+		/// TODO: Inject this from somewhere else and possibly also do this at the Json-RPC level? (But InputBag is inherent dynamic so maybe this is the right place?)
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="incomingValue"></param>
@@ -481,10 +481,10 @@ namespace ZoneLighting.ZoneProgramNS
 		/// <summary>
 		/// Batch set inputs.
 		/// </summary>
-		/// <param name="isv"></param>
-		public void SetInputs(ISV isv)
+		/// <param name="inputBag"></param>
+		public void SetInputs(InputBag inputBag)
 		{
-			isv.Keys.ToList().ForEach(key => SetInput(key, isv[key]));
+			inputBag.Keys.ToList().ForEach(key => SetInput(key, inputBag[key]));
 		}
 
 		#endregion

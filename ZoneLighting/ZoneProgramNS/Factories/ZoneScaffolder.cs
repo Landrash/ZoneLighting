@@ -231,18 +231,18 @@ namespace ZoneLighting.ZoneProgramNS.Factories
         /// <summary>
         /// Runs a zone with the given program name and starting values of the inputs as a name-value dictionary.
         /// </summary>
-        public void RunZone(Zone zone, string programName, ISV isv = null, bool isSyncRequested = false, SyncContext syncContext = null, bool dontStart = false, dynamic startingParameters = null)
+        public void RunZone(Zone zone, string programName, InputBag inputBag = null, bool isSyncRequested = false, SyncContext syncContext = null, bool dontStart = false, dynamic startingParameters = null)
         {
-            zone.Run(CreateZoneProgram(programName), isv, isSyncRequested, syncContext, dontStart, startingParameters);
+            zone.Run(CreateZoneProgram(programName), inputBag, isSyncRequested, syncContext, dontStart, startingParameters);
         }
 
 
-        public void AddInterruptingProgram(Zone zone, string programName, ISV isv = null, SyncContext syncContext = null)
+        public void AddInterruptingProgram(Zone zone, string programName, InputBag inputBag = null, SyncContext syncContext = null)
         {
             var zoneProgram = CreateZoneProgram(programName);
 
             if (zoneProgram is ReactiveZoneProgram)
-                zone.AddInterruptingProgram((ReactiveZoneProgram)zoneProgram, isv, syncContext);
+                zone.AddInterruptingProgram((ReactiveZoneProgram)zoneProgram, inputBag, syncContext);
             else
                 throw new Exception("Given program is not a reactive program.");
         }
@@ -328,7 +328,7 @@ namespace ZoneLighting.ZoneProgramNS.Factories
         //			{
         //				var zoneToLoadInto = zonesToLoadInto.First(z => zoneToLoadFrom.Name == z.Name);
         //				var zoneProgramName = zoneToLoadFrom.ZoneProgram.Name;
-        //				ISV startingValues = zoneToLoadFrom.ZoneProgram.GetInputValues();
+        //				InputBag startingValues = zoneToLoadFrom.ZoneProgram.GetInputValues();
 
         //				//start the main program
         //				RunZone(zoneToLoadInto, zoneProgramName, startingValues);

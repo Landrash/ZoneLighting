@@ -167,14 +167,14 @@ namespace WebRemoteTests
 			string programSetName = "RainbowSet";
 			string programName = "Rainbow";
 			var zoneName = "FadeCandyZone";
-			dynamic isv = new ISV();
-			isv.Speed = 50;
+			dynamic inputBag = new InputBag();
+			inputBag.Speed = 50;
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
 			var testLC = new TestLightingController("tlc1");
 			zlm.AddZone("FadeCandyZone", testLC, 8);
-			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, isv);
+			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, inputBag);
 			zlm.Zones.ForEach(zone =>
 			{
 				Assert.That(zone.ZoneProgram, Is.Not.Null);
@@ -182,10 +182,10 @@ namespace WebRemoteTests
 				Assert.That(zone.ZoneProgram.GetInput("Speed").Value, Is.EqualTo(50));
 			});
 
-			isv.Speed = 90;
+			inputBag.Speed = 90;
 
 			//act
-			zlmrpc.RecreateProgramSet(programSetName, programName, zoneName.Listify(), isv);
+			zlmrpc.RecreateProgramSet(programSetName, programName, zoneName.Listify(), inputBag);
 
 			//assert
 			zlm.Zones.ForEach(zone =>
@@ -264,14 +264,14 @@ namespace WebRemoteTests
 			string programSetName = "RainbowSet";
 			string programName = "Rainbow";
 			var zoneName = "FadeCandyZone";
-			dynamic isv = new ISV();
-			isv.Speed = 50;
+			dynamic inputBag = new InputBag();
+			inputBag.Speed = 50;
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
 			var testLC = new TestLightingController("tlc1");
 			zlm.AddZone(zoneName, testLC, 8);
-			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, isv);
+			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, inputBag);
 			zlm.Zones.ForEach(zone =>
 			{
 				Assert.That(zone.ZoneProgram, Is.Not.Null);
@@ -279,10 +279,10 @@ namespace WebRemoteTests
 				Assert.That(zone.ZoneProgram.GetInput("Speed").Value, Is.EqualTo(50));
 			});
 
-			isv.Speed = 90;
+			inputBag.Speed = 90;
 
 			//act
-			zlmrpc.SetProgramSetInputs(programSetName, isv);
+			zlmrpc.SetProgramSetInputs(programSetName, inputBag);
 
 			//assert
 			zlm.Zones.ForEach(zone =>
@@ -299,8 +299,8 @@ namespace WebRemoteTests
 			string programSetName = "RainbowSet";
 			string programName = "Rainbow";
 			var zoneName = "FadeCandyZone";
-			dynamic isv = new ISV();
-			isv.Speed = 50;
+			dynamic inputBag = new InputBag();
+			inputBag.Speed = 50;
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
@@ -308,7 +308,7 @@ namespace WebRemoteTests
 			var testLC = new TestLightingController("tlc1");
 			var fadeCandyZone1 = zlm.AddZone("FadeCandyZone1", testLC, 8);
 			var fadeCandyZone2 = zlm.AddZone("FadeCandyZone2", testLC, 8);
-			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, isv);
+			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, inputBag);
 
 			Assert.That(zlm.ProgramSets[programSetName].Zones, Contains.Item(fadeCandyZone1));
 			Assert.That(zlm.ProgramSets[programSetName].Zones, Contains.Item(fadeCandyZone2));
@@ -393,15 +393,15 @@ namespace WebRemoteTests
 			string programSetName = "RainbowSet";
 			string programName = "Rainbow";
 			var zoneName = "FadeCandyZone";
-			dynamic isv = new ISV();
-			isv.Speed = 50;
+			dynamic inputBag = new InputBag();
+			inputBag.Speed = 50;
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
 			var testLC = new TestLightingController("tlc1");
 			var fadeCandyZone1 = zlm.AddZone("FadeCandyZone1", testLC, 8);
 			var fadeCandyZone2 = zlm.AddZone("FadeCandyZone2", testLC, 8);
-			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, isv);
+			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, inputBag);
 
 			var zoneSummary = zlmrpc.GetZoneSummary();
 
@@ -417,8 +417,8 @@ namespace WebRemoteTests
 			string programSetName = "RainbowSet";
 			string programName = "Rainbow";
 			var zoneName = "FadeCandyZone";
-			dynamic isv = new ISV();
-			isv.Speed = 50;
+			dynamic inputBag = new InputBag();
+			inputBag.Speed = 50;
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
@@ -507,8 +507,8 @@ namespace WebRemoteTests
 		{
 			string programSetName = "RainbowSet";
 			string programName = "Rainbow";
-			dynamic isv = new ISV();
-			isv.Speed = 50;
+			dynamic inputBag = new InputBag();
+			inputBag.Speed = 50;
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
@@ -516,12 +516,12 @@ namespace WebRemoteTests
 			var zone1 = zlm.AddZone("Zone1", testLC, 8);
 			var zone2 = zlm.AddZone("Zone2", testLC, 8);
 
-			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, isv);
+			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, inputBag);
 
-			isv.Speed = 90;
+			inputBag.Speed = 90;
 
 			//act
-			zlmrpc.SetZoneInputs("Zone1", isv);
+			zlmrpc.SetZoneInputs("Zone1", inputBag);
 
 			//assert
 			Assert.That(zone1.ZoneProgram.GetInput("Speed").Value, Is.EqualTo(90));
@@ -535,8 +535,8 @@ namespace WebRemoteTests
 		{
 			string programSetName = "RainbowSet";
 			string programName = "Rainbow";
-			dynamic isv = new ISV();
-			isv.Speed = 50;
+			dynamic inputBag = new InputBag();
+			inputBag.Speed = 50;
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
@@ -544,7 +544,7 @@ namespace WebRemoteTests
 			var zone1 = zlm.AddZone("Zone1", testLC, 8);
 			var zone2 = zlm.AddZone("Zone2", testLC, 8);
 
-			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, isv);
+			zlm.CreateProgramSet(programSetName, programName, zlm.Zones.Select(z => z.Name), true, inputBag);
 
 			//act
 			var zones = zlmrpc.GetZones();
@@ -568,8 +568,8 @@ namespace WebRemoteTests
 		{
 			string programSetName = "RainbowSet";
 			string programName = "Rainbow";
-			dynamic isv = new ISV();
-			isv.Speed = 50;
+			dynamic inputBag = new InputBag();
+			inputBag.Speed = 50;
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
@@ -600,8 +600,8 @@ namespace WebRemoteTests
 		{
 			string programSetName = "RainbowSet";
 			string programName = "Rainbow";
-			dynamic isv = new ISV();
-			isv.Speed = 50;
+			dynamic inputBag = new InputBag();
+			inputBag.Speed = 50;
 
 			var zlm = new ZLM(false, false, false);
 			var zlmrpc = new ZLMRPC(zlm);
@@ -609,7 +609,7 @@ namespace WebRemoteTests
 			var zone1 = zlm.AddZone("Zone1", testLC, 8);
 			var zone2 = zlm.AddZone("Zone2", testLC, 8);
 
-			zlm.CreateProgramSet(programSetName, programName, "Zone2".Listify(), true, isv);
+			zlm.CreateProgramSet(programSetName, programName, "Zone2".Listify(), true, inputBag);
 
 			//act
 			var zones = zlmrpc.GetZones();

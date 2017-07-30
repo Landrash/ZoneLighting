@@ -17,6 +17,6 @@ namespace WebRemote.Models
 
 		public ProgramState State { get; set; }
 
-		public ISV Inputs { get; set; }
+		public InputInfo Inputs { get; set; }
 	}
 }

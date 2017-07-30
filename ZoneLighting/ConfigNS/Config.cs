@@ -147,20 +147,20 @@ namespace ZoneLighting.ConfigNS
 			{
 				var zonesEnumerated = zones as IList<Zone> ?? zones.ToList();
 				var zonesToPassIn = zonesEnumerated.Where(z => deserializedProgramSet.Zones.Select(dz => dz.Name).Contains(z.Name));
-				List<ISV> isvs = null;
+				List<InputBag> inputBags = null;
 
-				//prepare isv from deserialized zones
+				//prepare inputBags from deserialized zones
 				foreach (var zone in deserializedProgramSet.Zones.Where(zone => zone.ZoneProgramInputs.ContainsKey(deserializedProgramSet.ProgramName)))
 				{
-					if (isvs == null)
-						isvs = new List<ISV>();
+					if (inputBags == null)
+						inputBags = new List<InputBag>();
 
-					isvs.Add(zone.ZoneProgramInputs[deserializedProgramSet.ProgramName].ToISV());
+					inputBags.Add(zone.ZoneProgramInputs[deserializedProgramSet.ProgramName].ToInputInfo());
 				}
 
 				//create new program set with all values from the deserialized version
 				reinstantiatedProgramSets.Add(new ProgramSet(deserializedProgramSet.ProgramName, zonesToPassIn,
-					deserializedProgramSet.Sync, isvs, deserializedProgramSet.Name));
+					deserializedProgramSet.Sync, inputBags, deserializedProgramSet.Name));
 			});
 
 			//dump the deserialized program sets

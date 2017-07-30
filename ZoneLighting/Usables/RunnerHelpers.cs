@@ -64,7 +64,7 @@ namespace ZoneLighting.Usables
 
 		//	var neoMatrix = CreateNeoMatrixZone(zlm);
 
-		//	var isv = new ISV();
+		//	var isv = new InputBag();
 		//	isv.Add("MaxFadeSpeed", 1);
 		//	isv.Add("MaxFadeDelay", 20);
 		//	isv.Add("Density", 1.0);
@@ -100,7 +100,7 @@ namespace ZoneLighting.Usables
 
 		//public static void RunShimmerOnNeoMatrix(ZLM zlm)
 		//{
-		//	var isv = new ISV();
+		//	var isv = new InputBag();
 		//	isv.Add("MaxFadeSpeed", 1);
 		//	isv.Add("MaxFadeDelay", 20);
 		//	isv.Add("Density", 1.0);
@@ -117,7 +117,7 @@ namespace ZoneLighting.Usables
 
 		//public static void RunShimmerOnNeoMatrixWithoutMIDI(ZLM zlm)
 		//{
-		//	var isv = new ISV();
+		//	var isv = new InputBag();
 		//	isv.Add("MaxFadeSpeed", 1);
 		//	isv.Add("MaxFadeDelay", 20);
 		//	isv.Add("Density", 1.0);
@@ -131,7 +131,7 @@ namespace ZoneLighting.Usables
 
 		//public static void RunShimmerAndBlinkColorReactiveOnNeoMatrix(ZLM zlm)
 		//{
-		//	var isv = new ISV();
+		//	var isv = new InputBag();
 		//	isv.Add("MaxFadeSpeed", 1);
 		//	isv.Add("MaxFadeDelay", 20);
 		//	isv.Add("Density", 1.0);
@@ -150,7 +150,7 @@ namespace ZoneLighting.Usables
 
 		//public static void RunShimmerInLivingRoom(ZLM zlm)
 		//{
-		//	var isv = new ISV();
+		//	var isv = new InputBag();
 		//	isv.Add("MaxFadeSpeed", 1);
 		//	isv.Add("MaxFadeDelay", 20);
 		//	isv.Add("Density", 1.0);
@@ -169,12 +169,12 @@ namespace ZoneLighting.Usables
 
         public static void RunShimmerOnNodeMCUWithoutMIDI(ZLM zlm)
         {
-            var isv = new ISV();
-            isv.Add("MaxFadeSpeed", 1);
-            isv.Add("MaxFadeDelay", 5);
-            isv.Add("Density", 1.0);
-            isv.Add("Brightness", 1.0);
-            isv.Add("Random", true);
+            var inputBag = new InputBag();
+            inputBag.Add("MaxFadeSpeed", 1);
+            inputBag.Add("MaxFadeDelay", 5);
+            inputBag.Add("Density", 1.0);
+            inputBag.Add("Brightness", 1.0);
+            inputBag.Add("Random", true);
             //isv.Add("ColorScheme", ColorScheme.Primaries);
 
             //dynamic startingParameters = new ExpandoObject();
@@ -209,12 +209,12 @@ namespace ZoneLighting.Usables
 
 			CreateZonesFromConfig(zlm.Zones);
 
-			zlm.CreateProgramSet("ShimmerSet", "Shimmer", false, isv, zlm.Zones/*, startingParameters: startingParams*/);
+			zlm.CreateProgramSet("ShimmerSet", "Shimmer", false, inputBag, zlm.Zones/*, startingParameters: startingParams*/);
         }
 
 		//public static void RunShimmerOnNodeMCUWithoutMIDI(ZLM zlm)
 		//{
-		//	var isv = new ISV();
+		//	var isv = new InputBag();
 		//	isv.Add("MaxFadeSpeed", 1);
 		//	isv.Add("MaxFadeDelay", 5);
 		//	isv.Add("Density", 1.0);
@@ -315,7 +315,7 @@ namespace ZoneLighting.Usables
 
 		//public static void RunRainbowOnNeoMatrix(ZLM zlm)
 		//{
-		//	var isv = new ISV();
+		//	var isv = new InputBag();
 		//	isv.Add("Speed", 10);
 		//	isv.Add("DelayTime", 10);
 		//	var neomatrix = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "NeoMatrix", 64, 0.5);
@@ -324,7 +324,7 @@ namespace ZoneLighting.Usables
 
 		//public static void RunShimmerInBasement(ZLM zlm)
 		//{
-		//	var isv = new ISV();
+		//	var isv = new InputBag();
 		//	isv.Add("MaxFadeSpeed", 1);
 		//	isv.Add("MaxFadeDelay", 20);
 		//	isv.Add("Density", 1.0);
@@ -360,7 +360,7 @@ namespace ZoneLighting.Usables
 
 		//   public static void RunMidiTwoDimensionalFadeInBasement(ZLM zlm)
 		//   {
-		//          var isv = new ISV();
+		//          var isv = new InputBag();
 		//          var leftWing = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "LeftWing",
 		//              6, 1);
 		//          var rightwing = ZoneScaffolder.Instance.AddFadeCandyZone(zlm.Zones, "RightWing",
@@ -375,7 +375,7 @@ namespace ZoneLighting.Usables
 
 		//public static void RunShimmerOnNeoMatrixFourZones(ZLM zlm)
 		//{
-		//	var isv = new ISV();
+		//	var isv = new InputBag();
 		//	isv.Add("MaxFadeSpeed", 1);
 		//	isv.Add("MaxFadeDelay", 20);
 		//	isv.Add("Density", 1.0);

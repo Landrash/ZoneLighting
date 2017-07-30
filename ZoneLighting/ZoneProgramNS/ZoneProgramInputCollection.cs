@@ -40,9 +40,21 @@ namespace ZoneLighting.ZoneProgramNS
 			//}
 		}
 
-		public ISV ToISV()
+		public InputBag ToInputBag()
 		{
-			var inputStartingValues = new ISV();
+			var inputStartingValues = new InputBag();
+			this.ToList().ForEach(input =>
+			{
+				if (input.Value != null)
+					inputStartingValues.Add(input.Name, input.Value);
+
+			});
+			return inputStartingValues;
+		}
+
+		public InputInfo ToInputInfo()
+		{
+			var inputStartingValues = new InputInfo();
 			this.ToList().ForEach(input =>
 			{
 				if (input is RangedZoneProgramInput<int>)

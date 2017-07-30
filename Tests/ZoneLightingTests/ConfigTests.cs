@@ -28,14 +28,14 @@ namespace ZoneLightingTests
 
 			zones.Add(new Zone("TestZone1")).AddLights(6);
 
-			dynamic startingValuesOldTz1 = new ISV();
+			dynamic startingValuesOldTz1 = new InputBag();
 			startingValuesOldTz1.DelayTime = 1;
 			startingValuesOldTz1.Speed = 1;
 
 			zones[0].Run(new Rainbow(), startingValuesOldTz1);
 
 			zones.Add(new Zone("TestZone2")).AddLights(12);
-			dynamic startingValuesOldTz2 = new ISV();
+			dynamic startingValuesOldTz2 = new InputBag();
 			startingValuesOldTz2.DelayTime = 1;
 			startingValuesOldTz2.DotColor = Color.BlueViolet;
 
@@ -64,14 +64,14 @@ namespace ZoneLightingTests
 
 			zones.Add(new Zone(testController, "TestZone1")).AddLights(6);
 
-			dynamic startingValuesOldTz1 = new ISV();
+			dynamic startingValuesOldTz1 = new InputBag();
 			startingValuesOldTz1.DelayTime = 1;
 			startingValuesOldTz1.Speed = 1;
 
 			zones[0].Run(new Rainbow(), startingValuesOldTz1);
 
 			zones.Add(new Zone(testController, "TestZone2")).AddLights(12);
-			dynamic startingValuesOldTz2 = new ISV();
+			dynamic startingValuesOldTz2 = new InputBag();
 			startingValuesOldTz2.DelayTime = 1;
 			startingValuesOldTz2.DotColor = Color.BlueViolet;
 

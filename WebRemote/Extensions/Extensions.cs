@@ -30,7 +30,7 @@ namespace WebRemote.Extensions
 		public static ZoneJsonModel ToZoneJsonModel(this Zone zone)
 		{
 			var output = zone.ToJsonModel<Zone, ZoneJsonModel>();
-			output.Inputs = zone.ZoneProgram.Inputs.ToISV();
+			output.Inputs = zone.ZoneProgram.Inputs.ToInputInfo();
 
 			return output;
 		}

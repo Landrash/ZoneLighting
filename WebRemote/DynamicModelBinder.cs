@@ -25,7 +25,7 @@ namespace WebRemote
 			var json = actionContext.Request.Content.ReadAsStringAsync().Result;
 			dynamic jsonDynamic = JsonConvert.DeserializeObject(json, new JsonSerializerSettings()
 			{
-				Converters = new List<JsonConverter>() {new ISVConverter()}
+				Converters = new List<JsonConverter>() {new InputBagConverter()}
 			});
 
 			bindingContext.Model = jsonDynamic;

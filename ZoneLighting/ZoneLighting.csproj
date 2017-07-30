@@ -143,7 +143,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Int32Converter.cs" />
     <Compile Include="Int32DictionaryConverter.cs" />
-    <Compile Include="ISVConverter.cs" />
+    <Compile Include="InputBagConverter.cs" />
     <Compile Include="IZLM.cs" />
     <Compile Include="OPCController.cs" />
     <Compile Include="StockPrograms\LivingRoomMidiPlay.cs" />
@@ -195,9 +195,10 @@
     <Compile Include="ZoneProgramNS\ColorScheme.cs" />
     <Compile Include="ZoneProgramNS\HSLColor.cs" />
     <Compile Include="ZoneProgramNS\IClock.cs" />
+    <Compile Include="ZoneProgramNS\InputInfo.cs" />
     <Compile Include="ZoneProgramNS\LightingPattern.cs" />
     <Compile Include="ZoneProgramNS\Factories\ZoneScaffolder.cs" />
-    <Compile Include="ZoneProgramNS\InputStartingValues.cs" />
+    <Compile Include="ZoneProgramNS\InputBag.cs" />
     <Compile Include="ZoneProgramNS\InterruptInfo.cs" />
     <Compile Include="ZoneProgramNS\InterruptingInput.cs" />
     <Compile Include="ZoneProgramNS\IZoneProgramInput.cs" />

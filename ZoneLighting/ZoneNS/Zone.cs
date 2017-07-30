@@ -143,7 +143,7 @@ namespace ZoneLighting.ZoneNS
 		/// <summary>
 		/// Adds an interrupting program to the zone.
 		/// </summary>
-		public void AddInterruptingProgram(ReactiveZoneProgram interruptingProgram, ISV isv = null, SyncContext syncContext = null)
+		public void AddInterruptingProgram(ReactiveZoneProgram interruptingProgram, InputBag inputBag = null, SyncContext syncContext = null)
 		{
 			interruptingProgram.SetSyncContext(syncContext);
 			interruptingProgram.SetInterruptQueue(InterruptQueue);
@@ -323,24 +323,24 @@ namespace ZoneLighting.ZoneNS
 
 		#endregion
 
-        public void Run(ZoneProgram zoneProgram, ISV isv = null, bool isSyncRequested = false, SyncContext syncContext = null, bool dontStart = false, dynamic startingParameters = null)
+        public void Run(ZoneProgram zoneProgram, InputBag inputBag = null, bool isSyncRequested = false, SyncContext syncContext = null, bool dontStart = false, dynamic startingParameters = null)
 		{
 			if (!Running)
 			{
 				SetupInterruptProcessing();
-				SetupZoneProgram(zoneProgram, isv, isSyncRequested, syncContext, dontStart, startingParameters);
+				SetupZoneProgram(zoneProgram, inputBag, isSyncRequested, syncContext, dontStart, startingParameters);
 				Running = true;
 			}
 		}
 
-		private void SetupZoneProgram(ZoneProgram zoneProgram, ISV isv, bool isSyncRequested, SyncContext syncContext, bool dontStart, dynamic startingParameters = null)
+		private void SetupZoneProgram(ZoneProgram zoneProgram, InputBag inputBag, bool isSyncRequested, SyncContext syncContext, bool dontStart, dynamic startingParameters = null)
 		{
 			SetProgram(zoneProgram);
 			ZoneProgram.LightingController = LightingController;
 			ZoneProgram.SetSyncContext(syncContext);
 			ZoneProgram.SetInterruptQueue(InterruptQueue);
 			if (!dontStart)
-				ZoneProgram.Start(isv, isSyncRequested, startingParameters: startingParameters);
+				ZoneProgram.Start(inputBag, isSyncRequested, startingParameters: startingParameters);
 		}
 
 		public bool Running { get; private set; }

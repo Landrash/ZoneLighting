@@ -15,14 +15,14 @@ namespace WebRemote
 		void DisposeProgramSets();
 		List<ZoneJsonModel> GetZones();
 		
-		//void RestartProgramSet(string programSetName, string programName, List<string> zoneNames, ISV isv);
+		//void RestartProgramSet(string programSetName, string programName, List<string> zoneNames, InputBag inputBag);
 		void StopProgramSet(string programSetName);
-		void SetZoneInputs(string zoneName, ISV isv);
+		void SetZoneInputs(string zoneName, InputBag inputBag);
 		string GetZoneSummary();
-		void SetProgramSetInputs(string programSetName, ISV isv);
+		void SetProgramSetInputs(string programSetName, InputBag inputBag);
 		void StartProgramSet(string programSetName);
 
-		ProgramSetJsonModel CreateProgramSet(string programSetName, string programName, IEnumerable<string> zoneNames, bool sync = true, ISV isv = null, dynamic startingParameters = null);
+		ProgramSetJsonModel CreateProgramSet(string programSetName, string programName, IEnumerable<string> zoneNames, bool sync = true, InputBag inputBag = null, dynamic startingParameters = null);
 
 		//List<Zone> GetZones();
 		//List<Zone> GetAvailableZones();
@@ -41,7 +41,7 @@ namespace WebRemote
 		void SetLightColor(string zoneName, string color, int index, float brightness = 1);
 
 		void SetAllZonesColor(string color, float brightness = 1);
-		void SetInputs(string programSetOrZoneName, ISV isv);
-		void RecreateProgramSet(string programSetName, string programName, List<string> zoneNames, ISV isv);
+		void SetInputs(string programSetOrZoneName, InputBag inputBag);
+		void RecreateProgramSet(string programSetName, string programName, List<string> zoneNames, InputBag inputBag);
 	}
 }

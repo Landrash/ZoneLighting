@@ -44,10 +44,10 @@ namespace ZoneLighting
 		#region Program Set
 
 		public ProgramSet CreateProgramSet(string programSetName, string programName, IEnumerable<string> zoneNames, bool sync = true,
-			ISV isv = null, dynamic startingParameters = null)
+			InputBag inputBag = null, dynamic startingParameters = null)
 		{
 			var zones = GetZonesByNames(zoneNames.ToList());
-			return CreateProgramSet(programSetName, programName, sync, isv, zones, startingParameters);
+			return CreateProgramSet(programSetName, programName, sync, inputBag, zones, startingParameters);
 		}
 
 		/// <summary>
@@ -56,17 +56,17 @@ namespace ZoneLighting
 		/// <param name="programSetName">Name of program set</param>
 		/// <param name="programName">Name of program</param>
 		/// <param name="sync">Whether or not to start the programs in sync</param>
-		/// <param name="isv">Input starting values - starting values for the inputs</param>
+		/// <param name="inputBag">Input starting values - starting values for the inputs</param>
 		/// <param name="zones">Zones to run the program set on</param>
 		/// <param name="startingParameters">Starting parameters for creating this program set. These will be fed to the constructor(s) of the ZoneProgram(s).</param>
-		public ProgramSet CreateProgramSet(string programSetName, string programName, bool sync, ISV isv,
+		public ProgramSet CreateProgramSet(string programSetName, string programName, bool sync, InputBag inputBag,
 			IEnumerable<Zone> zones, dynamic startingParameters = null)
 		{
 			var zonesList = zones as IList<Zone> ?? zones.ToList();
 			if (zonesList.Any(z => !AvailableZones.Contains(z)))
 				throw new Exception("Some of the provided zones are not available.");
 
-			var programSet = new ProgramSet(programName, zonesList, sync, isv.Listify(), programSetName, startingParameters);
+			var programSet = new ProgramSet(programName, zonesList, sync, inputBag.Listify(), programSetName, startingParameters);
 			ProgramSets.Add(programSet);
 			return programSet;
 		}
@@ -74,24 +74,24 @@ namespace ZoneLighting
 		/// <summary>
 		/// Creates a ProgramSet with one program instance
 		/// </summary>
-		public ProgramSet CreateSingularProgramSet(string programSetName, ZoneProgram program, ISV isv, Zone zone, dynamic startingParameters = null)
+		public ProgramSet CreateSingularProgramSet(string programSetName, ZoneProgram program, InputBag inputBag, Zone zone, dynamic startingParameters = null)
 		{
 			if (!AvailableZones.Contains(zone)) throw new Exception("The provided zone is not available.");
 
-			var programSet = new ProgramSet(program, zone, isv, programSetName, startingParameters);
+			var programSet = new ProgramSet(program, zone, inputBag, programSetName, startingParameters);
 			ProgramSets.Add(programSet);
 			return programSet;
 		}
 
 		/// <summary>
-		/// Disposes the given program set and creates another with the same name and the given parameters (name, zones and ISV).
+		/// Disposes the given program set and creates another with the same name and the given parameters (name, zones and InputBag).
 		/// </summary>
-		public void RecreateProgramSet(string programSetName, string programName, List<string> zoneNames, ISV isv)
+		public void RecreateProgramSet(string programSetName, string programName, List<string> zoneNames, InputBag inputBag)
 		{
 			var zones = GetZonesByNames(zoneNames);
 
 			DisposeProgramSets(programSetName.Listify(), true);
-			CreateProgramSet(programSetName, programName, false, isv, zones);
+			CreateProgramSet(programSetName, programName, false, inputBag, zones);
 		}
 
 		/// <summary>
@@ -118,9 +118,9 @@ namespace ZoneLighting
 		/// <summary>
 		/// Sets inputs for a given program set. This will set inputs for all programs in the program set.
 		/// </summary>
-		public void SetProgramSetInputs(string programSetName, ISV isv)
+		public void SetProgramSetInputs(string programSetName, InputBag inputBag)
 		{
-			ProgramSets[programSetName].SetInputs(isv);
+			ProgramSets[programSetName].SetInputs(inputBag);
 		}
 
 		/// <summary>
@@ -130,7 +130,7 @@ namespace ZoneLighting
 		/// </summary>
 		public void RecreateProgramSetWithoutZone(string programSetName, string zoneName, bool force = false)
 		{
-			var isv = ProgramSets[programSetName].Zones.First().ZoneProgram.GetInputValues();
+			var inputBag = ProgramSets[programSetName].Zones.First().ZoneProgram.GetInputBag();
 			var programName = ProgramSets[programSetName].ProgramName;
 			var zones = ProgramSets[programSetName].Zones.Select(zone => zone.Name).ToList();
 			var sync = ProgramSets[programSetName].Sync;
@@ -138,7 +138,7 @@ namespace ZoneLighting
 			zones.Remove(zoneName);
 			Zones[zoneName].ClearColors();
 			//todo: get starting parameters to work - currently null is being passed in
-			CreateProgramSet(programSetName, programName, zones, sync, isv, null);
+			CreateProgramSet(programSetName, programName, zones, sync, inputBag, null);
 		}
 
 		#endregion
@@ -150,9 +150,9 @@ namespace ZoneLighting
 			Zones.First(z => z.Name == zoneName).Stop(force);
 		}
 
-		public void SetZoneInputs(string zoneName, ISV isv)
+		public void SetZoneInputs(string zoneName, InputBag inputBag)
 		{
-			Zones[zoneName].ZoneProgram.SetInputs(isv);
+			Zones[zoneName].ZoneProgram.SetInputs(inputBag);
 		}
 
 		public void SetZoneColor(string zoneName, string color, float brightness)

@@ -7,11 +7,11 @@ using ZoneLighting.ZoneProgramNS;
 
 namespace WebRemote.Automapper
 {
-	public class ProgramSetJsonModelInputsResolver : IValueResolver<ProgramSet, ProgramSetJsonModel, ISV>
+	public class ProgramSetJsonModelInputsResolver : IValueResolver<ProgramSet, ProgramSetJsonModel, InputInfo>
 	{
-		public ISV Resolve(ProgramSet source, ProgramSetJsonModel destination, ISV destMember, ResolutionContext context)
+		public InputInfo Resolve(ProgramSet source, ProgramSetJsonModel destination, InputInfo destMember, ResolutionContext context)
 		{
-			if (source == null) return new ISV();
+			if (source == null) return new InputInfo();
 			
 			var inputs = source.Zones.First().ZoneProgram.Inputs;
 				
@@ -28,7 +28,7 @@ namespace WebRemote.Automapper
 				}
 			}
 
-			return inputs.ToISV();
+			return inputs.ToInputInfo();
 		}
 	}
 }

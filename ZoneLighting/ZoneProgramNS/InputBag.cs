@@ -6,18 +6,18 @@ using Newtonsoft.Json;
 namespace ZoneLighting.ZoneProgramNS
 {
 	/// <summary>
-	/// Input Starting Values = ISV
+	/// InputBag
 	/// </summary>
 	[Serializable]
-	[JsonConverter(typeof(ISVConverter))]
-	public class ISV : DynamicObject
+	[JsonConverter(typeof(InputBagConverter))]
+	public class InputBag : DynamicObject
 	{
-		public ISV(Dictionary<string, object> dictionary)
+		public InputBag(Dictionary<string, object> dictionary)
 		{
 			Dictionary = dictionary;
 		}
 
-		public ISV()
+		public InputBag()
 		{
 		}
 

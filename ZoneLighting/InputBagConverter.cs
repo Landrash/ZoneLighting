@@ -1,23 +1,22 @@
 using System;
 using System.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using ZoneLighting.ZoneProgramNS;
 
 namespace ZoneLighting
 {
-	public class ISVConverter : JsonConverter
+	public class InputBagConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType == typeof(ISV);
+			return objectType == typeof(InputBag);
 		}
 
 		public override bool CanWrite => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var result = new ISV();
+			var result = new InputBag();
 			reader.Read();
 
 			while (reader.TokenType == JsonToken.PropertyName)
@@ -38,13 +37,13 @@ namespace ZoneLighting
 		/// </summary>
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var isv = (ISV)value;
+			var inputBag = (InputBag)value;
 
 			writer.WriteStartObject();
-			isv.Keys.ToList().ForEach(key =>
+			inputBag.Keys.ToList().ForEach(key =>
 			{
 				writer.WritePropertyName(key.ToPascalCase());
-				serializer.Serialize(writer, isv[key]);
+				serializer.Serialize(writer, inputBag[key]);
 			});
 			writer.WriteEndObject();
 		}

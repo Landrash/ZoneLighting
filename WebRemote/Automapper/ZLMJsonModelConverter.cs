@@ -16,11 +16,11 @@ namespace WebRemote.Automapper
 	//	}
 	//}
 
-	public class ZoneJsonModelInputsResolver : IValueResolver<Zone, ZoneJsonModel, ISV>
+	public class ZoneJsonModelInputsResolver : IValueResolver<Zone, ZoneJsonModel, InputInfo>
 	{
-		public ISV Resolve(Zone source, ZoneJsonModel destination, ISV destMember, ResolutionContext context)
+		public InputInfo Resolve(Zone source, ZoneJsonModel destination, InputInfo destMember, ResolutionContext context)
 		{
-			return source?.ZoneProgram?.Inputs?.ToISV();
+			return source?.ZoneProgram?.Inputs?.ToInputInfo();
 		}
 	}
 }

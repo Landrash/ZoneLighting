@@ -37,31 +37,31 @@ namespace ZoneLighting
 		/// <param name="programSetName">Name of program set</param>
 		/// <param name="programName">Name of program</param>
 		/// <param name="sync">Whether or not to start the programs in sync</param>
-		/// <param name="isv">Input starting values - starting values for the inputs</param>
+		/// <param name="inputBag">Input starting values - starting values for the inputs</param>
 		/// <param name="zones">Zones to run the program set on</param>
 		/// <param name="startingParameters">Starting parameters for creating this program set. These will be fed to the constructor(s) of the ZoneProgram(s).</param>
-		ProgramSet CreateProgramSet(string programSetName, string programName, bool sync, ISV isv,
+		ProgramSet CreateProgramSet(string programSetName, string programName, bool sync, InputBag inputBag,
 			IEnumerable<Zone> zones, dynamic startingParameters = null);
 
 		/// <summary>
 		/// Creates a ProgramSet with one program instance
 		/// </summary>
-		ProgramSet CreateSingularProgramSet(string programSetName, ZoneProgram program, ISV isv, Zone zone, dynamic startingParameters = null);
+		ProgramSet CreateSingularProgramSet(string programSetName, ZoneProgram program, InputBag inputBag, Zone zone, dynamic startingParameters = null);
 
-		void RecreateProgramSet(string programSetName, string programName, List<string> zoneNames, ISV isv);
+		void RecreateProgramSet(string programSetName, string programName, List<string> zoneNames, InputBag inputBag);
 		void DisposeProgramSets(List<string> programSetNames = null, bool force = false);
 		void StopZone(string zoneName, bool force);
-		void SetZoneInputs(string zoneName, ISV isv);
+		void SetZoneInputs(string zoneName, InputBag inputBag);
 		void SetZoneColor(string zoneName, string color, float brightness);
 		string GetZoneSummary();
 		void StopZones();
 		void DisposeZones();
 		void SaveProgramSets(string filename = null);
 		void SaveZones(string filename = null);
-		void SetProgramSetInputs(string programSetName, ISV isv);
+		void SetProgramSetInputs(string programSetName, InputBag inputBag);
 
 		ProgramSet CreateProgramSet(string programSetName, string programName, IEnumerable<string> zoneNames, bool sync = true,
-			ISV isv = null, dynamic startingParameters = null);
+			InputBag inputBag = null, dynamic startingParameters = null);
 
 		
 		/// <summary>
