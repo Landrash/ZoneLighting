@@ -25,52 +25,7 @@ export class ZLMFormProvider {
     //else
     //  return null;
 
-    return this.formProvider.getZLMForm();
-  }
-
-  public loadZLM() {
-    this.slimLoadingBarService.start();
-    this.http.get(this.zlmURL)
-      .map(response => <ZLM>response.json())
-      .subscribe(zlm => {
-        console.log(zlm);
-        this.formProvider.setZLMForm(zlm);
-        this.formProvider.getZLMForm().valueChanges.subscribe(value => {
-          console.log(value);
-        });
-        console.log(this.formProvider.getZLMForm());
-        this.setupForm();
-        this.slimLoadingBarService.complete();
-      },
-      err => console.log(err));
-  }
-
-  private setupForm() {
-    (<FormArray>(this.formProvider.getZLMForm().controls['programSets'])).controls.forEach(programSet => {
-      (<FormArray>(<FormGroup>programSet).controls['zones']).controls.forEach(zone => {
-        (<FormGroup>zone).controls['inputs'].valueChanges.debounceTime(this.debounceTime).subscribe(value => {
-          this.adjustAndSetInputs(value, programSet);
-        });
-      });
-
-      (<FormGroup>programSet).controls['programName'].valueChanges.debounceTime(this.debounceTime).subscribe(value => {
-        this.recreateProgramSet((<FormGroup>programSet).controls['name'].value,
-          value.toString(),
-          (<FormGroup>programSet).controls['zones'].value.map(x => x.name))
-          .subscribe(
-          response =>
-            console.log(response));
-      });
-
-      (<FormGroup>programSet).controls['inputs'].valueChanges.debounceTime(this.debounceTime).subscribe(value => {
-        this.adjustAndSetInputs(value, programSet);
-      });
-    });
-  }
-
-  public recreateProgramSet(programSetName: string, programName: string, zoneNames: string[], isv: any = null) {
-    return this.http.post(this.zlmURL + '/RecreateProgramSet', [programSetName, programName, zoneNames])
-      .map(res => <ZLM>res.json());
+    return this.formProvider.zlmForm;
   }
 
   private adjustAndSetInputs(value: any, programSet: any) {
@@ -81,7 +36,7 @@ export class ZLMFormProvider {
       }
     });
 
-    this.setInputs(programSet.value.name, value).subscribe(response => console.log(response));
+    this.setInputs(programSet.value.name, value).subscribe(zlm => this.handleZLMResponse(zlm));
   }
 
   public setInputs(programSet: string, inputs: any) {
@@ -92,4 +47,59 @@ export class ZLMFormProvider {
 
     return this.http.post(this.zlmURL + '/SetInputs', [programSet, inputs]).map(res => <ZLM>res.json());
   }
+
+  private setupForm() {
+    (<FormArray>(this.getZLMForm().controls['programSets'])).controls.forEach(programSet => {
+      (<FormArray>(<FormGroup>programSet).controls['zones']).controls.forEach(zone => {
+        (<FormGroup>zone).controls['inputs'].valueChanges.debounceTime(this.debounceTime).subscribe(value => {
+          this.adjustAndSetInputs(value, programSet);
+        });
+      });
+
+      (<FormGroup>programSet).controls['programName'].valueChanges.debounceTime(this.debounceTime).subscribe(value => {
+        this.recreateProgramSet((<FormGroup>programSet).controls['name'].value,
+            value.toString(),
+            (<FormGroup>programSet).controls['zones'].value.map(x => x.name))
+          .subscribe(
+            zlm =>
+            this.handleZLMResponse(zlm)
+          );
+      });
+
+      (<FormGroup>programSet).controls['inputs'].valueChanges.debounceTime(this.debounceTime).subscribe(value => {
+        this.adjustAndSetInputs(value, programSet);
+      });
+    });
+  }
+
+
+
+  public loadZLM() {
+    this.slimLoadingBarService.start();
+    this.http.get(this.zlmURL)
+      .map(response => <ZLM>response.json())
+      .subscribe(zlm => {
+          this.handleZLMResponse(zlm);
+        },
+        err => console.log(err));
+  }
+
+  private handleZLMResponse(zlm: ZLM) {
+    console.log(zlm);
+    this.formProvider.setZLMForm(zlm);
+    this.getZLMForm().valueChanges.subscribe(value => {
+      console.log(value);
+    });
+    console.log(this.getZLMForm());
+    this.setupForm();
+    this.slimLoadingBarService.complete();
+  }
+
+
+
+  public recreateProgramSet(programSetName: string, programName: string, zoneNames: string[], isv: any = null) {
+    return this.http.post(this.zlmURL + '/RecreateProgramSet', [programSetName, programName, zoneNames])
+      .map(res => <ZLM>res.json());
+  }
+
 }

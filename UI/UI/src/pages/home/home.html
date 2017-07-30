@@ -18,23 +18,21 @@
             <p>
               <ion-list>
                 <ion-item padding *ngFor="let programSet of zlmForm.controls.programSets.controls">
-                  <!--<ion-label stacked>-->
-                  <h2 (click)="toggleDetails(programSet)">{{programSet.value.name}} <ion-icon [name]="!programSet.showDetails ? 'ios-arrow-dropdown' : 'ios-arrow-dropup'" item-right></ion-icon></h2>
-                  <!--</ion-label>-->
-                  <!--<div >-->
-                  <ion-list *ngIf="programSet.showDetails">
-                    <ion-item>
-                      <ion-label>Program Name</ion-label>
-                      <ion-select [formControl]="programSet.controls['programName']">
-                        <ion-option *ngFor="let programName of zlmForm.controls['availablePrograms'].value" [value]="programName">{{programName}}</ion-option>
-                      </ion-select>
-                    </ion-item>
-                    <dynamic-input *ngFor="let input of objectType.keys(programSet.controls.inputs.controls)"
-                                   [name]="input"
-                                   [inputForm]="programSet.controls.inputs.controls[input]"
-                                   [controlType]="helperProvider.resolveControlTypeForInput(programSet.controls.inputs.controls[input].value)"></dynamic-input>
+                  <h2 (click)="toggleDetails(programSet)">{{programSet.value.name}} <!--<ion-icon [name]="!programSet.showDetails ? 'ios-arrow-dropdown' : 'ios-arrow-dropup'" item-right></ion-icon>--></h2>
+                  <ion-list>
+                    <div>
+                      <ion-item>
+                        Program Name
+                        <ion-select [formControl]="programSet.controls['programName']">
+                          <ion-option *ngFor="let programName of zlmForm.controls['availablePrograms'].value" [value]="programName">{{programName}}</ion-option>
+                        </ion-select>
+                      </ion-item>
+                      <dynamic-input *ngFor="let input of objectType.keys(programSet.controls.inputs.controls)"
+                                     [name]="input"
+                                     [inputForm]="programSet.controls.inputs.controls[input]"
+                                     [controlType]="helperProvider.resolveControlTypeForInput(programSet.controls.inputs.controls[input].value)"></dynamic-input>
+                    </div>
                   </ion-list>
-                  <!--</div>-->
                 </ion-item>
               </ion-list>
             </p>

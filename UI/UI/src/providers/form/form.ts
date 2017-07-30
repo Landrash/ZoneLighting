@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class FormProvider {
 
-  private zlmForm: FormGroup = null;
+  public zlmForm: FormGroup = null;
 
   constructor(private fb: FormBuilder) {
   }
