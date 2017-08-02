@@ -199,7 +199,14 @@ namespace ExternalPrograms
 			Tasks.ForEach(task =>
 			{
 				if (!task.IsCanceled && !task.IsCompleted)
-					task.Dispose();
+					try
+					{
+						task.Dispose();
+					}
+					catch (Exception ex)
+					{
+						System.Console.WriteLine(ex.StackTrace);
+					}
 			});
 			Tasks.Clear();
 			PixelStates = null;
