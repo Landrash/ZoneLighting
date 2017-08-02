@@ -37,12 +37,12 @@ export class HomePage implements OnInit {
   }
 
   toggleDetails(item) {
-    if (item.showDetails) {
-      item.showDetails = false;
-      item.icon = 'ios-add-circle-outline';
+    if (item.hideDetails) {
+      item.hideDetails = false;
+      //item.icon = 'ios-remove-circle-outline';
     } else {
-      item.showDetails = true;
-      item.icon = 'ios-remove-circle-outline';
+      item.hideDetails = true;
+      //item.icon = 'ios-add-circle-outline';
     }
   }
 }

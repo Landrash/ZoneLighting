@@ -18,9 +18,10 @@
             <p>
               <ion-list>
                 <ion-item padding *ngFor="let programSet of zlmForm.controls.programSets.controls">
-                  <h2 (click)="toggleDetails(programSet)">{{programSet.value.name}} <!--<ion-icon [name]="!programSet.showDetails ? 'ios-arrow-dropdown' : 'ios-arrow-dropup'" item-right></ion-icon>--></h2>
-                  <ion-list>
-
+                  <h2 (click)="toggleDetails(programSet)">
+                    {{programSet.value.name}} <ion-icon [name]="!programSet.hideDetails ? 'ios-arrow-dropup' : 'ios-arrow-dropdown'" item-right></ion-icon>
+                  </h2>
+                  <ion-list *ngIf="!!!programSet.hideDetails">
                     <ion-item>
                       <!--<ion-label stacked>Program Name</ion-label>-->
                       <ion-select [formControl]="programSet.controls['programName']">
@@ -49,13 +50,14 @@
               <ion-list>
                 <ion-item padding *ngFor="let zone of zlmForm.controls.zones.controls">
                   <h2 (click)="toggleDetails(zone)">
-                    {{zone.value.name}} <!--<ion-icon [name]="!programSet.showDetails ? 'ios-arrow-dropdown' : 'ios-arrow-dropup'" item-right></ion-icon>-->
+                    {{zone.value.name}} <ion-icon [name]="!zone.hideDetails ? 'ios-arrow-dropup' : 'ios-arrow-dropdown'" item-right></ion-icon>
                   </h2>
-                  <ion-list>
+                  <ion-list *ngIf="!!!zone.hideDetails">
                     <ion-item>
-                      <ion-select [formControl]="zone.controls['programName']">
+                      Program: {{zone.controls['programName'].value}}
+                      <!--<ion-select [formControl]="zone.controls['programName']">
                         <ion-option *ngFor="let programName of zlmForm.controls['availablePrograms'].value" [value]="programName">{{programName}}</ion-option>
-                      </ion-select>
+                      </ion-select>-->
                     </ion-item>
                     <dynamic-input *ngFor="let input of objectType.keys(zone.controls.inputs.controls)"
                                    [name]="input"
