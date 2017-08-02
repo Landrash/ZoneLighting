@@ -32,7 +32,7 @@ namespace WebRemoteTests
 			Assert.That(zone.Name, Is.EqualTo(name));
 			Assert.That(zone.LightCount, Is.EqualTo(numberOfLights));
 			Assert.That(zone.Running, Is.EqualTo(false));
-			Assert.That(zone.ZoneProgramName, Is.EqualTo(null));
+			Assert.That(zone.ProgramName, Is.EqualTo(null));
 
 			zlmrpc.Dispose();
 		}
@@ -553,12 +553,12 @@ namespace WebRemoteTests
 			Assert.That(zones.First(x => x.Name == "Zone1").Brightness, Is.EqualTo(zlm.Zones["Zone1"].Brightness));
 			Assert.That(zones.First(x => x.Name == "Zone1").LightCount, Is.EqualTo(zlm.Zones["Zone1"].LightCount));
 			Assert.That(zones.First(x => x.Name == "Zone1").Running, Is.EqualTo(zlm.Zones["Zone1"].Running));
-			Assert.That(zones.First(x => x.Name == "Zone1").ZoneProgramName, Is.EqualTo(zlm.Zones["Zone1"].ZoneProgram.Name));
+			Assert.That(zones.First(x => x.Name == "Zone1").ProgramName, Is.EqualTo(zlm.Zones["Zone1"].ZoneProgram.Name));
 
 			Assert.That(zones.First(x => x.Name == "Zone2").Brightness, Is.EqualTo(zlm.Zones["Zone2"].Brightness));
 			Assert.That(zones.First(x => x.Name == "Zone2").LightCount, Is.EqualTo(zlm.Zones["Zone2"].LightCount));
 			Assert.That(zones.First(x => x.Name == "Zone2").Running, Is.EqualTo(zlm.Zones["Zone2"].Running));
-			Assert.That(zones.First(x => x.Name == "Zone2").ZoneProgramName, Is.EqualTo(zlm.Zones["Zone2"].ZoneProgram.Name));
+			Assert.That(zones.First(x => x.Name == "Zone2").ProgramName, Is.EqualTo(zlm.Zones["Zone2"].ZoneProgram.Name));
 
 			zlmrpc.Dispose();
 		}
@@ -585,12 +585,12 @@ namespace WebRemoteTests
 			Assert.That(zones.First(x => x.Name == "Zone1").Brightness, Is.EqualTo(zlm.Zones["Zone1"].Brightness));
 			Assert.That(zones.First(x => x.Name == "Zone1").LightCount, Is.EqualTo(zlm.Zones["Zone1"].LightCount));
 			Assert.That(zones.First(x => x.Name == "Zone1").Running, Is.EqualTo(zlm.Zones["Zone1"].Running));
-			Assert.That(zones.First(x => x.Name == "Zone1").ZoneProgramName, Is.EqualTo(string.Empty).Or.EqualTo(null));
+			Assert.That(zones.First(x => x.Name == "Zone1").ProgramName, Is.EqualTo(string.Empty).Or.EqualTo(null));
 
 			Assert.That(zones.First(x => x.Name == "Zone2").Brightness, Is.EqualTo(zlm.Zones["Zone2"].Brightness));
 			Assert.That(zones.First(x => x.Name == "Zone2").LightCount, Is.EqualTo(zlm.Zones["Zone2"].LightCount));
 			Assert.That(zones.First(x => x.Name == "Zone2").Running, Is.EqualTo(zlm.Zones["Zone2"].Running));
-			Assert.That(zones.First(x => x.Name == "Zone2").ZoneProgramName, Is.EqualTo(string.Empty).Or.EqualTo(null));
+			Assert.That(zones.First(x => x.Name == "Zone2").ProgramName, Is.EqualTo(string.Empty).Or.EqualTo(null));
 
 			zlmrpc.Dispose();
 		}
@@ -618,12 +618,12 @@ namespace WebRemoteTests
 			Assert.That(zones.First(x => x.Name == "Zone1").Brightness, Is.EqualTo(zlm.Zones["Zone1"].Brightness));
 			Assert.That(zones.First(x => x.Name == "Zone1").LightCount, Is.EqualTo(zlm.Zones["Zone1"].LightCount));
 			Assert.That(zones.First(x => x.Name == "Zone1").Running, Is.EqualTo(zlm.Zones["Zone1"].Running));
-			Assert.That(zones.First(x => x.Name == "Zone1").ZoneProgramName, Is.EqualTo(string.Empty).Or.EqualTo(null));
+			Assert.That(zones.First(x => x.Name == "Zone1").ProgramName, Is.EqualTo(string.Empty).Or.EqualTo(null));
 
 			Assert.That(zones.First(x => x.Name == "Zone2").Brightness, Is.EqualTo(zlm.Zones["Zone2"].Brightness));
 			Assert.That(zones.First(x => x.Name == "Zone2").LightCount, Is.EqualTo(zlm.Zones["Zone2"].LightCount));
 			Assert.That(zones.First(x => x.Name == "Zone2").Running, Is.EqualTo(zlm.Zones["Zone2"].Running));
-			Assert.That(zones.First(x => x.Name == "Zone2").ZoneProgramName, Is.EqualTo(zlm.Zones["Zone2"].ZoneProgram.Name));
+			Assert.That(zones.First(x => x.Name == "Zone2").ProgramName, Is.EqualTo(zlm.Zones["Zone2"].ZoneProgram.Name));
 
 			zlmrpc.Dispose();
 		}

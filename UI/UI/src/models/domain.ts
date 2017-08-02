@@ -14,7 +14,7 @@ export enum ProgramState {
 
 export class Zone {
   name: string;
-  zoneProgramName: string;
+  programName: string;
   brightness: number;
   running: boolean;
   lightCount: number;

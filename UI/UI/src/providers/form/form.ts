@@ -54,7 +54,7 @@ export class FormProvider {
     zones.forEach(zone =>
       returnValue.push(this.fb.group({
         name: [zone.name],
-        zoneProgramName: [zone.zoneProgramName],
+        programName: [zone.programName],
         brightness: [zone.brightness],
         running: [zone.running],
         lightCount: [zone.lightCount],

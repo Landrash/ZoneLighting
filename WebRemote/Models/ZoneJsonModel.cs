@@ -9,7 +9,7 @@ namespace WebRemote.Models
 	{
 		public string Name { get; set; }
 		
-		public string ZoneProgramName { get; set; }
+		public string ProgramName { get; set; }
 		
 		public double Brightness { get; set; }
 
