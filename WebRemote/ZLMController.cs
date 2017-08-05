@@ -98,11 +98,22 @@ namespace WebRemote
 		[HttpPost]
 		public ZLMJsonModel RecreateProgramSet(JArray param)
 		{
-			string programSetName = param[0].ToObject<string>();
-			string programName = param[1].ToObject<string>();
+			var programSetName = param[0].ToObject<string>();
+			var programName = param[1].ToObject<string>();
 			var zoneNames = param[2].ToObject<List<string>>();
 
 			ZLMRPC.RecreateProgramSet(programSetName, programName, zoneNames, null);
+			return ZLMJsonModel;
+		}
+
+
+		[HttpPost]
+		public ZLMJsonModel RecreateProgramSetWithoutZone(JArray param)
+		{
+			var programSetName = param[0].ToObject<string>();
+			var zoneName = param[1].ToObject<string>();
+
+			ZLMRPC.RecreateProgramSetWithoutZone(programSetName, zoneName);
 			return ZLMJsonModel;
 		}
 
@@ -124,6 +135,16 @@ namespace WebRemote
 		public string GetZoneSummary()
 		{
 			return ZLMRPC.GetZoneSummary();
+		}
+
+		[HttpPost]
+		public ZLMJsonModel SetZoneInputs(JArray param)
+		{
+			var zoneName = param[0].ToObject<string>();
+			var inputBag = param[1].ToObject<InputBag>();
+
+			ZLMRPC.SetZoneInputs(zoneName, inputBag);
+			return ZLMJsonModel;
 		}
 
 		#endregion

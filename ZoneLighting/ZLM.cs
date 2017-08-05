@@ -128,13 +128,13 @@ namespace ZoneLighting
 		/// TODO: This is a very unelegant and stupid way of removing zones (basically disposing and recreating the program set without the zone)
 		/// TODO: What needs to happen is Unsync, which is currently broken for 3 or more programs. This needs to be resolved eventually. 
 		/// </summary>
-		public void RecreateProgramSetWithoutZone(string programSetName, string zoneName, bool force = false)
+		public void RecreateProgramSetWithoutZone(string programSetName, string zoneName, bool force = true)
 		{
 			var inputBag = ProgramSets[programSetName].Zones.First().ZoneProgram.GetInputBag();
 			var programName = ProgramSets[programSetName].ProgramName;
 			var zones = ProgramSets[programSetName].Zones.Select(zone => zone.Name).ToList();
 			var sync = ProgramSets[programSetName].Sync;
-			DisposeProgramSets(programSetName.Listify(), true);
+			DisposeProgramSets(programSetName.Listify(), force);
 			zones.Remove(zoneName);
 			Zones[zoneName].ClearColors();
 			//todo: get starting parameters to work - currently null is being passed in

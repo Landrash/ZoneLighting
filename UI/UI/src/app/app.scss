@@ -15,8 +15,25 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+$custom-text-dark-theme: #f4f4f4;
+
 .slim-loading-bar-progress {
   z-index: 999;
   position: absolute;
   top: 0px;
+}
+
+.card-title-md {
+  color: $custom-text-dark-theme;
+}
+
+.card-md h1, 
+.card-md h2, 
+.card-md h3, 
+.card-md h4, 
+.card-md h5, 
+.card-md h6, 
+.card-md p
+{
+  color: $custom-text-dark-theme;
 }

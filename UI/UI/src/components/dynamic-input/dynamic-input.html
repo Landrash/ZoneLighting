@@ -31,12 +31,12 @@
              step="0.05">
   </ion-input>
   
-  <ion-label *ngSwitchCase="controlTypeEnum.Toggle" stacked>{{name}}</ion-label>
+  <ion-label *ngSwitchCase="controlTypeEnum.Toggle">{{name}}</ion-label>
   <ion-toggle *ngSwitchCase="controlTypeEnum.Toggle"
               [formControl]="inputForm.controls['value']">
   </ion-toggle>
   
-  <ion-label *ngSwitchCase="controlTypeEnum.Dropdown" stacked>{{name}}</ion-label>
+  <ion-label *ngSwitchCase="controlTypeEnum.Dropdown">{{name}}</ion-label>
   <ion-select *ngSwitchCase="controlTypeEnum.Dropdown"
               [formControl]="inputForm.controls['value']">
     <ion-option *ngFor="let enum of inputForm.controls['options'].value" [value]="enum">{{enum}}</ion-option>

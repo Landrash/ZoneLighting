@@ -141,12 +141,11 @@ namespace WebRemote
 			ZLMAction(zlm => zlm.DisposeProgramSets());
 		}
 
-		
+
 		public void RecreateProgramSet(string programSetName, string programName, List<string> zoneNames, InputBag inputBag)
 		{
 			ZLMAction(zlm => zlm.RecreateProgramSet(programSetName, programName, zoneNames, inputBag));
 		}
-
 		
 		public void StartProgramSet(string programSetName)
 		{

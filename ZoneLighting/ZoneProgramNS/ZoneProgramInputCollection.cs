@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -59,44 +60,48 @@ namespace ZoneLighting.ZoneProgramNS
 			{
 				if (input is RangedZoneProgramInput<int>)
 				{
+					dynamic value = new ExpandoObject();
+
+					value.Value = input.Value;
+					value.Min = ((RangedZoneProgramInput<int>)input).Min;
+					value.Max = ((RangedZoneProgramInput<int>)input).Max;
+					value.Type = input.Type.FullName;
+
 					inputStartingValues.Add(input.Name.ToPascalCase(),
-						new
-						{
-							Value = input.Value,
-							Min = ((RangedZoneProgramInput<int>)input).Min,
-							Max = ((RangedZoneProgramInput<int>)input).Max,
-							Type = input.Type.FullName
-						});
+						value);
 				}
 				else if (input is RangedZoneProgramInput<double>)
 				{
+					dynamic value = new ExpandoObject();
+					
+					value.Value = input.Value;
+					value.Min = ((RangedZoneProgramInput<double>)input).Min;
+					value.Max = ((RangedZoneProgramInput<double>)input).Max;
+					value.Type = input.Type.FullName;
+
 					inputStartingValues.Add(input.Name.ToPascalCase(),
-						new
-						{
-							Value = input.Value,
-							Min = ((RangedZoneProgramInput<double>)input).Min,
-							Max = ((RangedZoneProgramInput<double>)input).Max,
-							Type = input.Type.FullName
-						});
+						value);
 				}
 				else if (input.Type.IsSubclassOfRawGeneric(typeof(List<>)))
 				{
+					dynamic value = new ExpandoObject();
+
+					value.Value = input.Value;
+					value.Options = input.Type.GetProperties(BindingFlags.Static | BindingFlags.Public).Select(x => x.Name);
+					value.Type = typeof(Enum).FullName;
+					
 					inputStartingValues.Add(input.Name.ToPascalCase(),
-						new
-						{
-							Value = input.Value,
-							Options = input.Type.GetProperties(BindingFlags.Static | BindingFlags.Public).Select(x => x.Name),
-							Type = typeof(Enum).FullName
-						});
+						value);
 				}
 				else
 				{
+					dynamic value = new ExpandoObject();
+
+					value.Value = input.Value;
+					value.Type = input.Type.FullName;
+					
 					inputStartingValues.Add(input.Name.ToPascalCase(),
-						new
-						{
-							Value = input.Value,
-							Type = input.Type.FullName
-						});
+						value);
 				}
 
 			});

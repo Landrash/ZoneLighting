@@ -440,7 +440,7 @@ namespace ZoneLighting.ZoneProgramNS
 					}
 				}
 
-			return (T)incomingValue;
+			return typeof(T).IsValueType && incomingValue == null ? default(T) : (T)incomingValue;
 		}
 
 

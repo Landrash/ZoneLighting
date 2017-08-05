@@ -9,12 +9,16 @@ namespace WebRemote.Automapper
 {
 	public class ProgramSetJsonModelInputsResolver : IValueResolver<ProgramSet, ProgramSetJsonModel, InputInfo>
 	{
+		public static string IndeterminateState = "Indeterminate";
+
 		public InputInfo Resolve(ProgramSet source, ProgramSetJsonModel destination, InputInfo destMember, ResolutionContext context)
 		{
 			if (source == null) return new InputInfo();
 			
 			var inputs = source.Zones.First().ZoneProgram.Inputs;
 				
+			var inputsInfo = inputs.ToInputInfo();
+
 			foreach (var input in inputs)
 			{
 				if (source.ZonePrograms.Any(x =>
@@ -24,11 +28,12 @@ namespace WebRemote.Automapper
 					                         !value.Equals(input.Value));
 				}))
 				{
-					input.SetValue("Indeterminate");
+					dynamic inputInfo = inputsInfo[input.Name];
+					inputInfo.Value = IndeterminateState;
 				}
 			}
 
-			return inputs.ToInputInfo();
+			return inputsInfo;
 		}
 	}
 }

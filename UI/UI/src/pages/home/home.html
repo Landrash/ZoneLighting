@@ -18,9 +18,9 @@
             <p>
               <ion-list>
                 <ion-item padding *ngFor="let programSet of zlmForm.controls.programSets.controls">
-                  <h2 (click)="toggleDetails(programSet)">
+                  <h1 (click)="toggleDetails(programSet)">
                     {{programSet.value.name}} <ion-icon [name]="!programSet.hideDetails ? 'ios-arrow-dropup' : 'ios-arrow-dropdown'" item-right></ion-icon>
-                  </h2>
+                  </h1>
                   <ion-list *ngIf="!!!programSet.hideDetails">
                     <ion-item>
                       <!--<ion-label stacked>Program Name</ion-label>-->
@@ -49,9 +49,10 @@
             <p>
               <ion-list>
                 <ion-item padding *ngFor="let zone of zlmForm.controls.zones.controls">
-                  <h2 (click)="toggleDetails(zone)">
+                  <h1 (click)="toggleDetails(zone)">
                     {{zone.value.name}} <ion-icon [name]="!zone.hideDetails ? 'ios-arrow-dropup' : 'ios-arrow-dropdown'" item-right></ion-icon>
-                  </h2>
+                  </h1>
+                  
                   <ion-list *ngIf="!!!zone.hideDetails">
                     <ion-item>
                       Program: {{zone.controls['programName'].value}}
