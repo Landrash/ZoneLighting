@@ -82,6 +82,18 @@ namespace ZoneLighting.ZoneProgramNS
 					inputStartingValues.Add(input.Name.ToPascalCase(),
 						value);
 				}
+				else if (input is RangedZoneProgramInput<decimal>)
+				{
+					dynamic value = new ExpandoObject();
+
+					value.Value = input.Value;
+					value.Min = ((RangedZoneProgramInput<decimal>)input).Min;
+					value.Max = ((RangedZoneProgramInput<decimal>)input).Max;
+					value.Type = input.Type.FullName;
+
+					inputStartingValues.Add(input.Name.ToPascalCase(),
+						value);
+				}
 				else if (input.Type.IsSubclassOfRawGeneric(typeof(List<>)))
 				{
 					dynamic value = new ExpandoObject();

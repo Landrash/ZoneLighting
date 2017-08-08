@@ -23,7 +23,7 @@ export class HelperProvider {
     else if (input.type === "System.Int32") {
       return ControlType.Number;
     }
-    else if (input.type === "System.Double") {
+    else if (input.type === "System.Double" || input.Type === "System.Decimal") {
       return ControlType.Decimal;
     }
     else if (input.type === "System.Boolean") {

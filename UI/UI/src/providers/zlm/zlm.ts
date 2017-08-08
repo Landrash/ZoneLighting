@@ -10,7 +10,7 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 export class ZLMFormProvider {
 
   private zlm: ZLM;
-  private zlmURL = "http://localhost:9999/zlm";
+  private zlmURL = "http://shootdaj.com:9998/zlm";
   private debounceTime = 1000;
 
   constructor(private http: Http,
