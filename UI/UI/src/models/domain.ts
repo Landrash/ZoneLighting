@@ -38,3 +38,7 @@ export enum ControlType {
   Toggle,
   Dropdown
 }
+
+export enum ZLRangeType {
+  Decimal,
+}

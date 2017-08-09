@@ -14,13 +14,15 @@ import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HelperProvider } from '../providers/helper/helper';
 import { DynamicInputComponent } from '../components/dynamic-input/dynamic-input';
+import { ZlRangeComponent } from '../components/zl-range/zl-range';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    DynamicInputComponent
+    DynamicInputComponent,
+    ZlRangeComponent
   ],
   imports: [
     BrowserModule,
