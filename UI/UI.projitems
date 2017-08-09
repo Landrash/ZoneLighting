@@ -65,6 +65,7 @@
     <Content Include="$(MSBuildThisFileDirectory)UI\src\app\app.html" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\assets\icon\favicon.ico" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\components\dynamic-input\dynamic-input.html" />
+    <Content Include="$(MSBuildThisFileDirectory)UI\src\components\zl-range\zl-range.html" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\index.html" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\manifest.json" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\pages\home\home.html" />
@@ -83,6 +84,9 @@
     <None Include="$(MSBuildThisFileDirectory)UI\src\components\dynamic-input\dynamic-input.module.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\components\dynamic-input\dynamic-input.scss" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\components\dynamic-input\dynamic-input.ts" />
+    <None Include="$(MSBuildThisFileDirectory)UI\src\components\zl-range\zl-range.module.ts" />
+    <None Include="$(MSBuildThisFileDirectory)UI\src\components\zl-range\zl-range.scss" />
+    <None Include="$(MSBuildThisFileDirectory)UI\src\components\zl-range\zl-range.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\models\index.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\models\domain.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\pages\home\home.scss" />
