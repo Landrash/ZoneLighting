@@ -9,9 +9,9 @@ import { List, Item, Range } from 'ionic-angular';
 })
 export class ZlRangeComponent implements ControlValueAccessor {
 
-  @Input() inputForm: FormGroup;
+  @Input() formControl: FormGroup;
   @Input() color: string;
-  @Input() pin: string;
+  @Input() pin: boolean;
   @Input() type: ZLRangeType;
 
   private model: number;
@@ -19,6 +19,7 @@ export class ZlRangeComponent implements ControlValueAccessor {
   private setModel(value: any) {
     this.model = value / 100.00;
     this.propagateChange(this.model);
+    this.propagateTouch(this.model);
   }
 
   private propagateChange = (_: any) => { };
@@ -27,6 +28,8 @@ export class ZlRangeComponent implements ControlValueAccessor {
   writeValue(obj): void {
     if (!!obj && this.type === ZLRangeType.Decimal) {
       this.model = obj * 100.00;
+    } else {
+      this.model = obj;
     }
   }
 
