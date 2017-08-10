@@ -13,11 +13,15 @@ export class HelperProvider {
 
   }
 
+  public hasValue(input: any) {
+    return input !== null && input !== undefined;
+  }
+
   public resolveControlTypeForInput(input: any): ControlType {
     if (input.type === "System.String") {
       return ControlType.Text;
     }
-    else if (input.type === "System.Int32" && !!input.min && !!input.max) {
+    else if ((input.type === "System.Int32" || input.type === "System.Double" || input.type === "System.Decimal") && this.hasValue(input.min) && this.hasValue(input.max)) {
       return ControlType.Range;
     }
     else if (input.type === "System.Int32") {

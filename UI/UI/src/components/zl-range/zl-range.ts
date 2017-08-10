@@ -1,5 +1,5 @@
-﻿import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, ControlValueAccessor } from '@angular/forms';
+﻿import { Component, OnInit, Input, AfterViewInit, forwardRef } from '@angular/core';
+import { FormGroup, FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
 import { ControlType, ZLRangeType } from '../../models';
 import { List, Item, Range } from 'ionic-angular';
 
@@ -7,37 +7,34 @@ import { List, Item, Range } from 'ionic-angular';
   selector: 'zl-range',
   templateUrl: 'zl-range.html'
 })
-export class ZlRangeComponent implements ControlValueAccessor {
+export class ZlRangeComponent {
 
-  @Input() formControl: FormGroup;
-  @Input() color: string;
-  @Input() pin: boolean;
+  @Input() control: FormControl;
+  @Input() max: number;
+  @Input() min: number;
   @Input() type: ZLRangeType;
 
-  private model: number;
+  set selectedValue(inValue: any) {
 
-  private setModel(value: any) {
-    this.model = value / 100.00;
-    this.propagateChange(this.model);
-    this.propagateTouch(this.model);
-  }
+    if (inValue === this.selectedValue)
+      return;
 
-  private propagateChange = (_: any) => { };
-  private propagateTouch = (_: any) => { };
-
-  writeValue(obj): void {
-    if (!!obj && this.type === ZLRangeType.Decimal) {
-      this.model = obj * 100.00;
-    } else {
-      this.model = obj;
+    if (this.type === ZLRangeType.Decimal)
+      this.control.setValue(inValue / 100.00);
+    else {
+      this.control.setValue(inValue);
     }
   }
 
-  registerOnChange(fn): void {
-    this.propagateChange = fn;
-  }
-
-  registerOnTouched(fn): void {
-    this.propagateTouch = fn;
+  get selectedValue(): any {
+    if (this.control == null)
+      return null;
+    else {
+      if (this.type === ZLRangeType.Decimal) {
+        return this.control.value * 100.00;
+      } else {
+        return this.control.value;
+      }
+    }
   }
 }

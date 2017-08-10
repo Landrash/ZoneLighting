@@ -5,13 +5,15 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators, F
 import { ZLM, Zone, ProgramSet } from '../../models';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
+import { HelperProvider } from '../helper/helper';
 
 @Injectable()
 export class FormProvider {
 
   public zlmForm: FormGroup = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private helper: HelperProvider) {
   }
 
   public setZLMForm(zlm: ZLM) {
@@ -79,9 +81,9 @@ export class FormProvider {
     var returnValue = new FormGroup({});
 
     returnValue.addControl("value", new FormControl(input.value, Validators.required));
-    if (!!input.min)
+    if (this.helper.hasValue(input.min))
       returnValue.addControl("min", new FormControl(input.min, Validators.nullValidator));
-    if (!!input.max)
+    if (this.helper.hasValue(input.max))
       returnValue.addControl("max", new FormControl(input.max, Validators.nullValidator));
     if (!!input.type)
       returnValue.addControl("type", new FormControl(input.type, Validators.nullValidator));

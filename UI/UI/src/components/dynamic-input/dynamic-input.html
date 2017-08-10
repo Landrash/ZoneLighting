@@ -1,24 +1,18 @@
 ﻿<ion-item [ngSwitch]="controlType">
-  
-  <ion-label *ngSwitchCase="controlTypeEnum.Range">{{name}}</ion-label>
-  <zl-range *ngSwitchCase="controlTypeEnum.Range"
-            [formControl]="inputForm"
-            [color]="'danger'" [pin]="true">
-  </zl-range>
-  
 
-  <!--<ion-range *ngSwitchCase="controlTypeEnum.Range"
-             [min]="inputForm.controls['min'].value"
-             [max]="inputForm.controls['max'].value"
-             [formControl]="inputForm.controls['value']"
-             color="danger" pin="true">
-  </ion-range>-->
+  <ion-label *ngSwitchCase="controlTypeEnum.Range">{{name}}</ion-label>
+  <zl-range item-content *ngSwitchCase="controlTypeEnum.Range" style="width:100%"
+            [min]="getScaledValue(inputForm.controls['min'].value)"
+            [max]="getScaledValue(inputForm.controls['max'].value)"
+            [control]="inputForm.controls['value']"
+            [type]="type">
+  </zl-range>
 
   <ion-label *ngSwitchCase="controlTypeEnum.Text" floating>{{name}}</ion-label>
   <ion-input *ngSwitchCase="controlTypeEnum.Text"
              [formControl]="inputForm.controls['value']">
   </ion-input>
-  
+
   <ion-label *ngSwitchCase="controlTypeEnum.Number" floating>{{name}}</ion-label>
   <ion-input *ngSwitchCase="controlTypeEnum.Number"
              type="number"
@@ -27,7 +21,7 @@
              [max]="!!inputForm.controls['max'] ? inputForm.controls['max'].value : 100"
              step="1">
   </ion-input>
-  
+
   <ion-label *ngSwitchCase="controlTypeEnum.Decimal" floating>{{name}}</ion-label>
   <ion-input *ngSwitchCase="controlTypeEnum.Decimal"
              type="number"
@@ -36,12 +30,12 @@
              [max]="!!inputForm.controls['max'] ? inputForm.controls['max'].value : 100"
              step="0.05">
   </ion-input>
-  
+
   <ion-label *ngSwitchCase="controlTypeEnum.Toggle">{{name}}</ion-label>
   <ion-toggle *ngSwitchCase="controlTypeEnum.Toggle"
               [formControl]="inputForm.controls['value']">
   </ion-toggle>
-  
+
   <ion-label *ngSwitchCase="controlTypeEnum.Dropdown">{{name}}</ion-label>
   <ion-select *ngSwitchCase="controlTypeEnum.Dropdown"
               [formControl]="inputForm.controls['value']">

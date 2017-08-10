@@ -1,7 +1,6 @@
-﻿<ion-range *ngIf="formControl"
-           [min]="formControl.controls['min'].value"
-           [max]="formControl.controls['max'].value"
-           [ngModel]="model"
-           (ngModelChanges)="setModel($event)"
-           [color]="color" [pin]="pin">
-</ion-range>
+﻿
+  <ion-range [min]="min"
+             [max]="max"
+             [(ngModel)]="selectedValue"
+             color="danger" pin="true">
+  </ion-range>

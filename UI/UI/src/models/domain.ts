@@ -41,4 +41,5 @@ export enum ControlType {
 
 export enum ZLRangeType {
   Decimal,
+  Integer
 }
