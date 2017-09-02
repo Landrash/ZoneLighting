@@ -1,0 +1,32 @@
+﻿<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>ZoneLighting</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col align-items-center style="text-align: center;">
+        <ion-card>
+          <ion-card-content>
+            <ion-card-title>
+              Configuration
+            </ion-card-title>
+            <p>
+              <ion-list>
+                <ion-item>
+                  <ion-label floating>Server URL</ion-label>
+                  <ion-input [(ngModel)]="zlmURL">
+                  </ion-input>
+                </ion-item>
+              </ion-list>
+            </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

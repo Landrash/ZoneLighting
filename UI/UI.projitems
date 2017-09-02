@@ -68,6 +68,7 @@
     <Content Include="$(MSBuildThisFileDirectory)UI\src\components\zl-range\zl-range.html" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\index.html" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\manifest.json" />
+    <Content Include="$(MSBuildThisFileDirectory)UI\src\pages\config\config.html" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\pages\home\home.html" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\pages\list\list.html" />
     <Content Include="$(MSBuildThisFileDirectory)UI\tsconfig.json" />
@@ -89,6 +90,8 @@
     <None Include="$(MSBuildThisFileDirectory)UI\src\components\zl-range\zl-range.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\models\index.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\models\domain.ts" />
+    <None Include="$(MSBuildThisFileDirectory)UI\src\pages\config\config.scss" />
+    <None Include="$(MSBuildThisFileDirectory)UI\src\pages\config\config.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\pages\home\home.scss" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\pages\home\home.ts" />
     <None Include="$(MSBuildThisFileDirectory)UI\src\pages\list\list.scss" />

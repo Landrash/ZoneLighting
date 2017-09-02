@@ -6,6 +6,7 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { ConfigPage } from '../pages/config/config';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,6 +22,7 @@ import { ZlRangeComponent } from '../components/zl-range/zl-range';
     MyApp,
     HomePage,
     ListPage,
+    ConfigPage,
     DynamicInputComponent,
     ZlRangeComponent
   ],
@@ -36,7 +38,8 @@ import { ZlRangeComponent } from '../components/zl-range/zl-range';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    ConfigPage
   ],
   providers: [
     StatusBar,
