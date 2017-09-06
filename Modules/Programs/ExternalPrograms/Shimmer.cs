@@ -174,7 +174,7 @@ namespace ExternalPrograms
 		{
 			if (!ShimmerCTS.IsCancellationRequested)
 			{
-				for (int i = 0; i < Tasks.Count; i++)
+				for (int i = 0; i < Math.Floor(Density * Zone.LightCount); i++)
 				{
 					if (Tasks[i].Status != TaskStatus.Running && Tasks[i].Status != TaskStatus.WaitingToRun)
 					{
