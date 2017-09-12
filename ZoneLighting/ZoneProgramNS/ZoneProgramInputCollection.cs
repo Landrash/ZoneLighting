@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using MIDIator.UIGenerator.Consumables;
+using ZoneLighting.ZoneProgramNS.Input;
 
 namespace ZoneLighting.ZoneProgramNS
 {

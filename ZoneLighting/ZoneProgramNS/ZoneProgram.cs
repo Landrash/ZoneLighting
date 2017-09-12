@@ -13,6 +13,7 @@ using LightingControllerBase;
 using ZoneLighting.MEF;
 using ZoneLighting.TriggerDependencyNS;
 using ZoneLighting.ZoneNS;
+using ZoneLighting.ZoneProgramNS.Input;
 
 namespace ZoneLighting.ZoneProgramNS
 {
