@@ -195,6 +195,7 @@
     <Compile Include="ZoneProgramNS\ColorScheme.cs" />
     <Compile Include="ZoneProgramNS\HSLColor.cs" />
     <Compile Include="ZoneProgramNS\IClock.cs" />
+    <Compile Include="ZoneProgramNS\Input\EnumValuesZoneProgramInput.cs" />
     <Compile Include="ZoneProgramNS\Input\InputInfo.cs" />
     <Compile Include="ZoneProgramNS\LightingPattern.cs" />
     <Compile Include="ZoneProgramNS\Factories\ZoneScaffolder.cs" />

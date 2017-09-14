@@ -418,6 +418,32 @@ namespace ZoneLighting.ZoneProgramNS
 			return input;
 		}
 
+
+		protected ZoneProgramInput AddColorInput(object instance, string propertyName)
+		{
+			var propertyInfo = instance.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+			var input = new EnumValuesZoneProgramInput<Color>(propertyInfo.Name, propertyInfo.PropertyType, typeof(KnownColor));
+			Inputs.Add(input);
+
+			input.Subscribe(incomingValue =>
+			{
+
+				if (Enum.TryParse(incomingValue, out Color color))
+				{
+					propertyInfo.SetValue(instance, color);
+				}
+				else
+				{
+					throw new WarningException("Incoming value is not a valid color.");
+				}
+			});
+
+
+			//set value of input to the value of the property
+			input.SetValue(propertyInfo.GetValue(instance));
+			return input;
+		}
+
 		/// <summary>
 		/// TODO: Inject this from somewhere else and possibly also do this at the Json-RPC level? (But InputBag is inherent dynamic so maybe this is the right place?)
 		/// </summary>

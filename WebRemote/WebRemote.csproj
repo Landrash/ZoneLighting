@@ -146,11 +146,16 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="LightingControllers\Picasso.json" />
-    <None Include="LightingControllers\TurntablePoster.json">
+    <None Include="LightingControllers\Dali.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="LightingControllers\Dali.json">
+    <None Include="LightingControllers\RotaryLight.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LightingControllers\BaiClock.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LightingControllers\PinkFloydPoster.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

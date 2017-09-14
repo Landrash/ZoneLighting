@@ -1,0 +1,131 @@
+{
+	"Name": "BaiClock",
+	"Type": "NodeMCUController",
+	"ServerURL": "ws://shootdaj.com:22226/",
+	"Username": "shootdaj",
+	"Password": "n00bn00b",
+	"PixelType": 1,
+	"Channel": 1,
+	"Pixels": [
+		{
+			"LogicalIndex": 0,
+			"PhysicalIndex": 0,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 1,
+			"PhysicalIndex": 1,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 2,
+			"PhysicalIndex": 2,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 3,
+			"PhysicalIndex": 3,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 4,
+			"PhysicalIndex": 4,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 5,
+			"PhysicalIndex": 5,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 6,
+			"PhysicalIndex": 6,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 7,
+			"PhysicalIndex": 7,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 8,
+			"PhysicalIndex": 8,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 9,
+			"PhysicalIndex": 9,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 10,
+			"PhysicalIndex": 10,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 11,
+			"PhysicalIndex": 11,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 12,
+			"PhysicalIndex": 12,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 13,
+			"PhysicalIndex": 13,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 14,
+			"PhysicalIndex": 14,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 15,
+			"PhysicalIndex": 15,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 16,
+			"PhysicalIndex": 16,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 17,
+			"PhysicalIndex": 17,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 18,
+			"PhysicalIndex": 18,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 19,
+			"PhysicalIndex": 19,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 20,
+			"PhysicalIndex": 20,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 21,
+			"PhysicalIndex": 21,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 22,
+			"PhysicalIndex": 22,
+			"Channel": 1
+		},
+		{
+			"LogicalIndex": 23,
+			"PhysicalIndex": 23,
+			"Channel": 1
+		}
+	]
+}

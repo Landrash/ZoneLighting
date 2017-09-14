@@ -99,6 +99,13 @@ namespace ZoneLighting.ZoneProgramNS
 			return IsInRangeMethod((double)(object)input, (double)(object)low, (double)(object)high, lowInclusive, highInclusive);
 		}
 
+
+
+		//public static bool IsInEnum<T>(this T input, Type enumType)
+		//{
+		//	return 
+		//}
+
 		/// <summary>
 		/// Determines if input is in the between the low and high bound (low and high bounds are included in range by default).
 		/// </summary>
