@@ -64,6 +64,8 @@
     <Content Include="$(MSBuildThisFileDirectory)UI\resources\splash.png" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\app\app.html" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\assets\icon\favicon.ico" />
+    <Content Include="$(MSBuildThisFileDirectory)UI\src\assets\img\ZoneLightingLogoPurple.png" />
+    <Content Include="$(MSBuildThisFileDirectory)UI\src\assets\img\ZoneLightingLogoWhite.png" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\components\dynamic-input\dynamic-input.html" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\components\zl-range\zl-range.html" />
     <Content Include="$(MSBuildThisFileDirectory)UI\src\index.html" />
