@@ -1,6 +1,6 @@
 ﻿<ion-item [ngSwitch]="controlType">
 
-  <ion-label *ngSwitchCase="controlTypeEnum.Range">{{name}}</ion-label>
+  <ion-label *ngSwitchCase="controlTypeEnum.Range" floating>{{name}}</ion-label>
   <zl-range item-content *ngSwitchCase="controlTypeEnum.Range" style="width:100%"
             [min]="getScaledValue(inputForm.controls['min'].value)"
             [max]="getScaledValue(inputForm.controls['max'].value)"

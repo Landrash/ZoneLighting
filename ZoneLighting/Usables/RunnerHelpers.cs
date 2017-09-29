@@ -170,8 +170,7 @@ namespace ZoneLighting.Usables
         public static void RunShimmerOnNodeMCUWithoutMIDI(ZLM zlm)
         {
             var inputBag = new InputBag();
-            inputBag.Add("MaxFadeSpeed", 1);
-            inputBag.Add("MaxFadeDelay", 5);
+            inputBag.Add("Speed", 80);
             inputBag.Add("Density", 1.0);
             inputBag.Add("Brightness", 1.0);
             inputBag.Add("Random", true);
