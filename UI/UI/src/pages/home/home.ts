@@ -45,4 +45,8 @@ export class HomePage implements OnInit {
       //item.icon = 'ios-add-circle-outline';
     }
   }
+
+  navigateHome() {
+    this.navCtrl.setRoot(HomePage);
+  }
 }

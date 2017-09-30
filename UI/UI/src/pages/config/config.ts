@@ -1,6 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ZLMFormProvider, HelperProvider, FormProvider } from '../../providers'
+import { HomePage } from '../home/home';
 
 @Component({
   selector: 'page-config',
@@ -20,6 +21,10 @@ export class ConfigPage {
 
   set zlmURL(value:string) {
     this.zlmFormProvider.zlmURL = value;
+  }
+
+  navigateHome() {
+    this.navCtrl.setRoot(HomePage);
   }
 
 }
