@@ -52,6 +52,9 @@ void setup() {
 }
 
 void loop() {
+  while (WiFiMulti.run() != WL_CONNECTED) {
+    delay(100);
+  }
 	webSocket.loop();	
 }
 
