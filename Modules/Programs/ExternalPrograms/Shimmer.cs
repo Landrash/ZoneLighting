@@ -88,7 +88,7 @@ namespace ExternalPrograms
 
 		protected override void PreLoopStart()
 		{
-			for (int i = 0; i < (Zone.LightCount); i++)
+			for (int i = 0; i < Math.Floor(Density * Zone.LightCount); i++)
 			{
 				Tasks.Add(new Task(SingleShimmer, TaskCreationOptions.LongRunning));
 			}
