@@ -3,7 +3,7 @@ using System.Reactive.Subjects;
 using System.Threading.Tasks.Dataflow;
 using ZoneLighting.TriggerDependencyNS;
 
-namespace ZoneLighting.ZoneProgramNS
+namespace ZoneLighting.ZoneProgramNS.Input
 {
 	public class InterruptingInput : ZoneProgramInput
 	{

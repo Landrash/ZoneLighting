@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Reactive.Subjects;
 using System.Runtime.Serialization;
-using ZoneLighting.ZoneNS;
 
-namespace ZoneLighting.ZoneProgramNS
+namespace ZoneLighting.ZoneProgramNS.Input
 {
 	[DataContract]
 	public class RangedZoneProgramInput<T> : ZoneProgramInput

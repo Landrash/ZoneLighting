@@ -2,6 +2,7 @@
 using WebRemote.Models;
 using ZoneLighting.ZoneNS;
 using ZoneLighting.ZoneProgramNS;
+using ZoneLighting.ZoneProgramNS.Input;
 
 namespace WebRemote.Automapper
 {

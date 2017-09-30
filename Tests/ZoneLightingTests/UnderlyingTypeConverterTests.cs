@@ -5,6 +5,7 @@ using System.Drawing;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using ZoneLighting.ZoneProgramNS;
+using ZoneLighting.ZoneProgramNS.Input;
 
 //using Xunit;
 

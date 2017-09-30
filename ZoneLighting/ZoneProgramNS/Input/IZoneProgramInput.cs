@@ -1,4 +1,4 @@
-﻿namespace ZoneLighting.ZoneProgramNS
+﻿namespace ZoneLighting.ZoneProgramNS.Input
 {
 	//public interface IZoneProgramInput
 	//{
