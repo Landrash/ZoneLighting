@@ -69,8 +69,7 @@ namespace ExternalPrograms
 		/// </summary>
 		public override void Setup()
 		{
-			AddRangedInput(this, "MaxFadeSpeed", 1, 127);
-			AddRangedInput(this, "MaxFadeDelay", 1, 100);
+			AddRangedInput(this, "MaxFadeDelay", 1, 100, "Speed", i => 100 - i);
 			AddRangedInput<double>(this, "Density", 0, 1);
 			AddRangedInput<double>(this, "Brightness", 0, 1);
 			AddMappedInput<bool>(this, "Random");

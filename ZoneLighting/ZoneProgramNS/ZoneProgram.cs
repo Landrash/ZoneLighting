@@ -393,17 +393,22 @@ namespace ZoneLighting.ZoneProgramNS
 			return input;
 		}
 
-		protected ZoneProgramInput AddRangedInput<T>(object instance, string propertyName, T min, T max)
+		protected ZoneProgramInput AddRangedInput<T>(object instance, string propertyName, T min, T max, string displayName = null, Func<T, T> intercepter = null)
 		{
 			var propertyInfo = instance.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-			var input = new RangedZoneProgramInput<T>(propertyInfo.Name, propertyInfo.PropertyType, min, max);
+			var input = new RangedZoneProgramInput<T>(displayName ?? propertyInfo.Name, propertyInfo.PropertyType, min, max);
 			Inputs.Add(input);
 
 			input.Subscribe(incomingValue =>
 			{
 				if (ProgramExtensions.IsInRange(ConvertIncomingValue<T>(incomingValue), input.Min, input.Max))
 				{
-					propertyInfo.SetValue(instance, incomingValue);
+					if (intercepter == null)
+						propertyInfo.SetValue(instance, incomingValue);
+					else
+					{
+						propertyInfo.SetValue(instance, intercepter(incomingValue));
+					}
 				}
 				else
 				{
