@@ -34,7 +34,7 @@ namespace ZoneLighting.StockPrograms
 		/// This effect means that shimmer of lengths in between SparkleLow and SparkleHigh will be brighter by a factor of SparkleIntensity. 
 		/// </summary>
 		bool Sparkle { get; set; } = false;
-		int SparkleLow { get; set; } = 1;
+		int SparkleLow { get; set; } = 0;
 		int SparkleHigh { get; set; } = 4;
 
 		/// <summary>
@@ -56,7 +56,6 @@ namespace ZoneLighting.StockPrograms
 		/// </summary>
 		private bool ForceStopFlag { get; set; }
 
-		//private Random RandomGen { get; } = new Random();
 
 		private IMIDIInputDevice MidiInput { get; set; }
 
@@ -70,14 +69,12 @@ namespace ZoneLighting.StockPrograms
 		public override void Setup()
 		{
 			AddRangedInput(this, "MaxFadeDelay", 1, 100, "Speed", i => 100 - i);
+			AddRangedInput(this, "MaxFadeSpeed", 1, 127, "Smoothness", i => 127 - i);
 			AddRangedInput<double>(this, "Density", 0, 1);
 			AddRangedInput<double>(this, "Brightness", 0, 1);
-			AddMappedInput<bool>(this, "Random");
-			AddMappedInput<ColorScheme>(this, "ColorScheme");
+			AddMappedInput<bool>(this, "Random"/*, displayName: "Randomness"*/);
+			AddMappedInput<ColorScheme>(this, "ColorScheme"/*, displayName: "ColorScheme"*/);
 			AddMappedInput<bool>(this, "Sparkle");
-			AddMappedInput<int>(this, "SparkleHigh", i => i.IsInRange(0, Zone == null ? int.MaxValue : LightCount) && i > SparkleLow);
-			AddMappedInput<int>(this, "SparkleLow", i => i.IsInRange(0, Zone == null ? int.MaxValue : LightCount) && i < SparkleHigh);
-			AddMappedInput<int>(this, "SparkleIntensity", i => i.IsInRange(0, 100));
 		}
 
 		private readonly List<Task> Tasks = new List<Task>();
@@ -88,6 +85,9 @@ namespace ZoneLighting.StockPrograms
 
 		protected override void PreLoopStart()
 		{
+			AddRangedInput(this, "SparkleHigh", 0, LightCount/*, "Sparkle Max"*/);
+			AddRangedInput(this, "SparkleIntensity", 0, 100/*, "Sparkle Strength"*/);
+
 			for (int i = 0; i < Math.Floor(Density * Zone.LightCount); i++)
 			{
 				Tasks.Add(new Task(SingleShimmer, TaskCreationOptions.LongRunning));
@@ -223,10 +223,9 @@ namespace ZoneLighting.StockPrograms
 				RandomGen.Next(MaxFadeSpeed) : MaxFadeSpeed;
 			var delayTime = Random ?
 				RandomGen.Next(MaxFadeDelay) : MaxFadeDelay;
-			Color? endingColor;
 
 			var brightness = Sparkle && delayTime >= SparkleLow && delayTime <= SparkleHigh
-				? Math.Min(Brightness * SparkleIntensity, 1)
+				? Math.Min(Brightness * SparkleIntensity, 1.0)
 				: Brightness;
 
 			var fader = new Animation.Fader();
@@ -239,7 +238,7 @@ namespace ZoneLighting.StockPrograms
 					ColorsToSend[pixelToShine] = color;
 				}
 
-			}, out endingColor, cts: ShimmerCTS);
+			}, out Color? endingColor, cts: ShimmerCTS);
 
 
 			fader.FadeToBlack(GetColor(pixelToShine), fadeSpeed, delayTime, false, color =>

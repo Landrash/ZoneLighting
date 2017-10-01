@@ -358,10 +358,10 @@ namespace ZoneLighting.ZoneProgramNS
 		/// <param name="propertyName"></param>
 		/// <param name="filterPredicate">The incoming value will be run through this filter predicate function and only set the value if the function returns true.</param>
 		/// <returns></returns>
-		protected ZoneProgramInput AddMappedInput<T>(object instance, string propertyName, Func<T, bool> filterPredicate = null)
+		protected ZoneProgramInput AddMappedInput<T>(object instance, string propertyName, Func<T, bool> filterPredicate = null, string displayName = null)
 		{
 			var propertyInfo = instance.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-			var input = new ZoneProgramInput(propertyInfo.Name, propertyInfo.PropertyType);
+			var input = new ZoneProgramInput(displayName ?? propertyInfo.Name, propertyInfo.PropertyType);
 			Inputs.Add(input);
 			if (filterPredicate != null)
 				input.Subscribe(incomingValue =>
@@ -393,7 +393,7 @@ namespace ZoneLighting.ZoneProgramNS
 			return input;
 		}
 
-		protected ZoneProgramInput AddRangedInput<T>(object instance, string propertyName, T min, T max, string displayName = null, Func<T, T> intercepter = null)
+		protected ZoneProgramInput AddRangedInput<T>(object instance, string propertyName, T min, T max, string displayName = null, Func<T, T> intercepter = null, Func<T, bool> filter = null)
 		{
 			var propertyInfo = instance.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 			var input = new RangedZoneProgramInput<T>(displayName ?? propertyInfo.Name, propertyInfo.PropertyType, min, max);
@@ -401,24 +401,24 @@ namespace ZoneLighting.ZoneProgramNS
 
 			input.Subscribe(incomingValue =>
 			{
-				if (ProgramExtensions.IsInRange(ConvertIncomingValue<T>(incomingValue), input.Min, input.Max))
+				var convertedValue = ConvertIncomingValue<T>(incomingValue);
+				if (ProgramExtensions.IsInRange(convertedValue, input.Min, input.Max) && (filter != null ? filter(convertedValue) : true))
 				{
-					if (intercepter == null)
-						propertyInfo.SetValue(instance, incomingValue);
-					else
-					{
-						propertyInfo.SetValue(instance, intercepter(incomingValue));
-					}
+					propertyInfo.SetValue(instance, intercepter == null ? 
+						incomingValue : 
+						intercepter(incomingValue));
 				}
 				else
 				{
-					throw new WarningException("Incoming value out of range of valid input values.");
+					throw new WarningException("Incoming value out of range of valid input values or violates the filter.");
 				}
 			});
 
 
 			//set value of input to the value of the property
-			input.SetValue(propertyInfo.GetValue(instance));
+			input.SetValue(intercepter == null
+				? propertyInfo.GetValue(instance)
+				: intercepter((T) propertyInfo.GetValue(instance)));
 
 			return input;
 		}

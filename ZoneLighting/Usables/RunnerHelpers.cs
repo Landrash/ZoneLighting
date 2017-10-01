@@ -208,7 +208,7 @@ namespace ZoneLighting.Usables
 
 			CreateZonesFromConfig(zlm.Zones);
 
-			zlm.CreateProgramSet("ShimmerSet", "Shimmer", false, inputBag, zlm.Zones/*, startingParameters: startingParams*/);
+			zlm.CreateProgramSet("Studio", "Shimmer", false, inputBag, zlm.Zones/*, startingParameters: startingParams*/);
         }
 
 		//public static void RunShimmerOnNodeMCUWithoutMIDI(ZLM zlm)
