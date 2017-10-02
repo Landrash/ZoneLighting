@@ -158,33 +158,44 @@ namespace ZoneLighting.ZoneProgramNS.Factories
                 var configString = File.ReadAllText(file);
                 dynamic config = JObject.Parse(configString);
 
-                try
-                {
-                    var matchedLightingControllerFactories =
-                        LightingControllerFactories.Where(lcf => lcf.Metadata.Name == config.Type.Value).ToList();
+	            bool enabled = true;
 
-                    if (matchedLightingControllerFactories.Any())
-                    {
-                        if (matchedLightingControllerFactories.Count() <= 1)
-                        {
-                            var info = new LightingControllerInfo
-                            {
-                                ConfigString = configString,
-                                Config = config,
-                                Factory = matchedLightingControllerFactories.First()
-                            };
-                            LightingControllerInfos.Add(info);
-                        }
-                        else
-                        {
-                            throw new Exception("Too many matching Lighting Controllers.");
-                        }
-                    }
-                }
-                catch (RuntimeBinderException)
-                {
-                    Console.Write($"{file}: Could not read JSON or it is missing the type of LightingController.");
-                }
+	            if (((JObject) config).TryGetValue("Enabled", StringComparison.InvariantCultureIgnoreCase, out JToken enabledToken))
+	            {
+		            enabled = enabledToken.Value<bool>();
+	            }
+
+	            if (enabled)
+	            {
+		            try
+		            {
+			            var matchedLightingControllerFactories =
+				            LightingControllerFactories.Where(lcf => lcf.Metadata.Name == config.Type.Value).ToList();
+
+			            if (matchedLightingControllerFactories.Any())
+			            {
+				            if (matchedLightingControllerFactories.Count() <= 1)
+				            {
+					            var info = new LightingControllerInfo
+					            {
+						            ConfigString = configString,
+						            Config = config,
+						            Factory = matchedLightingControllerFactories.First()
+					            };
+					            LightingControllerInfos.Add(info);
+				            }
+				            else
+				            {
+					            throw new Exception("Too many matching Lighting Controllers.");
+				            }
+			            }
+		            }
+		            catch (RuntimeBinderException)
+		            {
+			            Console.Write(
+				            $"{file}: Could not read JSON or it is missing the type of LightingController (property named \"Type\").");
+		            }
+	            }
             }
 
         }
