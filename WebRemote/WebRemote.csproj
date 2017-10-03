@@ -146,18 +146,19 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="LightingControllers\Dali.json">
+    <Content Include="GetConfig.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="LightingControllers\RotaryLight.json">
+    </Content>
+    <Content Include="LightingControllers\BaiClock.json" />
+    <Content Include="LightingControllers\Dali.json" />
+    <Content Include="LightingControllers\Picasso.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="LightingControllers\BaiClock.json">
+    </Content>
+    <Content Include="LightingControllers\PinkFloydPoster.json" />
+    <Content Include="LightingControllers\RotaryLight.json" />
+    <Content Include="LightingControllers\TurntablePoster.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="LightingControllers\PinkFloydPoster.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
