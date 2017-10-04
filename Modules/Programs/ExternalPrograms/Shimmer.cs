@@ -72,8 +72,8 @@ namespace ExternalPrograms
 			AddRangedInput(this, "MaxFadeSpeed", 1, 127, "Smoothness", i => 127 - i);
 			AddRangedInput<double>(this, "Density", 0, 1);
 			AddRangedInput<double>(this, "Brightness", 0, 1);
-			AddMappedInput<bool>(this, "Random"/*, displayName: "Randomness"*/);
-			AddMappedInput<ColorScheme>(this, "ColorScheme"/*, displayName: "ColorScheme"*/);
+			AddMappedInput<bool>(this, "Random", displayName: "Randomness");
+			AddMappedInput<ColorScheme>(this, "ColorScheme", displayName: "Color Scheme");
 			AddMappedInput<bool>(this, "Sparkle");
 		}
 
@@ -85,8 +85,8 @@ namespace ExternalPrograms
 
 		protected override void PreLoopStart()
 		{
-			AddRangedInput(this, "SparkleHigh", 0, LightCount/*, "Sparkle Max"*/);
-			AddRangedInput(this, "SparkleIntensity", 0, 100/*, "Sparkle Strength"*/);
+			AddRangedInput(this, "SparkleHigh", 0, LightCount, "Sparkle Max");
+			AddRangedInput(this, "SparkleIntensity", 0, 100, "Sparkle Strength");
 
 			for (int i = 0; i < Math.Floor(Density * Zone.LightCount); i++)
 			{

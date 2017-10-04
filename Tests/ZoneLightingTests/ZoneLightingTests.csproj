@@ -34,8 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Anshul.Utilities, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Anshul.Utilities.1.0.27.0\lib\net45\Anshul.Utilities.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Anshul.Utilities.1.0.28.0\lib\net45\Anshul.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="FakeItEasy, Version=1.25.1.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FakeItEasy.1.25.1\lib\net40\FakeItEasy.dll</HintPath>
@@ -98,6 +97,7 @@
     <Compile Include="ConfigTests.cs" />
     <Compile Include="FadeCandyControllerTests.cs" />
     <Compile Include="InputStartingValuesTests.cs" />
+    <Compile Include="ExtensionsTests.cs" />
     <Compile Include="InterruptingInputTests.cs" />
     <Compile Include="LEDTests.cs" />
     <Compile Include="ProgramCommonTests.cs" />

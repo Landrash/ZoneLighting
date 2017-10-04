@@ -36,8 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Anshul.Utilities, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Anshul.Utilities.1.0.27.0\lib\net45\Anshul.Utilities.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Anshul.Utilities.1.0.28.0\lib\net45\Anshul.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
@@ -149,14 +148,7 @@
     <Content Include="GetConfig.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="LightingControllers\BaiClock.json" />
-    <Content Include="LightingControllers\Dali.json" />
-    <Content Include="LightingControllers\Picasso.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LightingControllers\PinkFloydPoster.json" />
-    <Content Include="LightingControllers\RotaryLight.json" />
-    <Content Include="LightingControllers\TurntablePoster.json">
+    <Content Include="LightingControllers\Dali.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />

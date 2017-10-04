@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Anshul.Utilities, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Anshul.Utilities.1.0.27.0\lib\net45\Anshul.Utilities.dll</HintPath>
+      <HintPath>..\..\..\packages\Anshul.Utilities.1.0.28.0\lib\net45\Anshul.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="Graphics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\ZoneLighting.Graphics.1.0.0\lib\net461\Graphics.dll</HintPath>

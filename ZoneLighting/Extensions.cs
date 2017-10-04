@@ -10,14 +10,6 @@ namespace ZoneLighting
 {
 	public static class Extensions
 	{
-		public static BetterList<T> ToBetterList<T>(this IEnumerable<T> list) where T : IBetterListType
-		{
-			var betterList = new BetterList<T>();
-			betterList.AddRange(list); //this is buggy - if list has objects with duplicate names, they can still be added. that should not be allowed.
-			return betterList;
-		}
-
-
 		/// <summary>
 		/// This runs the given actions for each item in the given list on separate threads simultaneously (TaskCreationOptions.LongRunning).
 		/// </summary>
@@ -35,6 +27,7 @@ namespace ZoneLighting
 
 		public static string ToPascalCase(this string input)
 		{
+			input = input.Replace(" ", "| ");
 			input = input.SplitCamelCase();
 
 			// If there are 0 or 1 characters, just return the string.
@@ -43,13 +36,12 @@ namespace ZoneLighting
 			if (input.Length < 2)
 				return input;
 
-			// Split the string into words.
-			string[] words = input.Split(
-				new char[] { },
-				StringSplitOptions.RemoveEmptyEntries);
-
+			var words = input.Split();
+			
 			// Combine the words.
-			return words.Aggregate(string.Empty, (current, t) => current + (t.Substring(0, 1).ToUpper() + t.Substring(1)));
+			var returnValue = words.Aggregate(string.Empty, (current, t) => current + (t.Substring(0, 1).ToUpper() + t.Substring(1))).Replace("|", " ");
+
+			return returnValue;
 		}
 
 		public static bool IsSubclassOfRawGeneric(this Type toCheck, Type generic)

@@ -173,7 +173,7 @@ namespace ZoneLighting.Usables
             inputBag.Add("Speed", 80);
             inputBag.Add("Density", 1.0);
             inputBag.Add("Brightness", 1.0);
-            inputBag.Add("Random", true);
+            inputBag.Add("Randomness", true);
             //isv.Add("ColorScheme", ColorScheme.Primaries);
 
             //dynamic startingParameters = new ExpandoObject();
