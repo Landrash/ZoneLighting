@@ -1,6 +1,6 @@
-﻿# ZoneLighting
+# ZoneLighting
 
-## PROJECT SUMMARY
+## Project Summary
 
 ZoneLighting is a .NET application to create pixel-based lighting. It abstracts out the logical view of the lights in **zones**, each of which can run a **program**. Each zone has a **lighting controller**, which is an interface for lighting controllers such as the **FadeCandy** board or an **Arduino**. Programs can output any pattern of lights using a zone's lighting controller. Hardware support is currently limited to FadeCandy boards with WS2812 RGB LEDs, but the architecture is designed and intended for extensibility.
 
@@ -12,27 +12,26 @@ ZoneLighting is a .NET application to create pixel-based lighting. It abstracts 
 * **LICENSE**: MIT (See file *LICENSE*)
 
 
-## QUICKSTART
+## Quickstart
 
 See [QUICKSTART.md](/QUICKSTART.md).
 
 ## USER GUIDE
 
-###Project Structure
+### Project Structure
 
 The project is organized in the following manner:
 
-
-* ZoneLighting.sln - main solution file
-* ZoneLighting.csproj - This is the main class library that does all the work.
-* WebController.csproj - Web interface for the application
-* Console - A simple runner used mainly for debugging and/or testing
-* ExternalPrograms - A sample external program library provided for examples and to get started
-* ExternalZones - A sample external zone library provided for examples
-* ZoneLightingTests - Tests for the project ZoneLighting.csproj
-	
-	
-###Basic Concepts
+ * ZoneLighting.sln - main solution file
+ * ZoneLighting.csproj - This is the main class library that does all the work.
+ * WebController.csproj - Web interface for the application
+ * Console - A simple runner used mainly for debugging and/or testing
+ * ExternalPrograms - A sample external program library provided for examples and to get started
+ * ExternalZones - A sample external zone library provided for examples
+ * ZoneLightingTests - Tests for the project ZoneLighting.csproj
+  
+  
+### Basic Concepts
 
 This application is a software layer that is designed to give the user very powerful, modular, customizable, and high-level control over lights. A light in this context is anything that can be controlled (turned on and off or dimmed). As this application is written in C#, native support for C#-based lighting controller exists, although it is very much possible to add support for lighting controllers based on other languages. Additionally, a C# wrapper can be written on top of pretty much any kind of light, so this application can be used to control any kind of light including but not limited to regular LEDs, RGB LEDs, DMX lighting, home lighting (using X10 or another smart home technology), or any other light that can be controlled by a microcontroller or a digital interface. LEDs and RGB LEDs can be controlled using microcontrollers such as Arduino, Raspberry Pi, or FadeCandy.
 
@@ -40,7 +39,7 @@ Currently this application only supports WS2812 lights (http://www.adafruit.com/
 
 Here's an alternate way of looking at this application: ZoneLighting is as a software layer on top of lighting controller stacks. It gives you, as a programmer of lights, the ability to program lights and lighting effects at a much higher level using zones rather than individual lights. FadeCandy, for example, is not just a PCB. It's a stack. It needs multiple parts to function - it needs the PCB, the light strips attached to the PCB, the USB connection to the computer, and the server executable that relays websocket requests to the PCB, which are then relayed to the light strips. This entire FadeCandy stack is abstracted in ZoneLighting as a single class called FadeCandyController. This allows you to focus on the higher-level functionality of your application and algorithms. If you want to create a program that scrolls a dot across all the lights (which is provided as a stock program), the program can be written to work on any lighting controller stack without modifying the program. You would simply need to change the lighting controller on which the program is running (barring any inherent incompatibilities among the microcontrollers such as the interpolate and dither modes in FadeCandy which don't natively exist in Arduino or Raspberry Pi).
 
-###Application Architecture
+### Application Architecture
 
 Since a picture is worth a 1024 words, here's an architectural diagram of how the main concepts in ZoneLighting connect to each other: 
 
@@ -48,19 +47,19 @@ Since a picture is worth a 1024 words, here's an architectural diagram of how th
 
 The central concept of ZoneLighting is a construct known as a **ZoneProgram** (or simply Program). The main entry point to ZoneLighting is encapsulated in **ZLM**. ZLM contains **Program Sets** (or simply Sets) and **Zones**. Sets and Zones allow us to control the entire application to the finest detail. Some of the programs that are packaged with ZoneLighting are listed in the diagram and all of them inherit from ZoneProgram.
 
-In the following sectionds, the various parts of this diagram will be explained.
+In the following sections, the various parts of this diagram will be explained.
 
-###Zones and Lights
+### Zones and Lights
 
 This application is based on the concept of zones. A **zone** is a group of lights that can be controlled as a unit. Imagine you are creating a display made of LEDs or other form of light like bulbs, black lights, or DMX stage lighting. You want to be able to control what goes on that display with a high degree of expression and customizability. Zones allow you to group those lights together and execute various lighting programs such as loops or reactive programs like notifications from other sources on those zones. This technique of grouping lights together may sound similar to video game sprites, where groups of pixels are used instead of individual pixel manipulation to create the illusion of movement within the games. Zones can be seen as a way to control the lights in your display using a higher-level abstraction that gives your lighting application more structure. Using individual lights to construct the entirety of your lighting application would be akin to building a LEGO structure entirely out of a smallest kind of LEGO brick. It would be possible, but it would be unmanageable and inefficient, and it pollutes the higher-level structures with lower-level complications. It is for the same reason that an architect does not think of a building in terms of bricks and cement, but in terms of floors, rooms, and supporting structures. Building complex structures requires a degree of modularity, or zoning, to allow for a more holistic view of the structure. That is the concept of a zone - a way to encapsulate many lights into a structure that acts as a unit. Zones can be seen as the building blocks of your lighting application, but there is no restriction for zones to be a certain way so you can create zones of any "shape" (following the LEGO analogy) and size. Using zones it is possible to project a "light movie" on top of your zones. The program running on the zone must take the physical configuration into account as that defines the shape of the canvas on which the movie is painted.
 
 There are currently a few things that can be done on a zone:
 
-1. Run program(s) on zone
-2. Set color of entire zone
-3. More to be added
+ 1. Run program(s) on zone
+ 2. Set color of entire zone
+ 3. More to be added
 
-###Zone Programs and Program Sets
+### Zone Programs and Program Sets
 
 A **zone program** (or simply a **program**) can be any piece of code ranging from a static loop to a responsive program. A *light movie* is an example of a zone program. Another few examples are programs that scroll a dot in a loop, or output a loop of different colors, or output a notification using a light effect. Many stock programs are included with the application under the folder StockPrograms. Programs have the concept of Inputs, which are parameters that can be changed by the user of a program to manipulate things inside a program. A program is responsible for driving the lights in a zone. A program runs on a zone and uses a lighting controller to output the lights in a zone. The program running on a zone must take the physical configuration of the zone into account as that defines the shape of the canvas on which the movie is painted. Examples are included with the project in the folder ZoneLighting\StockPrograms.
 
@@ -68,28 +67,28 @@ A **zone program** (or simply a **program**) can be any piece of code ranging fr
 
 Zone programs are loaded from external assemblies. The location of the folder where the assemblies are searched for is provided in the configuration parameter "ProgramDLLFolder". In the way the project is organized, the project ExternalPrograms houses all the programs that are available.  The WebController project loads a copy of the assembly in the folder ExternalPrograms\bin\Debug\Programs as a post-build event by default so that any changes to ExternalPrograms are immediately available for use by WebController. This setting can be changed by modifying the parameter "ProgramDLLFolder" in WebController\Web.config. 
 
-####Creating a new Program
+#### Creating a new Program
 
 To create a new program, create a new class in the ExternalPrograms project. If the program needs to loop something over and over, make the new class inherit from LoopingZoneProgram. If the program is simply doing things based on external stimuli, make the new class inherit from ReactiveZoneProgram. If in doubt, use LoopingZoneProgram. Add some inputs using the AddMappedInput method if you wish to control parameters inside the program. An input needs a delegate that will determine what happens with the input value. A mapped input simply assigns the input value to a variable. See the example programs in ZoneLighting\StockPrograms for more details.
 
 To create a new zone program assembly (if you don't want to use the default ExternalPrograms assembly), create a new C# class library project, and add a reference to the ZoneLighting assembly. This assembly gives access to the LoopingZoneProgram and ReactiveZoneProgram classes. Now create at least one program in here and to have this assembly be loaded by the application, put the compiled .dll for this project in the folder specified in the configuration parameter "ProgramDLLFolder".
 
-###Synchronization
+### Synchronization
 
 The concept of synchronization is central to this application. The user can run programs on zones but these programs have no knowledge of each other. So what would you do if you wanted two programs to move in lock-step? That is where the concept of synchronization comes in, in the form of SyncContext. The user just has to provide whether or not they want the programs to be synced when creating a program set. The SyncContext is managed internally by the program set. The file ZoneLighting\Usables\RunnerHelpers.cs contains examples of ways to start a program set with synchronization.
 
-###Managed Extensibility Framework
+### Managed Extensibility Framework
 
-This application uses .NET's Managed Extensibility Framework (MEF) to load ZonePrograms. MEF is C#'s solution to allow loading of *modules* or *plugins* into applications. This means that this entire application is effectively a large "shell" into which zone programs are plugged in and provide the functionality. ZoneLighting provides the scaffolding and wiring to allow loading of program plugins, which are then loaded into zones. The plugins are nothing but a built .dll file that inherits from the ZoneLighting assembly. Future plans are to make this a Nuget-able package.
+This application uses .NET's Managed Extensibility Framework (MEF) to load ZonePrograms. MEF is C#'s solution to allow loading of *modules* or *plugins* into applications. This means that this entire application is effectively a large "shell" into which zone programs are plugged in and provide the functionality. ZoneLighting provides the scaffolding and wiring to allow loading of program plugins, which are then loaded into zones. The plugins are nothing but a built .dll file that inherits from the ZoneLighting assembly. Future plans are to make this a Nugget-able package.
 
-###ZoneLightingManager (ZLM)
+### ZoneLightingManager (ZLM)
 
 ZoneLightingManager (ZLM, in short) is the runner class for the entire application. All high-level operations like creating and destroying program sets and/or zones are done using this class. To use ZLM, simply create an instance of it. WebController already creates one and keeps it in the ASP.NET Application State and displays it on the index page.
 
 
-###Electronics
+### Electronics
 
-So far all information has been about the abstract concepts in this application. This section discusses the more concrete portions required to make this application useful. As mentioned earlier, ZoneLighting is built with extensibility in mind. This means that support can be added for any kind of electronics. I've mentioned FadeCandy in the previous paragraphs. FadeCandy is a microcontroller designed to control WS2812 and WS2811 RGB LED Strips. Both these LED strips are digitally addressable - each LED on the strip can be set to a different color and brightness because each LED has a dedicated chip. These RGB strips can be found online at places like Adafruit and Amazon. Another kind of light strips are analog light strips which come in a single color and all LEDs are always the same color, but the brightness can be changed by changing the voltage supplied to it. These are analog because there is no digital information being sent to them. With WS2812, digital information is being sent and therefore a microcontroller on each LED is needed. Analog just requires the voltage to be changed which can be done by a potentiometer. Currently the only microcontroller supported by ZoneLighting is FadeCandy and the corresponding wrapper is FadeCandyController. I plan on adding support for using Arduino as the microcontroller. As you can probably tell, the wrapper dependes very much on the implementation of the microcontroller and the connections on it. So if an Arduino is controlling WS2812 LED strip vs. an analog LED strip, the wrapper may have to do different things based on how the Arduino program is built and how the connections are connected. 
+So far all information has been about the abstract concepts in this application. This section discusses the more concrete portions required to make this application useful. As mentioned earlier, ZoneLighting is built with extensibility in mind. This means that support can be added for any kind of electronics. I've mentioned FadeCandy in the previous paragraphs. FadeCandy is a microcontroller designed to control WS2812 and WS2811 RGB LED Strips. Both these LED strips are digitally addressable - each LED on the strip can be set to a different color and brightness because each LED has a dedicated chip. These RGB strips can be found online at places like Adafruit and Amazon. Another kind of light strips are analog light strips which come in a single color and all LEDs are always the same color, but the brightness can be changed by changing the voltage supplied to it. These are analog because there is no digital information being sent to them. With WS2812, digital information is being sent and therefore a microcontroller on each LED is needed. Analog just requires the voltage to be changed which can be done by a potentiometer. Currently the only microcontroller supported by ZoneLighting is FadeCandy and the corresponding wrapper is FadeCandyController. I plan on adding support for using Arduino as the microcontroller. As you can probably tell, the wrapper depends very much on the implementation of the microcontroller and the connections on it. So if an Arduino is controlling WS2812 LED strip vs. an analog LED strip, the wrapper may have to do different things based on how the Arduino program is built and how the connections are connected. 
 
 
 ## Example
@@ -98,32 +97,32 @@ Here is an example setup that I created. The lighting is laid out as such:
 
 
 
-		[------------------]												[-------------------]
-		[                  ]												[					]
-		[    Left Wing     ]												[	  Right Wing	]
-		[                  ]												[					]
-		[------------------]												[-------------------]
+    [------------------]                        [-------------------]
+    [                  ]                        [         ]
+    [    Left Wing     ]                        [   Right Wing  ]
+    [                  ]                        [         ]
+    [------------------]                        [-------------------]
 
-				\																/
-				  \															  /	
-					\														/
-					  \													  /	
-						\												/
-						  \											  /
-							\										/
-							  \									  /
-								\	[-------------------------] /
-								  \	[						  ]
-									[		FadeCandy 		  ]
-									[						  ]
-									[-------------------------]
+        \                               /
+          \                               / 
+          \                           /
+            \                           / 
+            \                       /
+              \                       /
+              \                   /
+                \                   /
+                \ [-------------------------] /
+                  \ [             ]
+                  [   FadeCandy       ]
+                  [             ]
+                  [-------------------------]
 
 
 
 Left Wing and Right Wing are zones that sit on the left and right sides, respectively. They are both cut from a long strip of WS2812s. WS2812 is an electronic component that is a combination of an RGB LED and a driver chip that handles PWM, I/O buffering and propagation, timing issues, and other details that are required for a high-level control of an RGB LED or a series of RGB LEDs. 
 
-**Note**: WS2812s are are sometimes incorrectly referred to as "WS2811". Even though for most practical purposes the names WS2811 and WS2812 are interchangeable, it's important to realize that the WS2811 (http://www.adafruit.com/datasheets/WS2811.pdf) is the name for the driver chip that drives the RGB LED, and WS2812 (http://www.adafruit.com/datasheets/WS2812.pdf) is the name for the entire component, including the LED and the driver chip. But since the WS2811 driver chip is essentially useless without the LED, the name "WS2811" is many times used interchangeably with WS2812. Many vendors sell WS2812s as WS2811, so if searching vendor sites to buy the WS2812, try searching for WS2811 also. The Adafruit product known as NeoPixel is the same as the WS2812, rebranded for Adafruit.
+**Note**: WS2812s are are sometimes incorrectly referred to as "WS2811". Even though for most practical purposes the names WS2811 and WS2812 are interchangeable, it's important to realize that the WS2811 (http://www.adafruit.com/datasheets/WS2811.pdf) is the name for the driver chip that drives the RGB LED, and WS2812 (http://www.adafruit.com/datasheets/WS2812.pdf) is the name for the entire component, including the LED and the driver chip. But since the WS2811 driver chip is essentially useless without the LED, the name "WS2811" is many times used interchangeably with WS2812. Many vendors sell WS2812s as WS2811, so if searching vendor sites to buy the WS2812, try searching for WS2811 also. The Adafruit product known as NeoPixel is the same as the WS2812, re-branded for Adafruit.
 
-## FINAL NOTES AND FUTURE PLANS
+## Final notes and future plans
 
 This application is still in the early phases of architecture and therefore there are bound to be issues, errors, and incompatibilities. Please feel free to create issues in the Github issue tracker, and if you have any specific questions directed towards me, please feel free to email me. I will try to respond in a timely manner.
